@@ -22,7 +22,29 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
+// start here for the server. at some point this is going to need to be async
+// for now it is good to test the endpoint
+// in CRUD - this is READ data going to need to add middleware before async (req,res,next)
+app.get('/api/vehicles/:vehicleId', (req, res, next) => {
+  try {
+    const { vehicleId } = req.params;
+    if (!vehicleId) {
+      throw new ClientError(400, 'must have a valid vehicleId');
+    }
+    const sql = `
+    select * from vehicles
+    where vehicleId = $1
+    `;
+    // const results = results.rows(sql, [vehicleId]);
+    // res.json(results);
+  } catch (err) {
+    next(err);
+  }
+  // res.json({ message: 'Hello, World!' });
+});
+
+// this endpoint will gt all of them
+app.get('/api/vehicles', (req, res) => {
   res.json({ message: 'Hello, World!' });
 });
 
