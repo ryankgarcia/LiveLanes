@@ -2,8 +2,9 @@
 -- starting/dummy data to your database tables
 
 -- EXAMPLE:
--- write your vehicle information here..keep its short and only add 3 vehicles to get started (done)
--- this goes first, then pgweb, then http to test the server endpoint, after the server then you can
+-- write your vehicle information here..keep it short and only add 3 vehicles to get started (done)
+-- make sure it matches up with your pgWeb(database) - (done)
+-- then use http to test the server endpoint, after the server then.. (done)
 -- check the font end that will have a fetch call to call the data from the backend
  insert into "vehicles" ("vin", "year","make", "model","trim","bodyType","exteriorColor","interiorColor","transmission","engine","fuelType","mileage","sellerName","conditionReport","damages","reservePrice")
    values

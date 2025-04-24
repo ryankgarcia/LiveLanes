@@ -22,30 +22,41 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-// start here for the server. at some point this is going to need to be async
-// for now it is good to test the endpoint
-// in CRUD - this is READ data going to need to add middleware before async (req,res,next)
-app.get('/api/vehicles/:vehicleId', (req, res, next) => {
+// this endpoint will get read all of the vehicles,
+// later we will get an api call from the client to this endpoint
+app.get('/api/vehicles', async (req, res, next) => {
   try {
-    const { vehicleId } = req.params;
-    if (!vehicleId) {
-      throw new ClientError(400, 'must have a valid vehicleId');
-    }
     const sql = `
-    select * from vehicles
-    where vehicleId = $1
+    select * from "vehicles"
     `;
-    // const results = results.rows(sql, [vehicleId]);
-    // res.json(results);
+    const result = await db.query(sql);
+    const vehicles = result.rows;
+    res.json(vehicles);
   } catch (err) {
     next(err);
   }
-  // res.json({ message: 'Hello, World!' });
 });
 
-// this endpoint will gt all of them
-app.get('/api/vehicles', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+// in CRUD - this is READ data
+app.get('/api/vehicles/:vehicleId', async (req, res, next) => {
+  try {
+    const { vehicleId } = req.params;
+    if (!Number(vehicleId)) {
+      throw new ClientError(400, 'vehicleId must be a positive integer');
+    }
+    const sql = `
+    select * from "vehicles"
+    where "vehicleId" = $1
+    `;
+    const result = await db.query(sql, [vehicleId]);
+    const vehicle = result.rows[0];
+    if (!vehicle) {
+      throw new ClientError(404, `vehicle ${vehicleId} does not exist`);
+    }
+    res.json(vehicle);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /*
