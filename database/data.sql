@@ -3,9 +3,8 @@
 
 -- EXAMPLE:
 
---  insert into "todos"
---    ("task", "isCompleted")
---    values
---      ('Learn to code', false),
---      ('Build projects', false),
---      ('Get a job', false);
+ insert into "comments" ("content")
+   values
+     ('making the first showing of my database'),
+     ('another line of text for testing this thing'),
+     ('Get a job, it should have worked now!');
