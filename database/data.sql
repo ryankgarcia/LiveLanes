@@ -5,7 +5,7 @@
 -- write your vehicle information here..keep it short and only add 3 vehicles to get started (done)
 -- make sure it matches up with your pgWeb(database) - (done)
 -- then use http to test the server endpoint, after the server then.. (done)
--- check the font end that will have a fetch call to call the data from the backend
+-- check the font end that will have a fetch call to call the data from the backend (done)
  insert into "vehicles" ("vin", "year","make", "model","trim","bodyType","exteriorColor","interiorColor","transmission","engine","fuelType","mileage","sellerName","conditionReport","damages","reservePrice")
    values
      ('1FJKDNV382B129438','2009','Toyota','Yaris','Base','Sedan','light blue','black','automatic','1.8L - 4cy','Gasoline','124967','Bobs Car Resale','3.8 overall rating, has trouble starting, white smoke comes out of exhaust','broken mirror LH, seats stained, dents on hood, missing hubcaps','4300'),

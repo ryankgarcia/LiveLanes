@@ -4,15 +4,28 @@
 // import { User } from './components/UserContext';
 
 // modify this so it lines up with the vehicles
-export type Entry = {
-  entryId?: number;
-  title: string;
-  notes: string;
-  photoUrl: string;
+export type Vehicle = {
+  vehicleId?: number;
+  vin: string;
+  year: number;
+  make: string;
+  model: string;
+  trim: string;
+  bodyType: string;
+  exteriorColor: string;
+  interiorColor: string;
+  transmission: string;
+  engine: string;
+  fuelType: string;
+  mileage: number;
+  sellerName: string;
+  conditionReport: string;
+  damages: string;
+  reservePrice: number;
 };
 
 // need this one for the get in the server
-export async function readVehicles(): Promise<Entry[]> {
+export async function readVehicles(): Promise<Vehicle[]> {
   const url = '/api/vehicles';
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Response status ${response.status}`);
@@ -24,7 +37,7 @@ export async function readVehicles(): Promise<Entry[]> {
 // need this one for the get in the server. change the entryId to what you need to fit this project
 export async function readVehicleId(
   vehicleId: number
-): Promise<Entry | undefined> {
+): Promise<Vehicle | undefined> {
   const url = `/api/vehicles/${vehicleId}`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Response status ${response.status}`);
