@@ -7,6 +7,23 @@ export function VehicleCard() {
   const [entries, setEntries] = useState<Vehicle[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>();
+  const [distances, setDistances] = useState<number[]>([]);
+
+  function randomDistance(): number {
+    const distanceArr = [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    ];
+    const randomIndex = Math.floor(Math.random() * distanceArr.length);
+    const value = distanceArr[randomIndex];
+    const result = Math.floor(value * Math.random() * 100);
+    return Math.max(10, result);
+  }
+
+  // this useEffect was created to simulate distances from a seller dealership from where the buyer is from based on the buyer's address
+  useEffect(() => {
+    const generatedDistances = entries.map(() => randomDistance());
+    setDistances(generatedDistances);
+  }, [entries]);
 
   // this useEffect needs to make a call to the server to receive the entries
   useEffect(() => {
@@ -35,12 +52,10 @@ export function VehicleCard() {
 
   return (
     <div className="card-container">
-      {/* changed the above from a fragment to a div to test out if the cards can be placed in a container for separation */}
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <div className="card" key={entry.vehicleId}>
           <div className="card-header">
-            <span className="distance">26 mi away</span>
-            {/* this line above needs to show the distance the seller is from the buyer...assume one location for the buyer */}
+            <span className="distance">{distances[index]} mi away</span>
             <span className="dealer">{entry.sellerName}</span>
           </div>
           <hr />
@@ -70,7 +85,7 @@ export function VehicleCard() {
                 maximumFractionDigits: 0,
               })}
             </div>
-            {/* the line above here needs to show the starting bid price, you can swap it out for the startingBid price, which needs to get added to the database table */}
+            {/* the vehicle needs to show the starting bid price, you can swap it out for the reservePrice, when complete add to the database table */}
           </div>
           <div className="card-footer">
             <div className="button-container">
