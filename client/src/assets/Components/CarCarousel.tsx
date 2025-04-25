@@ -1,3 +1,11 @@
+import { PiArrowFatLeftLight, PiArrowFatRightLight } from 'react-icons/pi';
+
 export function CarCarousel() {
-  return <h1>Car Carousel needs to be built here...</h1>;
+  return (
+    <div className="carousel">
+      <PiArrowFatLeftLight />
+      <img />
+      <PiArrowFatRightLight />
+    </div>
+  );
 }
