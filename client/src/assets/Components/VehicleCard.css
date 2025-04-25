@@ -1,3 +1,10 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
 .card {
   width: 500px;
   background-color: #f2eeee;
@@ -34,10 +41,9 @@ hr {
 
 .vehicle-img {
   width: 120px;
-
-  /* height: auto; */
   object-fit: cover;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .vehicle-info {
@@ -57,6 +63,7 @@ hr {
 .card-theme-font {
   color: #28b89a;
   font-weight: bold;
+  margin-right: 0.3rem;
 }
 
 .card-black-font {
@@ -71,27 +78,36 @@ hr {
 }
 
 .card-footer {
-  margin-top: 1rem;
   display: flex;
-  gap: 0.6rem;
+  justify-content: flex-end;
+  padding: 0 2rem 1rem;
+}
+
+.button-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: row;
 }
 
 .bid-button {
   text-transform: uppercase;
   background-color: #5295f9;
+  border-color: #5295f9;
   color: white;
   border-radius: 2.25rem;
-  border: none;
+  border: 3px solid #5295f9;
   padding: 8px 16px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .fav-button {
   text-transform: uppercase;
-  background-color: #8f8f8f;
+  background-color: lightgray;
+  border: 3px solid #8f8f8f;
   color: black;
   border-radius: 36px;
-  border: none;
   padding: 8px 16px;
   font-weight: bold;
+  cursor: pointer;
 }

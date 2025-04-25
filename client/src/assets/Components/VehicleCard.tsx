@@ -34,7 +34,8 @@ export function VehicleCard() {
   }
 
   return (
-    <>
+    <div className="card-container">
+      {/* changed the above from a fragment to a div to test out if the cards can be placed in a container for separation */}
       {entries.map((entry) => (
         <div className="card" key={entry.vehicleId}>
           <div className="card-header">
@@ -54,8 +55,7 @@ export function VehicleCard() {
                 <span className="card-theme-font">C88</span>
                 {/* this line above needs to show a random letter & number which resembles the line and number the car will appear during live auction */}
                 <span className="vehicle-model">
-                  {entry.year}
-                  {entry.make}
+                  {entry.year} {} {entry.make}
                 </span>
               </div>
               <div className="vehicle-model">{entry.model}</div>
@@ -73,13 +73,15 @@ export function VehicleCard() {
             {/* the line above here needs to show the starting bid price, you can swap it out for the startingBid price, which needs to get added to the database table */}
           </div>
           <div className="card-footer">
-            <button className="bid-button">
-              {<MdOutlineHdrAuto />} Set bid
-            </button>
-            <button className="fav-button">{<MdOutlineStar />} Add</button>
+            <div className="button-container">
+              <button className="bid-button">
+                {<MdOutlineHdrAuto />} Set bid
+              </button>
+              <button className="fav-button">{<MdOutlineStar />} Add</button>
+            </div>
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
