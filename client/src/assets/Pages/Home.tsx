@@ -1,3 +1,8 @@
 export function HomePage() {
-  return <h2>HomePage JSX here...</h2>;
+  return (
+    <>
+      <h2>navBar component here...</h2>
+      <h2>Car Carousel component here...</h2>
+    </>
+  );
 }

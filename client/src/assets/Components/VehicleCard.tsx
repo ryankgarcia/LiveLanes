@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import './VehicleCard.css';
 import { MdOutlineHdrAuto, MdOutlineStar } from 'react-icons/md';
 import '..data.ts'; // this needs to import data.ts into this portion of the project
 
 export function VehicleCard() {
-  const [entries, setEntries] = useState<Vehicle[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<unknown>();
+  // const [entries, setEntries] = useState<Vehicle[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState<unknown>();
 
-  // this useEffect needs to make a call to the server to receive the entries
-  useEffect(() => {
-    async function load() {
-      try {
-        const entries = await readVehicles();
-        setEntries(entries);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    load();
-  }, []);
+  // // this useEffect needs to make a call to the server to receive the entries
+  // useEffect(() => {
+  //   async function load() {
+  //     try {
+  //       const entries = await readVehicles();
+  //       setEntries(entries);
+  //     } catch (err) {
+  //       setError(err);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   load();
+  // }, []);
 
-  if (isLoading) return <div>Loading cars...</div>;
-  if (error) {
-    return (
-      <div>
-        Error loading vehicles{' '}
-        {error instanceof Error ? Error.message : 'Unknown Error'}
-      </div>
-    );
-  }
+  // if (isLoading) return <div>Loading cars...</div>;
+  // if (error) {
+  //   return (
+  //     <div>
+  //       Error loading vehicles{' '}
+  //       {error instanceof Error ? Error.message : 'Unknown Error'}
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="card">
