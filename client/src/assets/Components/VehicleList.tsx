@@ -4,7 +4,7 @@ import { readVehicles, Vehicle } from '../../data'; // this needs to import data
 import { VehicleCard } from './VehicleCard';
 import { SavedSearches } from './SavedSearches';
 import { Filters } from './Filters';
-import { SearchBar } from './SearchBar';
+// import { SearchBar } from './SearchBar';
 
 export function VehicleList() {
   const [entries, setEntries] = useState<Vehicle[]>([]);
@@ -61,7 +61,7 @@ export function VehicleList() {
         ))}
       </div>
       <Filters />
-      <SearchBar />
+      {/* <SearchBar /> */}
       <SavedSearches />
     </>
   );

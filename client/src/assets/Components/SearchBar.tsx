@@ -1,55 +1,19 @@
-// import { useEffect, useState } from 'react';
 // import './SearchBar.css';
+// import React, { useState } from 'react';
 // import { BsSearch } from 'react-icons/bs';
-// import { readVehicles, Vehicle } from '../../data';
+// // import { Vehicle } from '../../data';
 
-// // type Vehicle = {
-// //   vehicleId?: number;
-// //   year: number;
-// //   make: string;
-// //   model: string;
-// //   exteriorColor: string;
-// //   interiorColor: string;
-// //   transmission: string;
-// // };
-
-// type SearchBarProps = {
+// type Props = {
 //   value: string;
 //   onCustomChange: (value: string) => void;
 // };
 
-// export function SearchBar() {
+// export function SearchBar({ value, onCustomChange }: Props) {
 //   const [inputValue, setInputValue] = useState('');
 //   const [entries, setEntries] = useState<Vehicle[]>([]);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState<unknown>();
 //   // const items = entries.filter((item) =>
 //   //   item.toLowerCase().includes(value.toLowerCase())
 //   // );
-
-//   useEffect(() => {
-//     async function load() {
-//       try {
-//         const entries = await readVehicles();
-//         setEntries(entries);
-//       } catch (err) {
-//         setError(err);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     }
-//     load();
-//   }, []);
-
-//   if (isLoading) return <div>Loading cars...</div>;
-//   if (error) {
-//     return (
-//       <div>
-//         Error loading vehicles{' '}
-//         {error instanceof Error ? error.message : 'Unknown Error'}
-//       </div>
-//     );
-//   }
 
 //   return (
 //     <div className="search-container">
@@ -58,7 +22,7 @@
 //         type="text"
 //         value={inputValue}
 //         onChange={(e) => setInputValue(e.target.value)}
-//         // onCustomChange={items}
+//         onCustomChange={items}
 //         placeholder="Search"
 //         className="search-bar"
 //       />

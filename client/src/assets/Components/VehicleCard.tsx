@@ -7,6 +7,30 @@ type Props = {
   distance: number;
 };
 
+// this function exists to assign each vehicle in the auction a number and a letter
+// that indicates the lane and number it will show up at
+// needs to be worked out but this is the general idea
+function laneAssign(): string[] {
+  const laneAssignment: string[] = [];
+  const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
+
+  for (let i = 1; i < 51; i++) {
+    const randomLaneIndex: number = Math.floor(
+      Math.random() * laneLetter.length
+    );
+    const randomLaneLetter: string = laneLetter[randomLaneIndex];
+    const lane = `${randomLaneLetter}${i}`;
+    laneAssignment.push(lane);
+  }
+  return laneAssignment;
+}
+
+const genLane = laneAssign();
+
+const newLane = genLane.map((item, index) => item[index]);
+
+// const generateLane = assignLane();
+
 export function VehicleCard({ entry, distance }: Props) {
   return (
     <div className="card" key={entry.vehicleId}>
@@ -23,7 +47,7 @@ export function VehicleCard({ entry, distance }: Props) {
         />
         <div className="vehicle-info">
           <div className="vehicle-title">
-            <span className="card-theme-font">C88</span>
+            <span className="card-theme-font">{newLane}</span>
             {/* this line above needs to show a random letter & number which resembles the line and number the car will appear during live auction */}
             <span className="vehicle-model">
               {entry.year} {} {entry.make}
