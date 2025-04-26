@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import './VehicleCard.css';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
+import { SavedSearches } from './SavedSearches';
+import { Filters } from './Filters';
+import { SearchBar } from './SearchBar';
 
 export function VehicleList() {
   const [entries, setEntries] = useState<Vehicle[]>([]);
@@ -51,10 +54,15 @@ export function VehicleList() {
   }
 
   return (
-    <div className="card-container">
-      {entries.map((entry, index) => (
-        <VehicleCard entry={entry} distance={distances[index]} />
-      ))}
-    </div>
+    <>
+      <div className="card-container">
+        {entries.map((entry, index) => (
+          <VehicleCard entry={entry} distance={distances[index]} />
+        ))}
+      </div>
+      <Filters />
+      <SearchBar />
+      <SavedSearches />
+    </>
   );
 }

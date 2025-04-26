@@ -2,8 +2,7 @@ import './App.css';
 import { NavBar } from './assets/Components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './assets/Pages/NotFound';
-// import { SearchBar } from './assets/Components/SearchBar';
-import { VehicleList } from './assets/Components/VehicleList';
+import { RunList } from './assets/Pages/RunList';
 
 // this file will only have the routes to the page
 // the useEffect should be placed in the component that will be fetching the data
@@ -14,7 +13,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<NavBar />}>
-        <Route index element={<VehicleList />} />
+        <Route index element={<RunList />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -1,5 +1,5 @@
-import { VehicleCard } from '../Components/VehicleCard';
+import { VehicleList } from '../Components/VehicleList';
 
 export function RunList() {
-  return <VehicleCard />;
+  return <VehicleList />;
 }
