@@ -21,6 +21,7 @@ app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
+app.use(express.static('public'));
 
 // this endpoint will get read all of the vehicles,
 // later we will get an api call from the client to this endpoint
