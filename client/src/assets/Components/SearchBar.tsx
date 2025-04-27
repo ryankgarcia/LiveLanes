@@ -1,31 +1,22 @@
-// import './SearchBar.css';
-// import React, { useState } from 'react';
-// import { BsSearch } from 'react-icons/bs';
-// // import { Vehicle } from '../../data';
+import './SearchBar.css';
+import { BsSearch } from 'react-icons/bs';
 
-// type Props = {
-//   value: string;
-//   onCustomChange: (value: string) => void;
-// };
+type Props = {
+  searchTerm: string;
+  onCustomChange: (newSearchTerm: string) => void;
+};
 
-// export function SearchBar({ value, onCustomChange }: Props) {
-//   const [inputValue, setInputValue] = useState('');
-//   const [entries, setEntries] = useState<Vehicle[]>([]);
-//   // const items = entries.filter((item) =>
-//   //   item.toLowerCase().includes(value.toLowerCase())
-//   // );
-
-//   return (
-//     <div className="search-container">
-//       {inputValue === '' && <BsSearch className="search-icon" />}
-//       <input
-//         type="text"
-//         value={inputValue}
-//         onChange={(e) => setInputValue(e.target.value)}
-//         onCustomChange={items}
-//         placeholder="Search"
-//         className="search-bar"
-//       />
-//     </div>
-//   );
-// }
+export function SearchBar({ searchTerm, onCustomChange }: Props) {
+  return (
+    <div className="search-container">
+      {searchTerm === '' && <BsSearch className="search-icon" />}
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => onCustomChange(e.target.value)}
+        placeholder="Search"
+        className="search-bar"
+      />
+    </div>
+  );
+}
