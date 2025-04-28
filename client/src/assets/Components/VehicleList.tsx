@@ -2,18 +2,9 @@ import { useEffect, useState } from 'react';
 import './VehicleCard.css';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
-import { SavedSearches } from './SavedSearches';
-import { Filters } from './Filters';
-// import { SBFollowTest } from './SBFollowTest';
+// import { SavedSearches } from './SavedSearches';
 import { SearchBar } from './SearchBar';
-
-// pretend this is the data from the fetch call
-// const list = [
-//   ' 2008 Ford F150',
-//   '2012 honda civic',
-//   '2019 subaru impreza',
-//   '2015 nissan sentra',
-// ];
+import { Filters } from './Filters';
 
 export function VehicleList() {
   const [entries, setEntries] = useState<Vehicle[]>([]);
@@ -21,16 +12,46 @@ export function VehicleList() {
   const [error, setError] = useState<unknown>();
   const [distances, setDistances] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [savedSearch, setSavedSearch] = useState<Vehicle[]>([]);
 
-  // function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-  //   setSearchTerm(e.target.value);
-  // }
-  const filteredCars = entries.filter(
-    (term) =>
-      term.model.toLowerCase().includes(searchTerm.toString().toLowerCase()) ||
-      term.make.toLowerCase().includes(searchTerm.toString().toLowerCase()) ||
-      term.year.toString().includes(searchTerm.toString().toLowerCase())
-  );
+  function handleFilterChange(filter: string) {
+    setSelectedFilter(filter);
+  }
+
+  function handleSavedSearch(entry: Vehicle) {
+    if (!savedSearch.some((e) => e.vehicleId === entry.vehicleId)) {
+      setSavedSearch((prev) => [...prev, entry]);
+    }
+  }
+
+  // filteredCars approach 2 (WIP, this one is most accurate as of Sunday Apr 27)
+  const trimSearchTerm = searchTerm.trim().toLowerCase();
+  const filteredCars = entries.filter((term) => {
+    const combinations = [
+      `${term.make} ${term.model} ${term.year}`,
+      `${term.make} ${term.year} ${term.model}`,
+      `${term.model} ${term.year} ${term.make}`,
+      `${term.model} ${term.make} ${term.year}`,
+      `${term.year} ${term.model} ${term.make}`,
+      `${term.year} ${term.make} ${term.model}`,
+    ];
+    return combinations.some((combo) =>
+      combo.toLowerCase().includes(trimSearchTerm)
+    );
+  });
+
+  let finalCars = [...filteredCars];
+
+  if (selectedFilter === 'priceLowHigh') {
+    finalCars.sort((a, b) => a.reservePrice - b.reservePrice);
+  } else if (selectedFilter === 'priceHighLow') {
+    finalCars.sort((a, b) => b.reservePrice - a.reservePrice);
+  } else if (selectedFilter === 'mileage') {
+    finalCars.sort((a, b) => a.mileage - b.mileage);
+  } else if (selectedFilter === 'saved') {
+    finalCars = savedEntries;
+  }
 
   // export this function into another component, then import it here to call it
   function randomDistance(): number {
@@ -64,6 +85,9 @@ export function VehicleList() {
     load();
   }, []);
 
+  // the entries in the useEffect dependency array was added but just to check if no duplicate cards were create,
+  // else it stays empty, and was empty. delete this comment if it didn't work as planned
+
   if (isLoading) return <div>Loading cars...</div>;
   if (error) {
     return (
@@ -75,7 +99,31 @@ export function VehicleList() {
   }
 
   return (
-    <>
+    <div>
+      <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
+      <Filters
+        selectedFilter={selectedFilter}
+        onFilterChange={handleFilterChange}
+      />
+      {/* <SavedSearches savedSearch={savedSearch} setSavedSearch={handleSavedSearch} /> */}
+      {/* the savedSearches component needs to be updated to reflect a list of vehicle brands that the
+user likes not just one vehicle, adding one vehicle to a favorites list should be its own component */}
+
+      <div className="card-container">
+        {finalCars.length > 0 ? (
+          finalCars.map((entry, index) => (
+            <VehicleCard
+              key={entry.vehicleId}
+              entry={entry}
+              distance={distances[index]}
+              onSave={handleSavedSearch}
+            />
+          ))
+        ) : (
+          <div> No vehicles found. Try another search </div>
+        )}
+      </div>
+      {/*
       <div className="card-container">
         {entries.map((entry, index) => (
           <VehicleCard
@@ -85,7 +133,13 @@ export function VehicleList() {
           />
         ))}
       </div>
-      <Filters />
+      <Filters
+        selectedFilter={selectedFilter}
+        onFilterChange={handleFilterChange}
+      />
+      {finalCars.map((car) => (
+       <VehicleCard key={car.vin} entry={entry} />
+      ))}
       <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
       {filteredCars.length === 0 ? (
         <h3>Sorry, no items match your search result</h3>
@@ -98,8 +152,7 @@ export function VehicleList() {
           />
         ))
       )}
-      {/* <SBFollowTest list={list} /> */}
-      <SavedSearches />
-    </>
+      <SavedSearches /> */}
+    </div>
   );
 }

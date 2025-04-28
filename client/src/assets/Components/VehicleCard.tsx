@@ -5,6 +5,7 @@ import { Vehicle } from '../../data'; // this needs to import data.ts into this 
 type Props = {
   entry: Vehicle;
   distance: number;
+  onSave: (entry: Vehicle) => void;
 };
 
 // this function exists to assign each vehicle in the auction a number and a letter
@@ -30,7 +31,7 @@ const genLane = laneAssign();
 const newLane = genLane.map((item, index) => item[index]);
 
 // const generateLane = assignLane();
-
+// put distance back in as props destructured in the component here..
 export function VehicleCard({ entry, distance }: Props) {
   return (
     <div className="card" key={entry.vehicleId}>
