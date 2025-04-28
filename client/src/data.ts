@@ -21,6 +21,7 @@ export type Vehicle = {
   sellerName: string;
   conditionReport: string;
   damages: string;
+  startingPrice: number;
   reservePrice: number;
 };
 

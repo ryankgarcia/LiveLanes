@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './VehicleCard.css';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
@@ -12,17 +12,31 @@ export function VehicleList() {
   const [error, setError] = useState<unknown>();
   const [distances, setDistances] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [selectedFilter, setSelectedFilter] = useState('all'); // might need to change this to an empty string ''
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  const [draftMinPrice, setDraftMinPrice] = useState('');
+  const [draftMaxPrice, setDraftMaxPrice] = useState('');
   const [savedSearch, setSavedSearch] = useState<Vehicle[]>([]);
 
-  function handleFilterChange(filter: string) {
-    setSelectedFilter(filter);
+  // function handleFilterChange(filter: string) {
+  //   setSelectedFilter(filter);
+  // }
+  function handleFilterChange(value: string) {
+    setSelectedFilter(value);
   }
 
   function handleSavedSearch(entry: Vehicle) {
     if (!savedSearch.some((e) => e.vehicleId === entry.vehicleId)) {
       setSavedSearch((prev) => [...prev, entry]);
     }
+  }
+
+  function handlePriceRange(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setMinPrice(draftMinPrice ? Number(draftMinPrice) : undefined);
+    setMaxPrice(draftMaxPrice ? Number(draftMaxPrice) : undefined);
+    setSelectedFilter('priceRange');
   }
 
   // filteredCars approach 2 (WIP, this one is most accurate as of Sunday Apr 27)
@@ -43,14 +57,35 @@ export function VehicleList() {
 
   let finalCars = [...filteredCars];
 
+  // the if statement below works but shows all vehicle cards. the goal is to get them to only show vehicle cards based on min&max range
+  // if (
+  //   selectedFilter === 'priceRange' &&
+  //   minPrice !== undefined &&
+  //   maxPrice !== undefined
+  // ) {
+  //   finalCars = finalCars.filter(
+  //     (car) =>
+  //       car.startingPrice >= Number(minPrice) &&
+  //       car.startingPrice <= Number(maxPrice)
+  //   );
+  //   finalCars.sort((a, b) => a.startingPrice - b.startingPrice);
+  // }
+
+  if (selectedFilter === 'priceRange') {
+    finalCars = filteredCars.filter((car) => {
+      const carPrice = car.startingPrice;
+      const min = minPrice ? Number(minPrice) : 0;
+      const max = maxPrice ? Number(maxPrice) : Infinity;
+      return carPrice >= min && carPrice <= max;
+    });
+  }
+
   if (selectedFilter === 'priceLowHigh') {
-    finalCars.sort((a, b) => a.reservePrice - b.reservePrice);
+    finalCars.sort((a, b) => a.startingPrice - b.startingPrice);
   } else if (selectedFilter === 'priceHighLow') {
-    finalCars.sort((a, b) => b.reservePrice - a.reservePrice);
+    finalCars.sort((a, b) => b.startingPrice - a.startingPrice);
   } else if (selectedFilter === 'mileage') {
     finalCars.sort((a, b) => a.mileage - b.mileage);
-  } else if (selectedFilter === 'saved') {
-    finalCars = savedEntries;
   }
 
   // export this function into another component, then import it here to call it
@@ -104,6 +139,12 @@ export function VehicleList() {
       <Filters
         selectedFilter={selectedFilter}
         onFilterChange={handleFilterChange}
+        onPriceChange={handlePriceRange}
+        draftMinPrice={draftMinPrice}
+        draftMaxPrice={draftMaxPrice}
+        setDraftMinPrice={setDraftMinPrice}
+        setDraftMaxPrice={setDraftMaxPrice}
+        // testing this || statement out on this...if not give it its own prop
       />
       {/* <SavedSearches savedSearch={savedSearch} setSavedSearch={handleSavedSearch} /> */}
       {/* the savedSearches component needs to be updated to reflect a list of vehicle brands that the
