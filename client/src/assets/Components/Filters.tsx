@@ -98,32 +98,36 @@ export function Filters({
             />
             Price Range:
           </label>
-          <input
-            className="range-box"
-            type="number"
-            placeholder="min"
-            value={draftMinPrice}
-            onChange={(e) => setDraftMinPrice(e.target.value)}
-          />
-          Min
-          <input
-            className="range-box"
-            type="number"
-            placeholder="max"
-            value={draftMaxPrice}
-            onChange={(e) => setDraftMaxPrice(e.target.value)}
-          />
-          Max
-          <button className="custom-button">Search</button>
+          <div>
+            <input
+              className="range-box"
+              type="number"
+              placeholder="min"
+              value={draftMinPrice}
+              onChange={(e) => setDraftMinPrice(e.target.value)}
+            />
+            Min
+            <input
+              className="range-box"
+              type="number"
+              placeholder="max"
+              value={draftMaxPrice}
+              onChange={(e) => setDraftMaxPrice(e.target.value)}
+            />
+            Max
+          </div>
+          <div>
+            <button className="search-button">Search</button>
+          </div>
         </form>
-        <button
-          type="button"
-          // onSaveFilter={handleSaveCurrentFilter}
-          onClick={onSaveFilter}
-          // the event handler here on the button is supposed to save the user's searchFilter
-          className="save-search-button">
-          Save Search
-        </button>
+        <div>
+          <button
+            type="button"
+            onClick={onSaveFilter}
+            className="save-search-button">
+            Save Search
+          </button>
+        </div>
         {/* the button above on this statement should add to Save Searches component */}
       </div>
     </div>

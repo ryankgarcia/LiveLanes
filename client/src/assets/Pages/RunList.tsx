@@ -6,6 +6,7 @@ import { Filters } from '../Components/Filters';
 import { SavedFilter } from '../Components/types';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
+import './RunList.css';
 
 export function RunList() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
@@ -146,19 +147,18 @@ export function RunList() {
     );
   }
   return (
-    <div className="run-list-page">
-      <div className="search-bar-container">
+    <div>
+      <div>
         <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
       </div>
-
-      <div className="filter-section">
-        <div className="saved-searches">
+      <div>
+        <div>
           <SavedSearches
             savedFilters={savedSearch}
             onApplySavedFilter={handleApplySavedFilter}
           />
         </div>
-        <div className="filters">
+        <div>
           <Filters
             selectedFilter={selectedFilter}
             onFilterChange={handleFilterChange}
@@ -168,13 +168,10 @@ export function RunList() {
             setDraftMinPrice={setDraftMinPrice}
             setDraftMaxPrice={setDraftMaxPrice}
             onSaveFilter={handleSaveCurrentFilter}
-            // handleSavedSearch={setSavedSearch}
-            // onClick={handleSavedSearch}
           />
         </div>
       </div>
-
-      <div className="vehicle-card-list">
+      <div>
         <VehicleList entries={finalCars} distances={distances} />
       </div>
     </div>
