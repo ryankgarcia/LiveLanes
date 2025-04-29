@@ -39,3 +39,14 @@ h4 {
   background-color: white;
   border-radius: 50%;
 }
+
+.save-search-button {
+  text-transform: uppercase;
+  background-color: #5295f9;
+  border-color: #5295f9;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}

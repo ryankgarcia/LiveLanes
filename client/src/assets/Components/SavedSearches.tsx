@@ -1,31 +1,34 @@
-// import { MdOutlineSavedSearch } from 'react-icons/md';
-import { Vehicle } from '../../data';
 import './SavedSearches.css';
 
-type Props = {
-  entries: Vehicle;
-  handleSavedSearch: (entry: Vehicle) => void;
+type SavedFilter = {
+  filterType: string;
+  minPrice?: number;
+  maxPrice?: number;
+  searchTerm?: string;
 };
 
-export function SavedSearches({ entries, handleSavedSearch }: Props) {
+type SavedSearchesProps = {
+  savedFilters: SavedFilter[];
+  onApplySavedFilter: (filter: SavedFilter) => void;
+};
+
+export function SavedSearches({
+  savedFilters,
+  onApplySavedFilter,
+}: SavedSearchesProps) {
   return (
-    <div>
+    <div className="saved-searches">
       <h4>Saved Searches</h4>
-      <div className="saved-searches">
-        <label>
+      {savedFilters.map((filter, index) => (
+        <label key={index}>
           <input
             type="radio"
-            value="saved"
-            checked={entries === 'saved'}
-            onChange={(e) => handleSavedSearch(e.target.value)}
-            id="userSavedList1"
             name="userSavedSearch"
+            onChange={() => onApplySavedFilter(filter)}
           />
-          {/* this input should add a filtered list of the user's favorite's search
-          which will represent a group of their favorite types of vehicles */}
-          Joe's Favorite Cars
+          {filter.searchTerm || filter.filterType}
         </label>
-      </div>
+      ))}
     </div>
   );
 }

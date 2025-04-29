@@ -2,10 +2,10 @@ import './VehicleCard.css';
 import { MdOutlineHdrAuto, MdOutlineStar } from 'react-icons/md';
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 
-type Props = {
+type VehicleCardProps = {
   entry: Vehicle;
   distance: number;
-  onSave: (entry: Vehicle) => void;
+  // onSave: (entry: Vehicle) => void;
 };
 
 // this function exists to assign each vehicle in the auction a number and a letter
@@ -32,7 +32,7 @@ const newLane = genLane.map((item, index) => item[index]);
 
 // const generateLane = assignLane();
 // put distance back in as props destructured in the component here..
-export function VehicleCard({ entry, distance }: Props) {
+export function VehicleCard({ entry, distance }: VehicleCardProps) {
   return (
     <div className="card" key={entry.vehicleId}>
       <div className="card-header">
@@ -60,7 +60,7 @@ export function VehicleCard({ entry, distance }: Props) {
           </div>
         </div>
         <div className="vehicle-price">
-          {entry.reservePrice.toLocaleString('en-US', {
+          {entry.startingPrice.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
             maximumFractionDigits: 0,

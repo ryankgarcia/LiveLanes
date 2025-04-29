@@ -57,6 +57,17 @@ function vins200(vinGenerator: () => string): string[] {
 const vinArr = vins200(generateVIN);
 console.log(vinArr);
 
+// auxiliary function
+export function randomDistance(): number {
+  const distanceArr = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
+  const randomIndex = Math.floor(Math.random() * distanceArr.length);
+  const value = distanceArr[randomIndex];
+  const result = Math.floor(value * Math.random() * 100);
+  return Math.max(10, result);
+}
+
 // auction timing (Live) has a green bar in the header with the 'timer' sliding down
 // in that it includes price of current bid and current highest bidder name(use alias for protection)
 // its a bunch of cards in line together includes a button with the word 'bid'

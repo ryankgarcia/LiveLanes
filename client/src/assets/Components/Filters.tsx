@@ -1,7 +1,6 @@
-import React from 'react';
 import './Filters.css';
 
-type Props = {
+type FilterProps = {
   selectedFilter: string;
   onFilterChange: (filter: string) => void;
   onPriceChange: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -19,7 +18,7 @@ export function Filters({
   draftMaxPrice,
   setDraftMaxPrice,
   setDraftMinPrice,
-}: Props) {
+}: FilterProps) {
   return (
     <div>
       <h4 className="header-text">Filter By</h4>
@@ -114,6 +113,8 @@ export function Filters({
           Max
           <button className="custom-button">Search</button>
         </form>
+        {/* <button onSubmit={SavedSearches} className="save-search-button">Save Search</button> */}
+        {/* the button above on this statement should add to Save Searches component */}
       </div>
     </div>
   );
