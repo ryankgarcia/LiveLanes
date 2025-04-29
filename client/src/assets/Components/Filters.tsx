@@ -9,7 +9,6 @@ type FilterProps = {
   setDraftMinPrice: (value: string) => void;
   setDraftMaxPrice: (value: string) => void;
   onSaveFilter: () => void;
-  // handleSavedSearch: (entry: string) => void;
 };
 
 export function Filters({

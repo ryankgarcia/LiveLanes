@@ -1,9 +1,6 @@
 // in this file i will be adding all of the fetch calls in the
 // for the client to communicate the data to the server
 
-// import { User } from './components/UserContext';
-
-// modify this so it lines up with the vehicles
 export type Vehicle = {
   vehicleId?: number;
   vin: string;
@@ -25,7 +22,7 @@ export type Vehicle = {
   reservePrice: number;
 };
 
-// need this one for the get in the server
+// need this one for the get protocol in the server
 export async function readVehicles(): Promise<Vehicle[]> {
   const url = '/api/vehicles';
   const response = await fetch(url);
@@ -35,7 +32,7 @@ export async function readVehicles(): Promise<Vehicle[]> {
   return vehicles;
 }
 
-// need this one for the get in the server. change the entryId to what you need to fit this project
+// need this one for the get protocol in the server
 export async function readVehicleId(
   vehicleId: number
 ): Promise<Vehicle | undefined> {

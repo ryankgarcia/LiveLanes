@@ -3,7 +3,7 @@ import { readVehicles, Vehicle } from '../../data'; // this needs to import data
 import { VehicleList } from '../Components/VehicleList';
 import { SearchBar } from '../Components/SearchBar';
 import { Filters } from '../Components/Filters';
-import { SavedFilter } from '../Components/types';
+import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
 import './RunList.css';
@@ -20,7 +20,6 @@ export function RunList() {
   const [draftMinPrice, setDraftMinPrice] = useState('');
   const [draftMaxPrice, setDraftMaxPrice] = useState('');
   const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
-  // const [savedVehicles, setSavedVehicles] = useState<Vehicle[]>([]);
 
   function handleFilterChange(value: string) {
     setSelectedFilter(value);
@@ -40,15 +39,6 @@ export function RunList() {
     setSelectedFilter('priceRange');
   }
 
-  // i need to know where this goes atm
-  // function handleSavedSearch(entry: Vehicle) {
-  //   if (!savedVehicles.some((e) => e.vehicleId === entry.vehicleId)) {
-  //     setSavedVehicles((prev) => [...prev, entry]);
-  //     console.log('does this event work?');
-  //   }
-  // }
-
-  // i need to know where this goes atm. likely needs to get passed as a prop to VehicleList
   function handleApplySavedFilter(filter: SavedFilter) {
     setSelectedFilter(filter.filterType);
     setMinPrice(filter.minPrice);
@@ -76,7 +66,6 @@ export function RunList() {
       alert('You already saved this search');
       return;
     }
-    console.log('does this event work?');
     setSavedSearch((prev) => [...prev, newSavedFilter]);
   }
 

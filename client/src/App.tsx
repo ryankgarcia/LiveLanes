@@ -3,7 +3,6 @@ import { NavBar } from './assets/Components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './assets/Pages/NotFound';
 import { RunList } from './assets/Pages/RunList';
-// import { useRunListContext } from './assets/Components/RunListContext';
 
 // this file will only have the routes to the page
 // the useEffect should be placed in the component that will be fetching the data

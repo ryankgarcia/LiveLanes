@@ -1,4 +1,4 @@
-/* .search-container {
+.search-container {
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -38,4 +38,4 @@
     right: 18rem;
     margin-top: 1.5rem;
   }
-} */
+}
