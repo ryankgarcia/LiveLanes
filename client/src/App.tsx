@@ -1,35 +1,22 @@
-import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import { NavBar } from './assets/Components/NavBar';
+import { Routes, Route } from 'react-router-dom';
+import { NotFound } from './assets/Pages/NotFound';
+import { RunList } from './assets/Pages/RunList';
+// import { useRunListContext } from './assets/Components/RunListContext';
+
+// this file will only have the routes to the page
+// the useEffect should be placed in the component that will be fetching the data
+// the way outlet works is that we let all the stuff that is not the navbar show on the page
+// which changes depending on the route you are on
 
 export default function App() {
-  const [serverData, setServerData] = useState('');
-
-  useEffect(() => {
-    async function readServerData() {
-      const resp = await fetch('/api/hello');
-      const data = await resp.json();
-
-      console.log('Data from server:', data);
-
-      setServerData(data.message);
-    }
-
-    readServerData();
-  }, []);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{serverData}</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<NavBar />}>
+        <Route index element={<RunList />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }

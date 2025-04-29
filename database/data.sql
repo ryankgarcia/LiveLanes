@@ -2,9 +2,31 @@
 -- starting/dummy data to your database tables
 
 -- EXAMPLE:
-
- insert into "comments" ("content")
+-- write your vehicle information here..keep it short and only add 3 vehicles to get started (done)
+-- make sure it matches up with your pgWeb(database) - (done)
+-- then use http to test the server endpoint, after the server then.. (done)
+-- check the font end that will have a fetch call to call the data from the backend (done)
+ insert into "vehicles" ("vin", "year","make", "model","trim","bodyType","exteriorColor","interiorColor","transmission","engine","fuelType","mileage","sellerName","conditionReport","damages", "startingPrice","reservePrice")
    values
-     ('making the first showing of my database'),
-     ('another line of text for testing this thing'),
-     ('Get a job, it should have worked now!');
+     ('1FJKDNV382B129438','2009','Toyota','Yaris','Base','Sedan','light blue','black','automatic','1.8L - 4cy','Gasoline','124967','Bobs Car Resale','3.8 overall rating, has trouble starting, white smoke comes out of exhaust','broken mirror LH, seats stained, dents on hood, missing hubcaps', '1000','4300'),
+     ('3FMCJEF2SEC000865', '2008', 'Honda', 'Accord', 'EX','Sedan', 'gray','black','automatic','2.4L - 4cy', 'Gasoline','203564','Greg Sells Cars','2.2 overall rating, battery inoperable, dents in rear bumper, tire tread 2/32','dents in LR door, hood minor scratches, stained passenger seat','700','3900'),
+     ('2FHCNEMSWWQR012865','2006','Ford','Ranger','XLT','Pickup', 'red','tan','automatic', '3.0L - 6cy', 'Gasoline','102998','Joes Vehicles Resale','3.1 overall rating, minor dents on hood, dents in rear bumper, missing spare tire','missing RH passenger window, missing bed liner, no lift gate','500', '2900'),
+     ('2FHWSEMXWQR012325','2008','Cadillac','Escalade','XL','SUV', 'black','black','automatic', '5.3L - 8cy', 'Gasoline','203998','Frank Sells Cars','2.1 overall rating, minor scratches rear door, interior seats stained, rim scratched','missing carpet, headlights missing, hood acceptable but dents','400' ,'1400'),
+     ('1FHWSEMYYCN111025','2018','Honda','Accord','LX','Sedan', 'silver','black','automatic', '2.4L - 4cy', 'Gasoline','198668','Emilio LLC','4.1 overall rating, minor scratches hood, missing center console, no spare tire','faded roof, headlining falling, missing hubcap LH rear', '2000' ,'8900'),
+     ('3QQVSEMZQCN967025','2017','Chevrolet','Spark','LX','Hatchback', 'light blue','gray','automatic', '1.8L - 4cy', 'Gasoline','99067','Markus & Son Inc.','3.7 overall rating, minor scratches, missing radio, missing back seat cushion','missing RH taillight, missing floor matts','700' ,'2500'),
+     ('2QWMNEMZQCN967525','2018','Chevrolet','Silverado','LT','Truck', 'white','black','automatic', '5.8L - 8cy', 'Gasoline','159087','Jim and Wife Resell','4.7 overall rating, minor scratches, LH fender dents','cracked center console', '4700','12000'),
+     ('1PTYNEMMMCN965645','2011','Acura','TL','LX','Sedan', 'silver','black','automatic', '3.0L - 6cy', 'Gasoline','209087','Enrique Car Wholesale LLC','2.7 overall rating, aftermarket rims, engine noise, transmission problems','missing spare tire, RH door repainted substandard repair, faded paint', '1500','4300'),
+     ('2TFYNEMCYCN965000','2014','Acura','TSX','XR','Sedan', 'white','grey','automatic', '2.4L - 4cy', 'Gasoline','156097','Bryant RLV Sales','2.9 overall rating, aftermarket rims, upper engine noise, radiator leak','missing RH rear door handle, seats stained, hood missing', '3900','8300'),
+     ('3TTRYEMCYXN185600','2012','Acura','RX','L','Sedan', 'blue','black','automatic', '3.2L - 6cy', 'Gasoline','306097','V & T Auto','1.9 overall rating, radiator leak, missing spare tire, transmission slips','seats cracked, paint faded, power windows inoperable', '1000','2900'),
+      ('1QPYSVNXWQE029725','2018','Cadillac','XTS','L','Sedan', 'red','black','automatic', '3.6L - 6cy', 'Gasoline','73568','VR Riot Sale','4.1 overall rating, minor scratches rear door, interior seats stained','oil light on', '5600','12300'),
+     ('1FHWZPYXWQR097565','2015','Cadillac','CTX','L','Sedan', 'red','black','automatic', '3.6L - 6cy', 'Gasoline','27908','RP Autosale','3.6 overall rating, minor scratches bumper, interior seats stained, aftermarket rims acceptable','missing radio', '1900','7400'),
+     ('1FHCWMCSWWQR015645','2016','Ford','Explorer','GE','SUV', 'tan','tan','automatic', '3.0L - 6cy', 'Gasoline','102978','Jared LLC','3.1 overall rating, minor dents on hood, dents in rear bumper, missing spare tire','missing RH passenger seatbelt harness', '8000','10800'),
+     ('1AHNNNMSWWQR090865','2017','Ford','F150','XT','Truck', 'black','black','automatic', '4.8L - 8cy', 'Gasoline','195698','Eddie Auto','3.4 overall rating, minor dents around car','missing bed liner, no lift gate hinges, brake lights inoperable', '7000','12700'),
+     ('1FMMMEMSWWQR000015','2014','Ford','Edge','T','SUV', 'blue','tan','automatic', '3.4L - 6cy', 'Gasoline','162928','AT Auto LLC','3.1 overall rating, scratched RH door, missing SRS sensor, missing front seat belts','lift gate inoperable', '3000','7400'),
+     ('3FHCMPBWWQR077655','2014','Ford','Fusion','XT','Sedan', 'silver','black','automatic', '2.4L - 4cy', 'Gasoline','197928','Brett B Sales','3.0 overall rating, missing spare tire','missing RH passenger window inoperable, brake lights malfunctioning, could not scan vehicle for DTC codes', '1200','3600'),
+     ('1FMNNNF2SEC056465', '2019', 'Honda', 'Accord', 'LX','Sedan', 'black','black','automatic','2.4L - 4cy', 'Gasoline','150064','Trent Auto LLC','4.2 overall rating, battery inoperable, RH rear door paint fading,tire tread 3/32','stained seats','5600','13900'),
+     ('3MNYJEF2HFC765098', '2017', 'Honda', 'Passport', 'VT','SUV', 'blue','black','automatic','3.6L - 6cy', 'Gasoline','183904','Knogg Ltd','4.2 overall rating, seats stained','hood minor scratches','10800','17600'),
+     ('1FKPRGV272B098438','2012','Toyota','Camry','Base','Sedan','blue','black','automatic','2.4L - 4cy','Gasoline','144967','Bobs Car Resale','3.8 overall rating, tire pressure low, check engine light','cracked mirror LH, seats stained','2900','4800'),
+     ('3FJKNBY382B156438','2017','Toyota','Corolla','LE','Sedan','white','tan','automatic','2.4L - 4cy','Gasoline','134967','Grant & Son','4.8 overall rating, minor RH read door scratch','seats stained','6700','10300'),
+     ('1FJBYTY382B154538','2014','Subaru','Forester','NX','Sedan','red','tan','automatic','3.6L - 6cy','Gasoline','165967','William & Ward','3.8 overall rating, minor RH read door scratch, faded paint, roof lining peeling','no major damages','3200','8000'),
+     ('2FMVTYY382B100788','2019','Subaru','Impreza','XR','Sedan','silver','black','automatic','2.4L - 4cy','Gasoline','65907','Jack & Pat LLC.','4.8 overall rating, minor scratch hood','no major damages','8700','14200');

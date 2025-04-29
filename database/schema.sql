@@ -31,7 +31,9 @@ CREATE TABLE "vehicles" (
   "sellerName" text,
   "conditionReport" text,
   "damages" text,
+  "startingPrice" integer,
   "reservePrice" integer,
+  "imageUrl" text, -- this is new
   "createdAt" timestamptz NOT NULL DEFAULT (now())
 );
 

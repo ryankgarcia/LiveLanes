@@ -1,0 +1,48 @@
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  width: 100vw;
+}
+
+.bg-black {
+  background-color: #272727;
+}
+
+.bg-green {
+  background-color: #28b89a;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  font-size: 1rem;
+  align-items: center;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  color: black;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  width: 100vw;
+}

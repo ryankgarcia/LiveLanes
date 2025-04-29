@@ -21,9 +21,43 @@ app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
+app.use(express.static('public'));
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+// this endpoint will get read all of the vehicles,
+// later we will get an api call from the client to this endpoint
+app.get('/api/vehicles', async (req, res, next) => {
+  try {
+    const sql = `
+    select * from "vehicles"
+    `;
+    const result = await db.query(sql);
+    const vehicles = result.rows;
+    res.json(vehicles);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// in CRUD - this is READ data
+app.get('/api/vehicles/:vehicleId', async (req, res, next) => {
+  try {
+    const { vehicleId } = req.params;
+    if (!Number(vehicleId)) {
+      throw new ClientError(400, 'vehicleId must be a positive integer');
+    }
+    const sql = `
+    select * from "vehicles"
+    where "vehicleId" = $1
+    `;
+    const result = await db.query(sql, [vehicleId]);
+    const vehicle = result.rows[0];
+    if (!vehicle) {
+      throw new ClientError(404, `vehicle ${vehicleId} does not exist`);
+    }
+    res.json(vehicle);
+  } catch (err) {
+    next(err);
+  }
 });
 
 /*
