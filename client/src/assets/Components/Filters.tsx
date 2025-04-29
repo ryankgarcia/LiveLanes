@@ -9,6 +9,8 @@ type FilterProps = {
   setDraftMinPrice: (value: string) => void;
   setDraftMaxPrice: (value: string) => void;
   onSaveFilter: () => void;
+  onSearchNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // event handler passed as props so user can change their saved search name
+  searchName: string; // this was added to make the change for user to type in their saved search name
 };
 
 export function Filters({
@@ -20,6 +22,8 @@ export function Filters({
   setDraftMaxPrice,
   setDraftMinPrice,
   onSaveFilter,
+  onSearchNameChange,
+  searchName,
 }: FilterProps) {
   return (
     <div>
@@ -120,12 +124,23 @@ export function Filters({
           </div>
         </form>
         <div>
-          <button
-            type="button"
-            onClick={onSaveFilter}
-            className="save-search-button">
-            Save Search
-          </button>
+          <input
+            type="text"
+            className="saved-search-box"
+            placeholder="Name your search"
+            value={searchName} // this was changed
+            onChange={onSearchNameChange} // this was changed
+            required
+          />
+          <div>
+            <button
+              type="button"
+              onClick={onSaveFilter}
+              // onSubmit={onSaveFilter}
+              className="save-search-button">
+              Save Search
+            </button>
+          </div>
         </div>
         {/* the button above on this statement should add to Save Searches component */}
       </div>

@@ -7,6 +7,7 @@ import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
 import './RunList.css';
+import { WatchList } from '../Components/WatchList.tsx';
 
 export function RunList() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
@@ -20,6 +21,13 @@ export function RunList() {
   const [draftMinPrice, setDraftMinPrice] = useState('');
   const [draftMaxPrice, setDraftMaxPrice] = useState('');
   const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
+  const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
+
+  // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
+  // to the name of their
+  function handleSavedSearchName(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchName(e.target.value);
+  }
 
   function handleFilterChange(value: string) {
     setSelectedFilter(value);
@@ -50,9 +58,9 @@ export function RunList() {
   function handleSaveCurrentFilter() {
     const newSavedFilter: SavedFilter = {
       filterType: selectedFilter,
-      minPrice,
-      maxPrice,
-      searchTerm,
+      minPrice: draftMinPrice ? parseInt(draftMinPrice) : undefined,
+      maxPrice: draftMaxPrice ? parseInt(draftMaxPrice) : undefined,
+      searchTerm: searchName,
     };
     const alreadyExists = savedSearch.some((filter) => {
       return (
@@ -67,6 +75,7 @@ export function RunList() {
       return;
     }
     setSavedSearch((prev) => [...prev, newSavedFilter]);
+    setSearchName('');
   }
 
   // this is used to filter cars by searchTerm in the SearchBar component
@@ -145,7 +154,12 @@ export function RunList() {
           <SavedSearches
             savedFilters={savedSearch}
             onApplySavedFilter={handleApplySavedFilter}
+            // searchName={searchName}
+            // onSearchNameChange={handleSavedSearchName}
           />
+        </div>
+        <div>
+          <WatchList />
         </div>
         <div>
           <Filters
@@ -157,6 +171,10 @@ export function RunList() {
             setDraftMinPrice={setDraftMinPrice}
             setDraftMaxPrice={setDraftMaxPrice}
             onSaveFilter={handleSaveCurrentFilter}
+            searchName={searchName}
+            onSearchNameChange={handleSavedSearchName}
+            // onSearchNameChange={handleSavedSearchName}
+            // searchName and setSearchName were added here
           />
         </div>
       </div>
