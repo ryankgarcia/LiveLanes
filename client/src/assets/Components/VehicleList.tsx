@@ -1,11 +1,6 @@
-// import React, { useEffect, useState } from 'react';
 import './VehicleCard.css';
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
-// import { SavedFilter } from './SavedSearches'
-// import { RunListContext } from './RunListContext';
-// import { SavedSearches } from './SavedSearches';
-// import { SavedFilter } from './types';
 
 // type SavedFilter = {
 //   filterType: string;
@@ -229,7 +224,6 @@ user likes not just one vehicle, adding one vehicle to a favorites list should b
               key={entry.vehicleId}
               entry={entry}
               distance={distances[index]}
-              // onSave={handleSavedSearch}
             />
           ))
         ) : (

@@ -8,6 +8,8 @@ type FilterProps = {
   draftMaxPrice: string;
   setDraftMinPrice: (value: string) => void;
   setDraftMaxPrice: (value: string) => void;
+  onSaveFilter: () => void;
+  // handleSavedSearch: (entry: string) => void;
 };
 
 export function Filters({
@@ -18,6 +20,7 @@ export function Filters({
   draftMaxPrice,
   setDraftMaxPrice,
   setDraftMinPrice,
+  onSaveFilter,
 }: FilterProps) {
   return (
     <div>
@@ -113,7 +116,14 @@ export function Filters({
           Max
           <button className="custom-button">Search</button>
         </form>
-        {/* <button onSubmit={SavedSearches} className="save-search-button">Save Search</button> */}
+        <button
+          type="button"
+          // onSaveFilter={handleSaveCurrentFilter}
+          onClick={onSaveFilter}
+          // the event handler here on the button is supposed to save the user's searchFilter
+          className="save-search-button">
+          Save Search
+        </button>
         {/* the button above on this statement should add to Save Searches component */}
       </div>
     </div>
