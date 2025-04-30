@@ -1,0 +1,23 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  height: 20rem;
+  width: 15rem;
+
+  /* border-style: 50px solid black; */
+}
+
+.arrow-color-left {
+  color: black;
+  padding-right: 4rem;
+}
+
+.arrow-color-right {
+  color: black;
+  padding-left: 4rem;
+}
