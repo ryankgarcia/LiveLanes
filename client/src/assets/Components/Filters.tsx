@@ -130,13 +130,11 @@ export function Filters({
             placeholder="Name your search"
             value={searchName} // this was changed
             onChange={onSearchNameChange} // this was changed
-            required
           />
           <div>
             <button
               type="button"
               onClick={onSaveFilter}
-              // onSubmit={onSaveFilter}
               className="save-search-button">
               Save Search
             </button>

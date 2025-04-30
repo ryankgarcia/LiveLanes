@@ -5,6 +5,7 @@ import { VehicleCard } from './VehicleCard';
 type Props = {
   entries: Vehicle[];
   distances: number[];
+  onAddFavorite: (vehicle: Vehicle) => void;
 };
 
 export type FilterProps = {
@@ -17,7 +18,7 @@ export type FilterProps = {
   setDraftMaxPrice: (value: string) => void;
 };
 
-export function VehicleList({ entries, distances }: Props) {
+export function VehicleList({ entries, distances, onAddFavorite }: Props) {
   return (
     <div>
       <div className="card-container">
@@ -27,6 +28,7 @@ export function VehicleList({ entries, distances }: Props) {
               key={entry.vehicleId}
               entry={entry}
               distance={distances[index]}
+              onAddFavorite={onAddFavorite}
             />
           ))
         ) : (

@@ -2,7 +2,7 @@
   text-transform: uppercase;
 }
 
-.saved-searches {
+.saved-favorites {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;

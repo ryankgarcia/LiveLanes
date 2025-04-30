@@ -22,6 +22,24 @@ export function RunList() {
   const [draftMaxPrice, setDraftMaxPrice] = useState('');
   const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
   const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
+  // addFavorite state will push the vehicleId into watchlist (users-favorites)
+  const [favorite, setFavorite] = useState<Vehicle[]>([]);
+
+  // this event handler adds the vehicleId to a new vehicle Card array in the favorites section
+  function handleAddFavorite(vehicle: Vehicle) {
+    if (favorite.some((v) => v.vehicleId === vehicle.vehicleId)) {
+      alert('This vehicle has already been added to your Watchlist');
+      return;
+    }
+
+    setFavorite((prev) => [...prev, vehicle]);
+  }
+
+  // function handleRemoveFavorite(vehicleId: number) {
+  //   setFavorite((prev) =>
+  //   prev.filter((vehicle) => vehicle.vehicleId !== vehicleId));
+  //   alert('This vehicle has been removed from your Watchlist');
+  // }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
   // to the name of their
@@ -159,7 +177,8 @@ export function RunList() {
           />
         </div>
         <div>
-          <WatchList />
+          <WatchList entries={favorite} distances={distances} />
+          {/* we are working on getting this props to work */}
         </div>
         <div>
           <Filters
@@ -179,7 +198,11 @@ export function RunList() {
         </div>
       </div>
       <div>
-        <VehicleList entries={finalCars} distances={distances} />
+        <VehicleList
+          entries={finalCars}
+          distances={distances}
+          onAddFavorite={handleAddFavorite}
+        />
       </div>
     </div>
   );

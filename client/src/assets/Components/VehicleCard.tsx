@@ -5,6 +5,7 @@ import { Vehicle } from '../../data'; // this needs to import data.ts into this 
 type VehicleCardProps = {
   entry: Vehicle;
   distance: number;
+  onAddFavorite: (vehicle: Vehicle) => void;
 };
 
 // this function exists to assign each vehicle in the auction a number and a letter
@@ -26,10 +27,16 @@ function laneAssign(): string[] {
 }
 
 const genLane = laneAssign();
-
 const newLane = genLane.map((item, index) => item[index]);
 
-export function VehicleCard({ entry, distance }: VehicleCardProps) {
+export function VehicleCard({
+  entry,
+  distance,
+  onAddFavorite,
+}: VehicleCardProps) {
+  function handleClick() {
+    onAddFavorite(entry);
+  }
   return (
     <div className="card" key={entry.vehicleId}>
       <div className="card-header">
@@ -67,7 +74,14 @@ export function VehicleCard({ entry, distance }: VehicleCardProps) {
       <div className="card-footer">
         <div className="button-container">
           <button className="bid-button">{<MdOutlineHdrAuto />} Set bid</button>
-          <button className="fav-button">{<MdOutlineStar />} Add</button>
+          <button
+            className="fav-button"
+            // addFavorite={addFavorite}
+            onClick={handleClick}
+            // onCustomClick={handleAddFavorite}
+          >
+            {<MdOutlineStar />} Add
+          </button>
         </div>
       </div>
     </div>
