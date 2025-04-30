@@ -164,7 +164,7 @@ export function RunList() {
   }
   return (
     <div>
-      <div>
+      <div className="runlist-container">
         <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
       </div>
       <div>

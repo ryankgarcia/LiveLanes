@@ -8,7 +8,7 @@ type Props = {
 
 export function SearchBar({ searchTerm, onCustomChange }: Props) {
   return (
-    <div className="search-container">
+    <div>
       {searchTerm === '' && <BsSearch className="search-icon" />}
       <input
         type="text"
