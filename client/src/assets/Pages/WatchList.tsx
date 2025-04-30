@@ -1,5 +1,5 @@
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
-import { VehicleCard } from './VehicleCard';
+import { VehicleCard } from '../Components/VehicleCard';
 import './VehicleCard.css';
 
 type Props = {
