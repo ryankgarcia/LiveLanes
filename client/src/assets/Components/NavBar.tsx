@@ -6,17 +6,18 @@ import { NavLink, Outlet } from 'react-router-dom';
 export function NavBar() {
   // there are styles that can be conditionally added depending on the page
   // the user is on. bg-black, bg-green, bg-white
+
   return (
     <div>
       <div className="navbar-top bg-black">
         <div className="logo">LiveLanes</div>
         <div className="nav-links">
           <NavLink
-            to="/buy"
+            to="/"
             className={({ isActive }) =>
               isActive ? 'nav-link active' : 'nav-link'
             }>
-            <span>Buy</span>
+            <span>Home</span>
           </NavLink>
           <NavLink
             to="/sell"
@@ -37,6 +38,7 @@ export function NavBar() {
         </div>
         <div className="profile-icon">
           <FaUserCircle size={32} />
+          {/* this is where userManagement will be... */}
         </div>
       </div>
       <div className="navbar-bottom bg-green">
@@ -48,7 +50,7 @@ export function NavBar() {
           <span>Buy Now</span>
         </NavLink>
         <NavLink
-          to="/"
+          to="/runlist"
           className={({ isActive }) =>
             isActive ? 'nav-link active' : 'nav-link'
           }>

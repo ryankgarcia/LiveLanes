@@ -7,7 +7,7 @@ import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
 import './RunList.css';
-import { WatchList } from './WatchList.tsx';
+import { WatchList } from '../Components/WatchList.tsx';
 
 export function RunList() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call

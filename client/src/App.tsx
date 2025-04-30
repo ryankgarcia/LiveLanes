@@ -3,7 +3,8 @@ import { NavBar } from './assets/Components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './assets/Pages/NotFound';
 import { RunList } from './assets/Pages/RunList';
-// import { WatchList } from './assets/Pages/WatchList';
+import { HomePage } from './assets/Pages/HomePage';
+// import { Details } from './assets/Components/Details';
 
 // this file will only have the routes to the page
 // the useEffect should be placed in the component that will be fetching the data
@@ -14,10 +15,10 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<NavBar />}>
-        <Route index element={<RunList />} />
-        {/* <Route path="/runlist" element={<RunList />} /> */}
+        <Route index element={<HomePage />} />
+        <Route path="/runlist" element={<RunList />} />
+        {/* <Route path="/runlist/:vehicleId" element={<Details />} /> */}
         <Route path="*" element={<NotFound />} />
-        {/* <Route path="/watchlist" element={<WatchList />} /> */}
       </Route>
     </Routes>
   );
