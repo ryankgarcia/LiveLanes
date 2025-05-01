@@ -105,7 +105,7 @@ export function Filters({
             <input
               className="range-box"
               type="number"
-              placeholder="min"
+              placeholder="Min"
               value={draftMinPrice}
               onChange={(e) => setDraftMinPrice(e.target.value)}
             />
@@ -113,7 +113,7 @@ export function Filters({
             <input
               className="range-box"
               type="number"
-              placeholder="max"
+              placeholder="Max"
               value={draftMaxPrice}
               onChange={(e) => setDraftMaxPrice(e.target.value)}
             />

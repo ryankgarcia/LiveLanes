@@ -5,38 +5,50 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 export function NavBar() {
   const location = useLocation();
-  console.log('location', location);
 
-  const bgColorGreen =
-    location.pathname === '/mypurchases' ? 'bg-green' : 'bg-black';
+  const styleMap: Record<string, { top: string; bottom: string }> = {
+    '/': {
+      top: 'bg-black',
+      bottom: 'bg-white',
+    },
+    '/sell': {
+      top: 'bg-black',
+      bottom: 'bg-white',
+    },
+    '/mypurchases': {
+      top: 'bg-green',
+      bottom: 'bg-black',
+    },
+    '/buynow': {
+      top: 'bg-green',
+      bottom: 'bg-black',
+    },
+    '/runlist': {
+      top: 'bg-black',
+      bottom: 'bg-green',
+    },
+    '/LiveAuction': {
+      top: 'bg-green',
+      bottom: 'bg-black',
+    },
+  };
 
-  const bgColorBlack =
-    location.pathname === '/liveauction' ? 'bg-white' : 'bg-green';
-
-  if (location.pathname === '/mypurchases') {
-    ('bg-green');
-  } else if (location.pathname === '/buynow') {
-    ('bg-black');
+  function getTextColor(bgClass: string) {
+    return bgClass === 'bg-white' ? 'text-black' : 'text-white';
   }
-  // const bgColorWhite =
-  //   location.pathname === '/liveauction' ? 'bg-white' : 'bg-black';
 
-  // if (location.pathname === '/mypurchases') {
-  //   bgColorGreen;
-  // } else if (location.pathname === '/runlist') {
-  //   bgColorGreen;
-  // } else if (location.pathname === '/buynow') {
-  //   bgColorBlack;
-  // } else if (location.pathname === '/liveauction') {
-  //   bgColorWhite;
-  // }
+  const styles = styleMap[location.pathname] || {};
+  const topClass = styles.top || '';
+  const bottomClass = styles.bottom || '';
+  const textColorTop = getTextColor(topClass);
+  const textColorBottom = getTextColor(bottomClass);
 
   // there are styles that can be conditionally added depending on the page
   // the user is on. bg-black, bg-green, bg-white
 
   return (
     <div>
-      <div className={`navbar-top ${bgColorGreen}`}>
+      <div className={`navbar-top ${topClass} ${textColorTop}`}>
         <div className="logo">LiveLanes</div>
         <div className="nav-links">
           <NavLink
@@ -68,7 +80,7 @@ export function NavBar() {
           {/* this is where userManagement will be... */}
         </div>
       </div>
-      <div className={`navbar-bottom ${bgColorBlack}`}>
+      <div className={`navbar-bottom ${bottomClass} ${textColorBottom}`}>
         <NavLink
           to="/buynow"
           className={({ isActive }) =>

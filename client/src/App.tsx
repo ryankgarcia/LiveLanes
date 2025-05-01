@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './assets/Pages/NotFound';
 import { RunList } from './assets/Pages/RunList';
 import { HomePage } from './assets/Pages/HomePage';
+import { LiveAuction } from './assets/Pages/LiveAuction';
 // import { Details } from './assets/Components/Details';
 
 // this file will only have the routes to the page
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/" element={<NavBar />}>
         <Route index element={<HomePage />} />
         <Route path="/runlist" element={<RunList />} />
+        <Route path="/liveauction" element={<LiveAuction />} />
         {/* <Route path="/runlist/:vehicleId" element={<Details />} /> */}
         <Route path="*" element={<NotFound />} />
       </Route>
