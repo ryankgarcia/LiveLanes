@@ -8,15 +8,15 @@ type Props = {
 
 export function SearchBar({ searchTerm, onCustomChange }: Props) {
   return (
-    <div>
-      {searchTerm === '' && <BsSearch className="search-icon" />}
+    <div className="search-bar">
       <input
         type="text"
         value={searchTerm}
         onChange={(e) => onCustomChange(e.target.value)}
         placeholder="Search"
-        className="search-bar"
+        // className="search-bar"
       />
+      {searchTerm === '' && <BsSearch className="search-icon" />}
     </div>
   );
 }

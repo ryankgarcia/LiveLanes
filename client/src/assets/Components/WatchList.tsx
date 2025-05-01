@@ -1,6 +1,7 @@
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
 import './VehicleCard.css';
+import './WatchList.css';
 
 type Props = {
   // onAddFavorite: (vehicle: Vehicle) => void;

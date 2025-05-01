@@ -1,15 +1,42 @@
 import { BsFillCarFrontFill } from 'react-icons/bs';
 import { FaUserCircle } from 'react-icons/fa';
 import './NavBar.css';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 export function NavBar() {
+  const location = useLocation();
+  console.log('location', location);
+
+  const bgColorGreen =
+    location.pathname === '/mypurchases' ? 'bg-green' : 'bg-black';
+
+  const bgColorBlack =
+    location.pathname === '/liveauction' ? 'bg-white' : 'bg-green';
+
+  if (location.pathname === '/mypurchases') {
+    ('bg-green');
+  } else if (location.pathname === '/buynow') {
+    ('bg-black');
+  }
+  // const bgColorWhite =
+  //   location.pathname === '/liveauction' ? 'bg-white' : 'bg-black';
+
+  // if (location.pathname === '/mypurchases') {
+  //   bgColorGreen;
+  // } else if (location.pathname === '/runlist') {
+  //   bgColorGreen;
+  // } else if (location.pathname === '/buynow') {
+  //   bgColorBlack;
+  // } else if (location.pathname === '/liveauction') {
+  //   bgColorWhite;
+  // }
+
   // there are styles that can be conditionally added depending on the page
   // the user is on. bg-black, bg-green, bg-white
 
   return (
     <div>
-      <div className="navbar-top bg-black">
+      <div className={`navbar-top ${bgColorGreen}`}>
         <div className="logo">LiveLanes</div>
         <div className="nav-links">
           <NavLink
@@ -41,7 +68,7 @@ export function NavBar() {
           {/* this is where userManagement will be... */}
         </div>
       </div>
-      <div className="navbar-bottom bg-green">
+      <div className={`navbar-bottom ${bgColorBlack}`}>
         <NavLink
           to="/buynow"
           className={({ isActive }) =>

@@ -9,7 +9,11 @@ h4 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   text-transform: uppercase;
-  color: #f4f0f1;
+
+  /* color: #f4f0f1; */
+
+  /* changed this color to black for testing container size */
+  color: black;
   font-weight: 300;
   padding-left: 1rem;
 }

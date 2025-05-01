@@ -56,6 +56,7 @@ h4 {
   cursor: pointer;
 }
 
+/*
 .range-box {
   background-color: white;
   width: 10%;
@@ -68,7 +69,7 @@ h4 {
   border-width: 0.1rem;
   color: black;
   font-size: 1rem;
-}
+} */
 
 .saved-search-box {
   background-color: white;

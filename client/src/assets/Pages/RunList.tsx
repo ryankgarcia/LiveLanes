@@ -163,12 +163,13 @@ export function RunList() {
     );
   }
   return (
-    <div>
+    <>
       <div className="runlist-container">
         <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
-      </div>
+        {/* </div>
       <div>
-        <div>
+        <div> */}
+        <div className="filter1-containter">
           <SavedSearches
             savedFilters={savedSearch}
             onApplySavedFilter={handleApplySavedFilter}
@@ -176,34 +177,35 @@ export function RunList() {
             // onSearchNameChange={handleSavedSearchName}
           />
         </div>
-        <div>
-          <WatchList entries={favorite} distances={distances} />
-          {/* we are working on getting this props to work */}
-        </div>
-        <div>
-          <Filters
-            selectedFilter={selectedFilter}
-            onFilterChange={handleFilterChange}
-            onPriceChange={handlePriceRange}
-            draftMinPrice={draftMinPrice}
-            draftMaxPrice={draftMaxPrice}
-            setDraftMinPrice={setDraftMinPrice}
-            setDraftMaxPrice={setDraftMaxPrice}
-            onSaveFilter={handleSaveCurrentFilter}
-            searchName={searchName}
-            onSearchNameChange={handleSavedSearchName}
-            // onSearchNameChange={handleSavedSearchName}
-            // searchName and setSearchName were added here
-          />
-        </div>
+        {/* </div>
+        <div> */}
+        <WatchList entries={favorite} distances={distances} />
+        {/* we are working on getting this props to work */}
+        {/* </div>
+        <div> */}
+        <Filters
+          selectedFilter={selectedFilter}
+          onFilterChange={handleFilterChange}
+          onPriceChange={handlePriceRange}
+          draftMinPrice={draftMinPrice}
+          draftMaxPrice={draftMaxPrice}
+          setDraftMinPrice={setDraftMinPrice}
+          setDraftMaxPrice={setDraftMaxPrice}
+          onSaveFilter={handleSaveCurrentFilter}
+          searchName={searchName}
+          onSearchNameChange={handleSavedSearchName}
+          // onSearchNameChange={handleSavedSearchName}
+          // searchName and setSearchName were added here
+        />
+        {/* </div>
       </div>
-      <div>
+      <div> */}
         <VehicleList
           entries={finalCars}
           distances={distances}
           onAddFavorite={handleAddFavorite}
         />
       </div>
-    </div>
+    </>
   );
 }
