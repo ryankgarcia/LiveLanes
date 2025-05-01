@@ -12,6 +12,17 @@
   }
 }
 
+.filters {
+  width: 20%;
+}
+
+.carsMiddle {
+  display: flex;
+
+  /* align-items: flex-start; */
+  width: 35%;
+}
+
 * {
   box-sizing: border-box;
 }
