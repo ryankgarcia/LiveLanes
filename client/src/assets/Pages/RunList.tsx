@@ -6,8 +6,8 @@ import { Filters } from '../Components/Filters';
 import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
-import './RunList.css';
 import { WatchList } from '../Components/WatchList.tsx';
+import './RunListLayout.css';
 
 export function RunList() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
@@ -165,37 +165,41 @@ export function RunList() {
   return (
     <>
       <div className="runlist-container">
-        <div className="filters">
-          <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
-          <SavedSearches
-            savedFilters={savedSearch}
-            onApplySavedFilter={handleApplySavedFilter}
-            // searchName={searchName}
-            // onSearchNameChange={handleSavedSearchName}
-          />
-          <WatchList entries={favorite} distances={distances} />
-          {/* we are working on getting this props to work */}
-          <Filters
-            selectedFilter={selectedFilter}
-            onFilterChange={handleFilterChange}
-            onPriceChange={handlePriceRange}
-            draftMinPrice={draftMinPrice}
-            draftMaxPrice={draftMaxPrice}
-            setDraftMinPrice={setDraftMinPrice}
-            setDraftMaxPrice={setDraftMaxPrice}
-            onSaveFilter={handleSaveCurrentFilter}
-            searchName={searchName}
-            onSearchNameChange={handleSavedSearchName}
-            // onSearchNameChange={handleSavedSearchName}
-            // searchName and setSearchName were added here
-          />
-        </div>
-        <div className="carsMiddle">
-          <VehicleList
-            entries={finalCars}
-            distances={distances}
-            onAddFavorite={handleAddFavorite}
-          />
+        <div className="row">
+          <div className="column-quarter">
+            <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
+            <SavedSearches
+              savedFilters={savedSearch}
+              onApplySavedFilter={handleApplySavedFilter}
+              // searchName={searchName}
+              // onSearchNameChange={handleSavedSearchName}
+            />
+            <WatchList entries={favorite} distances={distances} />
+            {/* we are working on getting this props to work */}
+            <Filters
+              selectedFilter={selectedFilter}
+              onFilterChange={handleFilterChange}
+              onPriceChange={handlePriceRange}
+              draftMinPrice={draftMinPrice}
+              draftMaxPrice={draftMaxPrice}
+              setDraftMinPrice={setDraftMinPrice}
+              setDraftMaxPrice={setDraftMaxPrice}
+              onSaveFilter={handleSaveCurrentFilter}
+              searchName={searchName}
+              onSearchNameChange={handleSavedSearchName}
+              // onSearchNameChange={handleSavedSearchName}
+              // searchName and setSearchName were added here
+            />
+          </div>
+          <div className="column-half">
+            <div className="margin-top">
+              <VehicleList
+                entries={finalCars}
+                distances={distances}
+                onAddFavorite={handleAddFavorite}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

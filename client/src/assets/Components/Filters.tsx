@@ -110,6 +110,8 @@ export function Filters({
               onChange={(e) => setDraftMinPrice(e.target.value)}
             />
             Min
+          </div>
+          <div>
             <input
               className="range-box"
               type="number"
