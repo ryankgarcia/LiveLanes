@@ -9,7 +9,7 @@ export function NextArrow({ onCustomClick }: Props) {
     <PiArrowFatRightLight
       onClick={onCustomClick}
       className="next-image"
-      size="4rem"
+      size="3rem"
     />
   );
 }

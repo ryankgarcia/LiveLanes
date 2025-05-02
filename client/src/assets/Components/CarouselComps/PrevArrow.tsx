@@ -7,9 +7,9 @@ type Props = {
 export function PrevArrow({ onCustomClick }: Props) {
   return (
     <PiArrowFatLeftLight
-      onClick={onCustomClick}
       className="prev-image"
-      size="6rem"
+      size="3rem"
+      onClick={onCustomClick}
     />
   );
 }

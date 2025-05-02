@@ -1,4 +1,4 @@
-import { Image } from './CarouselImage.css';
+import { Image } from '../CarCarousel';
 
 type Props = {
   currentImage: Image;

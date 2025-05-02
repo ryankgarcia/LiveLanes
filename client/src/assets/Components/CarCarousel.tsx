@@ -1,11 +1,11 @@
 import './CarCarousel.css';
-import { CarouselImage } from './CarouselComps/CarouselImage';
-import { Dots } from './CarouselComps/Dots';
-import { useCallback, useEffect, useState } from 'react';
-import { NextArrow } from './CarouselComps/NextArrow';
+import { useEffect, useState } from 'react';
 import { PrevArrow } from './CarouselComps/PrevArrow';
+import { CarouselImage } from './CarouselComps/CarouselImage';
+import { NextArrow } from './CarouselComps/NextArrow';
+import { Dots } from './CarouselComps/Dots';
 
-export type ImageProps = {
+export type Image = {
   src: string;
   alt: string;
 };
@@ -15,32 +15,35 @@ type Props = {
 };
 
 export function CarCarousel({ images }: Props) {
-  const [imageIndex, setImageIndex] = useState(0);
-
-  const nextImage = useCallback(() => {
-    const nextIndex = (imageIndex + 1) % images.length;
-    setImageIndex(nextIndex);
-  }, [images, imageIndex]);
-
-  const prevImage = useCallback(() => {
-    const prevIndex = (imageIndex - 1 + images.length) % images.length;
-    setImageIndex(prevIndex);
-  }, [images, imageIndex]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timeoutHandle = setTimeout(nextImage, 3000);
-    return () => clearTimeout(timeoutHandle);
-  }, [nextImage]);
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [images, currentIndex]);
 
+  function handleNext() {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }
+
+  function handlePrev() {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  }
+
+  function handleCurrentIndex(i: number) {
+    setCurrentIndex(i);
+  }
   return (
     <div className="carousel">
-      <PrevArrow onCustomClick={prevImage} />
-      <CarouselImage image={images[imageIndex]} />
-      <NextArrow onCustomClick={nextImage} />
+      <PrevArrow onCustomClick={handlePrev} />
+      <CarouselImage currentImage={images[currentIndex]} />
+      <NextArrow onCustomClick={handleNext} />
       <Dots
+        currentIndex={currentIndex}
         numDots={images.length}
-        activeIndex={imageIndex}
-        onClick={(i) => setImageIndex(i)}
+        onCustomClick={handleCurrentIndex}
       />
     </div>
   );

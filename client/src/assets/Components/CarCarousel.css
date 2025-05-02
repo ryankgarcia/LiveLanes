@@ -1,3 +1,5 @@
+/* make all css classes unique and make sure not to have them overlap with layout classes of another page */
+
 .arrow-color-left {
   color: black;
   padding-right: 4rem;
@@ -26,14 +28,12 @@
 
 /* new css rule sets below, use them */
 
-/* .carousel {
+.carousel {
   position: relative;
   width: 800px;
   margin: 0 auto;
   padding: 1rem;
-
-  border: 0.25rem solid;
-} */
+}
 
 .image-wrapper {
   position: relative;

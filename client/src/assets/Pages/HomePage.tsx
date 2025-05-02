@@ -1,5 +1,8 @@
-import { CarCarousel } from '../Components/CarCarousel';
 import '../Pages/HomePage.css';
+import '../Components/CarCarousel';
+import { CarCarousel } from '../Components/CarCarousel';
+
+// solve the error showing up on line 7 Image[]...
 
 const images: Image[] = [
   { src: '/images/2007-toyota-camry-ce-white.jpg', alt: '2007 Toyota Camry' },
