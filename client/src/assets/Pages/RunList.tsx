@@ -6,7 +6,6 @@ import { Filters } from '../Components/Filters';
 import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
-// import { WatchList } from '../Components/WatchList.tsx';
 import './RunListLayout.css';
 
 export function RunList() {
@@ -36,12 +35,11 @@ export function RunList() {
   }
 
   // this needs to properly remove an entry.
-  // function handleRemoveFavorite(vehicleId: number) {
-  //   setFavorites((prev) =>
-  //     prev.filter((vehicle) => vehicle.vehicleId !== vehicleId)
-  //   );
-  //   alert('This vehicle has been removed from your Watchlist');
-  // }
+  function handleRemoveFavorite(vehicle: Vehicle) {
+    setFavorites((prev) =>
+      prev.filter((v) => v.vehicleId !== vehicle.vehicleId)
+    );
+  }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
   // to the name of their
@@ -185,13 +183,6 @@ export function RunList() {
               // searchName={searchName}
               // onSearchNameChange={handleSavedSearchName}
             />
-            {/* <WatchList
-              entries={favorite}
-              distances={distances}
-              onRemoveFavorite={handleRemoveFavorite}
-              favorites={favorite}
-            /> */}
-            {/* we are working on getting this props to work */}
             <Filters
               selectedFilter={selectedFilter}
               onFilterChange={handleFilterChange}
@@ -215,7 +206,8 @@ export function RunList() {
                 entries={finalCars}
                 distances={distances}
                 onAddFavorite={handleAddFavorite}
-                // favorites={favorite}
+                onRemoveFavorite={handleRemoveFavorite}
+                favorites={favorites}
               />
             </div>
           </div>

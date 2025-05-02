@@ -16,11 +16,16 @@ type Props = {
   entries: Vehicle[];
   distances: number[];
   onAddFavorite: (vehicle: Vehicle) => void;
-  // onRemoveFavorite: (vehicleId: number) => void;
-  // favorites: Vehicle[];
+  onRemoveFavorite: (vehicle: Vehicle) => void;
+  favorites: Vehicle[];
 };
-// this was destructured in props 'favorites,' , take out of quotes and pass in if needed
-export function VehicleList({ entries, distances, onAddFavorite }: Props) {
+export function VehicleList({
+  entries,
+  distances,
+  onAddFavorite,
+  onRemoveFavorite,
+  favorites,
+}: Props) {
   return (
     <div>
       <div className="card-container">
@@ -31,8 +36,10 @@ export function VehicleList({ entries, distances, onAddFavorite }: Props) {
               entry={entry}
               distance={distances[index]}
               onAddFavorite={onAddFavorite}
-              // onRemoveFavorite={onRemoveFavorite}
-              // favorites={favorites}
+              onRemoveFavorite={onRemoveFavorite}
+              isFavorite={favorites.some(
+                (v) => v.vehicleId === entry.vehicleId
+              )}
             />
           ))
         ) : (

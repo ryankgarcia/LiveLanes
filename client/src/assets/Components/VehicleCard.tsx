@@ -1,13 +1,13 @@
 import './VehicleCard.css';
-import { MdOutlineHdrAuto, MdOutlineStar } from 'react-icons/md';
+import { MdOutlineHdrAuto, MdOutlineStar, MdStar } from 'react-icons/md';
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 
 type VehicleCardProps = {
   entry: Vehicle;
   distance: number;
   onAddFavorite: (vehicle: Vehicle) => void;
-  // onRemoveFavorite: (vehicleId: number) => void;
-  // favorites: Vehicle[];
+  onRemoveFavorite: (vehicle: Vehicle) => void;
+  isFavorite: boolean;
 };
 
 // this function exists to assign each vehicle in the auction a number and a letter
@@ -35,14 +35,9 @@ export function VehicleCard({
   entry,
   distance,
   onAddFavorite,
+  onRemoveFavorite,
+  isFavorite,
 }: VehicleCardProps) {
-  function handleClick() {
-    onAddFavorite(entry);
-  }
-  // function handleRemove() {
-  //   onRemoveFavorite(entry);
-  // }
-
   return (
     <div className="card" key={entry.vehicleId}>
       <div className="card-header">
@@ -82,17 +77,16 @@ export function VehicleCard({
           <button className="bid-button">{<MdOutlineHdrAuto />} Set bid</button>
           <button
             className="fav-button"
-            onClick={handleClick}
-            // onClick={
-            //   isFavorite
-            //     ? () => onRemoveFavorite(favorites.vehicleId)
-            //     : () => onAddFavorite(entry)
-            // }>
-            // {isFavorite ? <MdStar /> : <MdOutlineStar />}
-            // {isFavorite ? 'Remove' : 'Add'}
-          >
-            {<MdOutlineStar />}
-            Add
+            onClick={
+              isFavorite
+                ? () => onRemoveFavorite(entry)
+                : () => onAddFavorite(entry)
+            }>
+            {isFavorite ? <MdStar /> : <MdOutlineStar />}
+            {isFavorite ? 'Remove' : 'Add'}
+            {/* {isFavorite ? 'Remove' : 'Add'} */}
+            {/* > */}
+            {/* {<MdOutlineStar />} */}
           </button>
         </div>
       </div>
