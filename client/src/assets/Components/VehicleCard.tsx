@@ -6,6 +6,8 @@ type VehicleCardProps = {
   entry: Vehicle;
   distance: number;
   onAddFavorite: (vehicle: Vehicle) => void;
+  // onRemoveFavorite: (vehicleId: number) => void;
+  // favorites: Vehicle[];
 };
 
 // this function exists to assign each vehicle in the auction a number and a letter
@@ -37,6 +39,10 @@ export function VehicleCard({
   function handleClick() {
     onAddFavorite(entry);
   }
+  // function handleRemove() {
+  //   onRemoveFavorite(entry);
+  // }
+
   return (
     <div className="card" key={entry.vehicleId}>
       <div className="card-header">
@@ -76,11 +82,17 @@ export function VehicleCard({
           <button className="bid-button">{<MdOutlineHdrAuto />} Set bid</button>
           <button
             className="fav-button"
-            // addFavorite={addFavorite}
             onClick={handleClick}
-            // onCustomClick={handleAddFavorite}
+            // onClick={
+            //   isFavorite
+            //     ? () => onRemoveFavorite(favorites.vehicleId)
+            //     : () => onAddFavorite(entry)
+            // }>
+            // {isFavorite ? <MdStar /> : <MdOutlineStar />}
+            // {isFavorite ? 'Remove' : 'Add'}
           >
-            {<MdOutlineStar />} Add
+            {<MdOutlineStar />}
+            Add
           </button>
         </div>
       </div>

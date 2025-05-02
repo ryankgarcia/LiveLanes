@@ -43,3 +43,10 @@ export async function readVehicleId(
   const car = await response.json();
   return car;
 }
+
+// this function saves the user's entry in localStorage, i'll get to it later.
+// export async function writeVehicle(entry: Vehicle): void {
+//   const entryJSON = JSON.stringify(entry)
+// }
+
+// export async function readVehicle

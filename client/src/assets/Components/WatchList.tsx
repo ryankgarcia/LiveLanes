@@ -4,12 +4,19 @@ import './VehicleCard.css';
 import './WatchList.css';
 
 type Props = {
-  // onAddFavorite: (vehicle: Vehicle) => void;
   entries: Vehicle[];
   distances: number[];
+  onRemoveFavorite: (vehicleId: number) => void;
+  favorites: Vehicle[];
 };
 
-export function WatchList({ entries, distances }: Props) {
+export function WatchList({
+  entries,
+  distances,
+  onRemoveFavorite,
+  favorites,
+}: Props) {
+  const isFavorite = favorites.some((v) => v.vehicleId === entry.vehicleId);
   return (
     <div className="saved-favorites">
       <h4>Watch List</h4>
@@ -19,12 +26,18 @@ export function WatchList({ entries, distances }: Props) {
       </label>
       <div className="card-container">
         {entries.length > 0 ? (
-          entries.map((entry, index) => (
+          favorites.map((entry, index) => (
             <VehicleCard
               key={entry.vehicleId}
               entry={entry}
               distance={distances[index]}
-              onAddFavorite={() => entry}
+              onClick={
+                isFavorite
+                  ? () => onRemoveFavorite(favorites.vehicleId)
+                  : () => onAddFavorite(entry)
+              }
+              onRemoveFavorite={() => onRemoveFavorite}
+              // () => entry}
             />
           ))
         ) : (
@@ -36,3 +49,11 @@ export function WatchList({ entries, distances }: Props) {
     </div>
   );
 }
+
+// onClick={
+//   isFavorite
+//     ? () => onRemoveFavorite(favorites.vehicleId)
+//     : () => onAddFavorite(entry)
+// }>
+// {isFavorite ? <MdStar /> : <MdOutlineStar />}
+// {isFavorite ? 'Remove' : 'Add'}

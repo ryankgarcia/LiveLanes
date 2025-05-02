@@ -2,12 +2,6 @@ import './VehicleCard.css';
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleCard } from './VehicleCard';
 
-type Props = {
-  entries: Vehicle[];
-  distances: number[];
-  onAddFavorite: (vehicle: Vehicle) => void;
-};
-
 export type FilterProps = {
   selectedFilter: string;
   onFilterChange: (filter: string) => void;
@@ -16,6 +10,14 @@ export type FilterProps = {
   draftMaxPrice: string;
   setDraftMinPrice: (value: string) => void;
   setDraftMaxPrice: (value: string) => void;
+};
+
+type Props = {
+  entries: Vehicle[];
+  distances: number[];
+  onAddFavorite: (vehicle: Vehicle) => void;
+  // onRemoveFavorite: (vehicleId: number) => void;
+  // favorites: Vehicle[];
 };
 
 export function VehicleList({ entries, distances, onAddFavorite }: Props) {
@@ -29,6 +31,8 @@ export function VehicleList({ entries, distances, onAddFavorite }: Props) {
               entry={entry}
               distance={distances[index]}
               onAddFavorite={onAddFavorite}
+              // onRemoveFavorite={onRemoveFavorite}
+              // favorites={favorites}
             />
           ))
         ) : (
