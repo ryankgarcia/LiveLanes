@@ -148,7 +148,6 @@ export function Filters({
             </button>
           </div>
         </div>
-        {/* the button above on this statement should add to Save Searches component */}
       </div>
     </div>
   );

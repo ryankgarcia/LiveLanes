@@ -53,7 +53,6 @@ export function RunList() {
   }
 
   function handleFilterChange(value: string) {
-    console.log('value', value);
     setSelectedFilter(value);
   }
 
@@ -146,10 +145,6 @@ export function RunList() {
     );
   }
 
-  // finalCars = isFavorite.filter((v) => v.vehicleId === finalCars.vehicleId);
-  // finalCars.filter((f) => f.vehicleId === finalCars.vehicleId)
-  // finalCars = isFavorite.filter((v) => v.vehicleId === isFavorite.vehicleId);
-
   // this useEffect was created to simulate distances from a seller dealership from where the buyer is from based on the buyer's address
   useEffect(() => {
     const generatedDistances = entries.map(() => randomDistance());
@@ -191,8 +186,6 @@ export function RunList() {
             <SavedSearches
               savedFilters={savedSearch}
               onApplySavedFilter={handleApplySavedFilter}
-              // searchName={searchName}
-              // onSearchNameChange={handleSavedSearchName}
             />
             <Filters
               selectedFilter={selectedFilter}
@@ -205,10 +198,6 @@ export function RunList() {
               onSaveFilter={handleSaveCurrentFilter}
               searchName={searchName}
               onSearchNameChange={handleSavedSearchName}
-              // isFavorite={isFavorite}
-              // favorites={favorite}
-              // onSearchNameChange={handleSavedSearchName}
-              // searchName and setSearchName were added here
             />
           </div>
           <div className="column-half">

@@ -46,6 +46,8 @@ export async function readVehicleId(
   return car;
 }
 
+// integrate your local storage here for the user's favorites, and the user's saved searches
+
 // this function saves the user's entry in localStorage, i'll get to it later.
 // export async function writeVehicle(entry: Vehicle): void {
 //   const entryJSON = JSON.stringify(entry)
