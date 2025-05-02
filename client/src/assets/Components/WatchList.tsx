@@ -7,7 +7,6 @@ type Props = {
   entries: Vehicle[];
   distances: number[];
   onRemoveFavorite: (vehicleId: number) => void;
-  favorites: Vehicle[];
 };
 
 export function WatchList({
@@ -16,14 +15,13 @@ export function WatchList({
   onRemoveFavorite,
   favorites,
 }: Props) {
-  const isFavorite = favorites.some((v) => v.vehicleId === entry.vehicleId);
   return (
     <div className="saved-favorites">
-      <h4>Watch List</h4>
+      {/* <h4>Watch List</h4>
       <label>
         <input type="radio" name="filterBy" className="custom-radio" />
         Favorites
-      </label>
+      </label> */}
       <div className="card-container">
         {entries.length > 0 ? (
           favorites.map((entry, index) => (
@@ -32,7 +30,7 @@ export function WatchList({
               entry={entry}
               distance={distances[index]}
               onClick={
-                isFavorite
+                favorites.some((v) => v.vehicleId === entry.vehicleId)
                   ? () => onRemoveFavorite(favorites.vehicleId)
                   : () => onAddFavorite(entry)
               }

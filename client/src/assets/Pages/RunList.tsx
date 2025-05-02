@@ -6,7 +6,7 @@ import { Filters } from '../Components/Filters';
 import { SavedFilter } from '../Components/types.ts';
 import { randomDistance } from '../Components/AuxilaryFunctions';
 import { SavedSearches } from '../Components/SavedSearches';
-import { WatchList } from '../Components/WatchList.tsx';
+// import { WatchList } from '../Components/WatchList.tsx';
 import './RunListLayout.css';
 
 export function RunList() {
@@ -23,25 +23,25 @@ export function RunList() {
   const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
   const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
   // addFavorite state will push the vehicleId into watchlist (users-favorites)
-  const [favorite, setFavorite] = useState<Vehicle[]>([]);
+  const [favorites, setFavorites] = useState<Vehicle[]>([]);
 
   // this event handler adds the vehicleId to a new vehicle Card array in the favorites section
   function handleAddFavorite(vehicle: Vehicle) {
-    if (favorite.some((v) => v.vehicleId === vehicle.vehicleId)) {
+    if (favorites.some((v) => v.vehicleId === vehicle.vehicleId)) {
       alert('This vehicle has already been added to your Watchlist');
       return;
     }
 
-    setFavorite((prev) => [...prev, vehicle]);
+    setFavorites((prev) => [...prev, vehicle]);
   }
 
   // this needs to properly remove an entry.
-  function handleRemoveFavorite(vehicleId: number) {
-    setFavorite((prev) =>
-      prev.filter((vehicle) => vehicle.vehicleId !== vehicleId)
-    );
-    alert('This vehicle has been removed from your Watchlist');
-  }
+  // function handleRemoveFavorite(vehicleId: number) {
+  //   setFavorites((prev) =>
+  //     prev.filter((vehicle) => vehicle.vehicleId !== vehicleId)
+  //   );
+  //   alert('This vehicle has been removed from your Watchlist');
+  // }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
   // to the name of their
@@ -50,6 +50,7 @@ export function RunList() {
   }
 
   function handleFilterChange(value: string) {
+    console.log('value', value);
     setSelectedFilter(value);
   }
 
@@ -133,7 +134,15 @@ export function RunList() {
     finalCars.sort((a, b) => b.startingPrice - a.startingPrice);
   } else if (selectedFilter === 'mileage') {
     finalCars.sort((a, b) => a.mileage - b.mileage);
+  } else if (selectedFilter === 'favorite') {
+    finalCars = finalCars.filter((v) =>
+      favorites.some((fav) => fav.vehicleId === v.vehicleId)
+    );
   }
+
+  // finalCars = isFavorite.filter((v) => v.vehicleId === finalCars.vehicleId);
+  // finalCars.filter((f) => f.vehicleId === finalCars.vehicleId)
+  // finalCars = isFavorite.filter((v) => v.vehicleId === isFavorite.vehicleId);
 
   // this useEffect was created to simulate distances from a seller dealership from where the buyer is from based on the buyer's address
   useEffect(() => {
@@ -176,12 +185,12 @@ export function RunList() {
               // searchName={searchName}
               // onSearchNameChange={handleSavedSearchName}
             />
-            <WatchList
+            {/* <WatchList
               entries={favorite}
               distances={distances}
               onRemoveFavorite={handleRemoveFavorite}
               favorites={favorite}
-            />
+            /> */}
             {/* we are working on getting this props to work */}
             <Filters
               selectedFilter={selectedFilter}
@@ -194,6 +203,8 @@ export function RunList() {
               onSaveFilter={handleSaveCurrentFilter}
               searchName={searchName}
               onSearchNameChange={handleSavedSearchName}
+              // isFavorite={isFavorite}
+              // favorites={favorite}
               // onSearchNameChange={handleSavedSearchName}
               // searchName and setSearchName were added here
             />

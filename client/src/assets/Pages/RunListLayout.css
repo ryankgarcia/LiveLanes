@@ -23,11 +23,11 @@
 
 /* same with this row, just comment it back in */
 
-/* .row {
+.row {
   @media (width >= 500px) {
     display: flex;
   }
-} */
+}
 
 .column-quarter {
   @media (width >= 500px) {
@@ -37,12 +37,11 @@
 
 /* edit this .column half back in, it works but to test out the favorites feature i needed to comment it out */
 
-/*
- .column-half {
+.column-half {
   @media (width >= 500px) {
     width: calc(100% / 2);
   }
-}  */
+}
 
 * {
   box-sizing: border-box;

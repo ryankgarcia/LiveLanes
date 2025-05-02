@@ -19,7 +19,7 @@ type Props = {
   // onRemoveFavorite: (vehicleId: number) => void;
   // favorites: Vehicle[];
 };
-
+// this was destructured in props 'favorites,' , take out of quotes and pass in if needed
 export function VehicleList({ entries, distances, onAddFavorite }: Props) {
   return (
     <div>

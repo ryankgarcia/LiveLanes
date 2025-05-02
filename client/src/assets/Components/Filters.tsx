@@ -11,8 +11,9 @@ type FilterProps = {
   onSaveFilter: () => void;
   onSearchNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // event handler passed as props so user can change their saved search name
   searchName: string; // this was added to make the change for user to type in their saved search name
+  // favorite: (vehicle: Vehicle[]); //Vehicle[];
 };
-
+// this was passed in as props 'favorites' take out of quotes and pass in destructured if needed
 export function Filters({
   selectedFilter,
   onFilterChange,
@@ -36,7 +37,6 @@ export function Filters({
             value="all"
             checked={selectedFilter === 'all'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="all"
             name="filterBy"
           />
           All
@@ -45,10 +45,20 @@ export function Filters({
           <input
             className="custom-radio"
             type="radio"
+            value="favorite"
+            checked={selectedFilter === 'favorite'}
+            onChange={(e) => onFilterChange(e.target.value)}
+            name="filterBy"
+          />
+          Watch List
+        </label>
+        <label>
+          <input
+            className="custom-radio"
+            type="radio"
             value="priceLowHigh"
             checked={selectedFilter === 'priceLowHigh'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="lowToHigh"
             name="filterBy"
           />
           Price: Lowest - Highest
@@ -60,7 +70,6 @@ export function Filters({
             value="priceHighLow"
             checked={selectedFilter === 'priceHighLow'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="highToLow"
             name="filterBy"
           />
           Price: Highest - Lowest
@@ -72,7 +81,6 @@ export function Filters({
             value="mileage"
             checked={selectedFilter === 'mileage'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="mileage"
             name="filterBy"
           />
           Mileage
