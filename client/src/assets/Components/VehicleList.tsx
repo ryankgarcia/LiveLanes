@@ -18,7 +18,10 @@ type Props = {
   onAddFavorite: (vehicle: Vehicle) => void;
   onRemoveFavorite: (vehicle: Vehicle) => void;
   favorites: Vehicle[];
+  // this one will be reserved for lanes
 };
+
+// this one will be reserved for lanes pass it in here as props
 export function VehicleList({
   entries,
   distances,

@@ -3,6 +3,8 @@
 
 export type Vehicle = {
   vehicleId?: number;
+  laneLetter: string; // assign it here in run list right after you read them
+  laneIndex: number; // assign it here in run list right after you read them
   vin: string;
   year: number;
   make: string;

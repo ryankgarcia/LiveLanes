@@ -23,11 +23,11 @@
 
 /* same with this row, just comment it back in */
 
-/* .row {
+.row {
   @media (width >= 500px) {
     display: flex;
   }
-} */
+}
 
 .column-quarter {
   @media (width >= 500px) {

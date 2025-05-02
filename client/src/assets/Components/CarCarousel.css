@@ -14,17 +14,20 @@
   width: 100%;
 }
 
-.row {
+/* you might need to unhighlight these, and change their class name to become unique,
+these affect the runlist page, although they are on different css sheets.  */
+
+/* .row {
   display: flex;
 
   @media (width >= 500px) {
     display: flex;
   }
-}
+} */
 
-.column-full {
+/* .column-full {
   flex-basis: 100%;
-}
+} */
 
 /* new css rule sets below, use them */
 

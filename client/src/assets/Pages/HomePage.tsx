@@ -4,7 +4,12 @@ import { CarCarousel } from '../Components/CarCarousel';
 
 // solve the error showing up on line 7 Image[]...
 
-const images: Image[] = [
+type VehicleImages = {
+  src: string;
+  alt: string;
+};
+
+const images: VehicleImages[] = [
   { src: '/images/2007-toyota-camry-ce-white.jpg', alt: '2007 Toyota Camry' },
   {
     src: '/images/2009-toyota-highlander-tan.jpg',

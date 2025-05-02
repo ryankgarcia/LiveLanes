@@ -11,9 +11,7 @@ type FilterProps = {
   onSaveFilter: () => void;
   onSearchNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // event handler passed as props so user can change their saved search name
   searchName: string; // this was added to make the change for user to type in their saved search name
-  // favorite: (vehicle: Vehicle[]); //Vehicle[];
 };
-// this was passed in as props 'favorites' take out of quotes and pass in destructured if needed
 export function Filters({
   selectedFilter,
   onFilterChange,

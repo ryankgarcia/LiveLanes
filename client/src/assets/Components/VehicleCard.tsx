@@ -76,7 +76,7 @@ export function VehicleCard({
         <div className="button-container">
           <button className="bid-button">{<MdOutlineHdrAuto />} Set bid</button>
           <button
-            className="fav-button"
+            className={isFavorite ? 'remove-button' : 'fav-button'}
             onClick={
               isFavorite
                 ? () => onRemoveFavorite(entry)
@@ -84,9 +84,6 @@ export function VehicleCard({
             }>
             {isFavorite ? <MdStar /> : <MdOutlineStar />}
             {isFavorite ? 'Remove' : 'Add'}
-            {/* {isFavorite ? 'Remove' : 'Add'} */}
-            {/* > */}
-            {/* {<MdOutlineStar />} */}
           </button>
         </div>
       </div>

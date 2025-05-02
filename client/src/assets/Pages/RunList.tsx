@@ -24,6 +24,9 @@ export function RunList() {
   // addFavorite state will push the vehicleId into watchlist (users-favorites)
   const [favorites, setFavorites] = useState<Vehicle[]>([]);
 
+  // add a useEffect to read them out of local storage. with an empty dependency to read them from local storage.
+  // then call handleApplySavedFilter inside the useEff
+
   // this event handler adds the vehicleId to a new vehicle Card array in the favorites section
   function handleAddFavorite(vehicle: Vehicle) {
     if (favorites.some((v) => v.vehicleId === vehicle.vehicleId)) {
@@ -32,6 +35,7 @@ export function RunList() {
     }
 
     setFavorites((prev) => [...prev, vehicle]);
+    // set to local storage here..
   }
 
   // this needs to properly remove an entry.
@@ -39,6 +43,7 @@ export function RunList() {
     setFavorites((prev) =>
       prev.filter((v) => v.vehicleId !== vehicle.vehicleId)
     );
+    // set to local storage here..
   }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
@@ -67,6 +72,7 @@ export function RunList() {
   }
 
   function handleApplySavedFilter(filter: SavedFilter) {
+    console.log('filter', filter);
     setSelectedFilter(filter.filterType);
     setMinPrice(filter.minPrice);
     setMaxPrice(filter.maxPrice);
@@ -76,10 +82,11 @@ export function RunList() {
   // this handler is used to create a saved Search radio button.
   function handleSaveCurrentFilter() {
     const newSavedFilter: SavedFilter = {
+      name: searchName,
       filterType: selectedFilter,
       minPrice: draftMinPrice ? parseInt(draftMinPrice) : undefined,
       maxPrice: draftMaxPrice ? parseInt(draftMaxPrice) : undefined,
-      searchTerm: searchName,
+      searchTerm: searchTerm,
     };
     const alreadyExists = savedSearch.some((filter) => {
       return (
@@ -94,6 +101,7 @@ export function RunList() {
       return;
     }
     setSavedSearch((prev) => [...prev, newSavedFilter]);
+    // set to local storage here..
     setSearchName('');
   }
 
@@ -146,12 +154,15 @@ export function RunList() {
   useEffect(() => {
     const generatedDistances = entries.map(() => randomDistance());
     setDistances(generatedDistances);
+
+    //assign the lane number here for the vehiclecard
   }, [entries]);
 
   useEffect(() => {
     async function load() {
       try {
         const entries = await readVehicles();
+        // assign a lane to every vehicle here
         setEntries(entries);
       } catch (err) {
         setError(err);

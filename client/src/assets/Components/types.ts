@@ -2,6 +2,7 @@
 // the RunList component
 
 export type SavedFilter = {
+  name: string;
   filterType: string;
   minPrice?: number;
   maxPrice?: number;

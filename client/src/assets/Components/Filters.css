@@ -55,7 +55,6 @@ h4 {
   color: black;
 
   @media (width >= 500px) {
-    /* width: 15%; */
     width: 50%;
     height: 2rem;
     margin-left: 0.5rem;

@@ -117,3 +117,14 @@ hr {
   font-weight: bold;
   cursor: pointer;
 }
+
+.remove-button {
+  text-transform: uppercase;
+  background-color: red;
+  border: 3px solid #8f8f8f;
+  color: white;
+  border-radius: 36px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
