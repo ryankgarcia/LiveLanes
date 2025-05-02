@@ -1,16 +1,7 @@
-.arrow-color-left {
-  color: black;
-  padding-right: 4rem;
-}
-
-.arrow-color-right {
-  color: black;
-  padding-left: 4rem;
-}
-
+/*
 .car-image {
   width: 100%;
-}
+} */
 
 .row {
   display: flex;
@@ -26,14 +17,14 @@
 
 /* new css rule sets below, use them */
 
-/* .carousel {
+.carousel {
   position: relative;
   width: 800px;
   margin: 0 auto;
   padding: 1rem;
 
-  border: 0.25rem solid;
-} */
+  /* border: 0.25rem solid; */
+}
 
 .image-wrapper {
   position: relative;

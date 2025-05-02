@@ -1,6 +1,5 @@
 import { CarCarousel } from '../Components/CarCarousel';
 import '../Pages/HomePage.css';
-// import type { ImageProps } from '../Components/CarCarousel';
 
 const images: Image[] = [
   { src: '/images/2007-toyota-camry-ce-white.jpg', alt: '2007 Toyota Camry' },
