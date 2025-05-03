@@ -44,13 +44,11 @@ export function RunList() {
   }
 
   function handleRemoveFavorite(vehicle: Vehicle) {
-    setFavorites((prev) =>
-      prev.filter((v) => v.vehicleId !== vehicle.vehicleId)
+    const remainingFavorites: Vehicle[] = favorites.filter(
+      (v) => v.vehicleId !== vehicle.vehicleId
     );
-    // set to local storage here..
-    // const deleteFav = [...v, vehicle];
-    // setFavorites(deleteFav);
-    // writeFavorites(deleteFav);
+    setFavorites(remainingFavorites);
+    writeFavorites(remainingFavorites);
   }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
