@@ -24,6 +24,7 @@ export type Vehicle = {
   damages: string;
   startingPrice: number;
   reservePrice: number;
+  imageUrl: string;
 };
 
 // need this one for the get protocol in the server

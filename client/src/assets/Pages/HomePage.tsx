@@ -38,13 +38,13 @@ const images: VehicleImages[] = [
 export function HomePage() {
   return (
     <div className="homepage-container">
-      <div className="row">
-        <div className="header">
+      <div className="home-row">
+        <div className="home-header">
           <h3>You might like these . . .</h3>
         </div>
       </div>
-      <div className="row">
-        <div className="column-full">
+      <div className="home-row">
+        <div className="home-column-full">
           <div className="carousel-container">
             <CarCarousel images={images} />
           </div>

@@ -14,6 +14,7 @@ CREATE TABLE "users" (
   "createdAt" timestamptz NOT NULL DEFAULT (now())
 );
 
+-- imageUrl has been added to the schema
 CREATE TABLE "vehicles" (
   "vehicleId" serial PRIMARY KEY,
   "vin" text UNIQUE,
