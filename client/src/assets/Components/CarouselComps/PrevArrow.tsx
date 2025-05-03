@@ -1,4 +1,5 @@
 import { PiArrowFatLeftLight } from 'react-icons/pi';
+import '../CarCarouselLayout.css';
 
 type Props = {
   onCustomClick: () => void;
@@ -7,8 +8,8 @@ type Props = {
 export function PrevArrow({ onCustomClick }: Props) {
   return (
     <PiArrowFatLeftLight
-      className="prev-image"
       size="3rem"
+      className="prev-image"
       onClick={onCustomClick}
     />
   );

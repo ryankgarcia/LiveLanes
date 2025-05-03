@@ -1,4 +1,5 @@
 import { PiArrowFatRightLight } from 'react-icons/pi';
+import '../CarCarouselLayout.css';
 
 type Props = {
   onCustomClick: () => void;

@@ -1,8 +1,6 @@
 import '../Pages/HomePage.css';
-import '../Components/CarCarousel';
+// import '../Components/CarCarousel';
 import { CarCarousel } from '../Components/CarCarousel';
-
-// solve the error showing up on line 7 Image[]...
 
 type VehicleImages = {
   src: string;
@@ -39,8 +37,18 @@ export function HomePage() {
   return (
     <div className="homepage-container">
       <div className="home-row">
-        <div className="home-header">
-          <h3>You might like these . . .</h3>
+        <div className="home-column-full">
+          <h3 className="home-header">
+            Drive the
+            <em> Bid </em>. Win the ride.
+          </h3>
+        </div>
+      </div>
+      <div className="home-row">
+        <div className="home-column-full">
+          <h3 className="home-header">
+            There's no slowing down, we're going <em>live</em>.
+          </h3>
         </div>
       </div>
       <div className="home-row">

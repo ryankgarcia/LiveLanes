@@ -1,4 +1,4 @@
-import './CarCarousel.css';
+import './CarCarouselLayout.css';
 import { useEffect, useState } from 'react';
 import { PrevArrow } from './CarouselComps/PrevArrow';
 import { CarouselImage } from './CarouselComps/CarouselImage';
@@ -36,7 +36,7 @@ export function CarCarousel({ images }: Props) {
     setCurrentIndex(i);
   }
   return (
-    <div className="carousel">
+    <div>
       <PrevArrow onCustomClick={handlePrev} />
       <CarouselImage currentImage={images[currentIndex]} />
       <NextArrow onCustomClick={handleNext} />

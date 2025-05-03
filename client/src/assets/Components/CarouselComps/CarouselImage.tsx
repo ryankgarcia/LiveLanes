@@ -1,4 +1,5 @@
 import { Image } from '../CarCarousel';
+import '../CarCarouselLayout.css';
 
 type Props = {
   currentImage: Image;
@@ -12,7 +13,9 @@ export function CarouselImage({ currentImage }: Props) {
         alt={currentImage.alt}
         className="current-image"
       />
-      <h2 className="image-caption">{currentImage.alt}</h2>
+      <div className="image-caption">
+        <h2>{currentImage.alt}</h2>
+      </div>
     </div>
   );
 }

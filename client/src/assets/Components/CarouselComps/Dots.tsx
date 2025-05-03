@@ -1,4 +1,5 @@
 import { FaCircle, FaRegCircle } from 'react-icons/fa';
+import '../CarCarouselLayout.css';
 
 type Props = {
   numDots: number;
