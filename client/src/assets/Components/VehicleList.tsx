@@ -46,7 +46,9 @@ export function VehicleList({
             />
           ))
         ) : (
-          <div> No vehicles found. Try another search </div>
+          <div>
+            You have not added any vehicles to your Watch List yet . . .
+          </div>
         )}
       </div>
     </div>
