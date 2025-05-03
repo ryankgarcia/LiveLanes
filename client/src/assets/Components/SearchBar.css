@@ -33,7 +33,6 @@ input::selection {
   font-size: 1.2rem;
 
   @media (width >= 500px) {
-    top: 0.1rem;
     right: 0.3rem;
   }
 }

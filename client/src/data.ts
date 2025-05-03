@@ -1,6 +1,8 @@
 // in this file i will be adding all of the fetch calls in the
 // for the client to communicate the data to the server
 
+import { SavedFilter } from './assets/Components/types';
+
 export type Vehicle = {
   vehicleId?: number;
   laneLetter: string; // assign it here in run list right after you read them
@@ -57,5 +59,19 @@ export function writeFavorites(favorites: Vehicle[]): void {
 
 export function readFavorites(): Vehicle[] {
   const data = localStorage.getItem('userFav-storage');
+  return data ? JSON.parse(data) : [];
+}
+
+// this code is to save the user's savedSearch filters in local Storage to be
+// called in the runlist component
+export const userSavedSearches: SavedFilter[] = readSavedFavorites();
+
+export function writeSavedFavorites(savedSearch: SavedFilter[]): void {
+  const json = JSON.stringify(savedSearch);
+  localStorage.setItem('userFavSearch-storage', json);
+}
+
+export function readSavedFavorites(): SavedFilter[] {
+  const data = localStorage.getItem('userFavSearch-storage');
   return data ? JSON.parse(data) : [];
 }

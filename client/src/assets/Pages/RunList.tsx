@@ -4,6 +4,8 @@ import {
   readVehicles,
   Vehicle,
   writeFavorites,
+  writeSavedFavorites,
+  readSavedFavorites,
 } from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleList } from '../Components/VehicleList';
 import { SearchBar } from '../Components/SearchBar';
@@ -24,7 +26,9 @@ export function RunList() {
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [draftMinPrice, setDraftMinPrice] = useState('');
   const [draftMaxPrice, setDraftMaxPrice] = useState('');
-  const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
+  const [savedSearch, setSavedSearch] = useState<SavedFilter[]>(() =>
+    readSavedFavorites()
+  );
   const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
   // addFavorite state will push the vehicleId into watchlist (users-favorites)
   const [favorites, setFavorites] = useState<Vehicle[]>(() => readFavorites());
@@ -103,8 +107,12 @@ export function RunList() {
       alert('You already saved this search');
       return;
     }
-    setSavedSearch((prev) => [...prev, newSavedFilter]);
-    // set to local storage here..
+    // this block saves the user's saved favorites to local storage
+    setSavedSearch((prev) => {
+      const updated = [...prev, newSavedFilter];
+      writeSavedFavorites(updated);
+      return updated;
+    });
     setSearchName('');
   }
 

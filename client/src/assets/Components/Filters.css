@@ -55,10 +55,7 @@ h4 {
   color: black;
 
   @media (width >= 500px) {
-    width: 50%;
     height: 2rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
     margin-bottom: 1.5rem;
     border: 1px solid #ccc;
     border-radius: 0.3rem;
