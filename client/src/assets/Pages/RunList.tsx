@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import {
+  readFavorites,
+  readVehicles,
+  Vehicle,
+  writeFavorites,
+} from '../../data'; // this needs to import data.ts into this portion of the project
 import { VehicleList } from '../Components/VehicleList';
 import { SearchBar } from '../Components/SearchBar';
 import { Filters } from '../Components/Filters';
@@ -22,7 +27,7 @@ export function RunList() {
   const [savedSearch, setSavedSearch] = useState<SavedFilter[]>([]);
   const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
   // addFavorite state will push the vehicleId into watchlist (users-favorites)
-  const [favorites, setFavorites] = useState<Vehicle[]>([]);
+  const [favorites, setFavorites] = useState<Vehicle[]>(() => readFavorites());
 
   // add a useEffect to read them out of local storage. with an empty dependency to read them from local storage.
   // then call handleApplySavedFilter inside the useEff
@@ -33,17 +38,19 @@ export function RunList() {
       alert('This vehicle has already been added to your Watchlist');
       return;
     }
-
-    setFavorites((prev) => [...prev, vehicle]);
-    // set to local storage here..
+    const updatedFavorites = [...favorites, vehicle];
+    setFavorites(updatedFavorites);
+    writeFavorites(updatedFavorites);
   }
 
-  // this needs to properly remove an entry.
   function handleRemoveFavorite(vehicle: Vehicle) {
     setFavorites((prev) =>
       prev.filter((v) => v.vehicleId !== vehicle.vehicleId)
     );
     // set to local storage here..
+    // const deleteFav = [...v, vehicle];
+    // setFavorites(deleteFav);
+    // writeFavorites(deleteFav);
   }
 
   // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
@@ -71,7 +78,6 @@ export function RunList() {
   }
 
   function handleApplySavedFilter(filter: SavedFilter) {
-    console.log('filter', filter);
     setSelectedFilter(filter.filterType);
     setMinPrice(filter.minPrice);
     setMaxPrice(filter.maxPrice);

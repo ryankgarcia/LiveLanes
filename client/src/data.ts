@@ -46,11 +46,16 @@ export async function readVehicleId(
   return car;
 }
 
-// integrate your local storage here for the user's favorites, and the user's saved searches
+// this code block is used to store the user's favorites into local storage
+// and will be called in the RunList component
+export const userFavorites: Vehicle[] = readFavorites();
 
-// this function saves the user's entry in localStorage, i'll get to it later.
-// export async function writeVehicle(entry: Vehicle): void {
-//   const entryJSON = JSON.stringify(entry)
-// }
+export function writeFavorites(favorites: Vehicle[]): void {
+  const json = JSON.stringify(favorites);
+  localStorage.setItem('userFav-storage', json);
+}
 
-// export async function readVehicle
+export function readFavorites(): Vehicle[] {
+  const data = localStorage.getItem('userFav-storage');
+  return data ? JSON.parse(data) : [];
+}
