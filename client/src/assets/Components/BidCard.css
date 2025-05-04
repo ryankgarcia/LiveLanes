@@ -1,0 +1,118 @@
+.auction-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auction-card {
+  width: 225px;
+  height: 300px;
+  background-color: #f2eeee;
+  padding: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+
+  @media (width >= 500px) {
+    /* width: 500px; */
+  }
+}
+
+.auction-card-header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+
+  /* background-color: #28b89a; */
+}
+
+.auction-card-header .selling-price {
+  /* color: black; */
+  color: #28b89a;
+}
+
+.auction-card-header .buying-dealer {
+  /* color: black; */
+  color: #28b89a;
+}
+
+.auction-card-body {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* this one is the one i had on my own */
+
+/* .auction-vehicle-img {
+  width: 220px;
+  object-fit: cover;
+  border-radius: 2px;
+  cursor: pointer;
+} */
+
+.auction-vehicle-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.auction-vehicle-info {
+  flex-grow: 1;
+}
+
+.auction-vehicle-title {
+  font-size: 1rem;
+}
+
+.auction-vehicle-model,
+.auction-vehicle-mileage {
+  font-size: 0.9rem;
+  color: black;
+}
+
+.auction-card-theme-font {
+  color: #28b89a;
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.auction-card-black-font {
+  color: black;
+}
+
+.auction-vehicle-price {
+  font-size: 1rem;
+
+  /* color: white; */
+  color: #28b89a;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.auction-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 2rem 1rem;
+}
+
+.auction-button-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: row;
+}
+
+.bid-btn {
+  position: absolute;
+  bottom: 105px;
+  right: 10px;
+  background-color: white;
+  color: #28b89a;
+  border: 3px solid #28b89a;
+  border-radius: 50%;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
