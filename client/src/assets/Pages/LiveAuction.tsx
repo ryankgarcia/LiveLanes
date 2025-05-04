@@ -1,5 +1,6 @@
 // import { Details } from '../Components/Details';
 import { LiveAuctionCard } from '../Components/BidCard';
+import { NextUpCard } from '../Components/NextUpCard';
 // import { LiveAuctionNextUpCard } from '../Components/LiveAuctionNextUpCard';
 // import { SearchBar } from '../Components/SearchBar';
 import './LiveAuctionLayout.css';
@@ -15,8 +16,12 @@ export function LiveAuction() {
           </div>
         </div>
       </div>
-      <div className="auction-column-full"></div>
-      {/* <LiveAuctionNextUpCard /> */}
+      <div className="auction-column-full">
+        <div className="scroll-container-cards">
+          <NextUpCard />
+          <NextUpCard />
+        </div>
+      </div>
       {/* <Details /> */}
     </div>
   );

@@ -82,17 +82,13 @@
   flex-grow: 1;
 }
 
-.auction.lane {
+.auction-lane {
   color: #28b89a;
   font-weight: bold;
 }
 
 .auction-vehicle-year-make {
   font-weight: bold;
-}
-
-.auction-vehicle-title {
-  font-size: 1rem;
 }
 
 .auction-vehicle-model,

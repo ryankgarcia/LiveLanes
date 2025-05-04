@@ -20,7 +20,7 @@ export function LiveAuctionCard() {
         <button className="bid-btn">Bid</button>
       </div>
       <div className="auction-vehicle-info">
-        <div className="auction-vehicle-title">
+        <div>
           <span className="auction-lane">A23 {}</span>
           <span className="auction-vehicle-year-make">2016 Toyota </span>
         </div>

@@ -1,0 +1,56 @@
+.nextUp-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nextUp-card {
+  height: 85px;
+  width: 200px;
+  background-color: #f2eeee;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+
+  /* padding: 16px; */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+
+  @media (width >= 500px) {
+    /* width: 500px; */
+  }
+}
+
+.nextUp-card:hover {
+  @media (width >= 500px) {
+    transform: scale(0.9);
+    box-shadow: 0 0 10px #1162bb;
+    cursor: pointer;
+  }
+}
+
+.nextUp-card-body {
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.nextUp-lane {
+  color: #28b89a;
+  font-weight: bold;
+  font-style: oblique;
+  font-size: 1rem;
+  padding-left: 15%;
+}
+
+.nextUp-vehicle-year-make {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+}
+
+.nextUp-vehicle-model {
+  display: flex;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: black;
+}
