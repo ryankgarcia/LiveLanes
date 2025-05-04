@@ -14,7 +14,9 @@
 
 .scroll-container-cards {
   overflow-x: scroll;
-  height: 400px;
+  height: 365px;
+  padding-left: 2%;
+  padding-top: 2%;
 }
 
 /* this css class changes the color of the bar that is displayed */

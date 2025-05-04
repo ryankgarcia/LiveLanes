@@ -37,8 +37,6 @@
 .auction-card:hover {
   @media (width >= 500px) {
     border-color: ;
-
-    /* border: 6px solid #9747ff; */
     transform: scale(1.02);
     box-shadow: 0 0 10px #9747ff;
     cursor: pointer;
@@ -73,15 +71,6 @@
   justify-content: space-between;
 }
 
-/* this one is the one i had on my own */
-
-/* .auction-vehicle-img {
-  width: 220px;
-  object-fit: cover;
-  border-radius: 2px;
-  cursor: pointer;
-} */
-
 .auction-vehicle-img {
   width: 100%;
   height: auto;
@@ -91,6 +80,15 @@
 
 .auction-vehicle-info {
   flex-grow: 1;
+}
+
+.auction.lane {
+  color: #28b89a;
+  font-weight: bold;
+}
+
+.auction-vehicle-year-make {
+  font-weight: bold;
 }
 
 .auction-vehicle-title {
@@ -117,18 +115,10 @@
   font-size: 1rem;
 
   /* color: white; */
+
   color: #28b89a;
   font-weight: bold;
   white-space: nowrap;
-}
-
-.auction-card-footer {
-  display: flex;
-
-  /* justify-content: flex-end; */
-
-  /* justify-content: flex-start; */
-  padding: 0 2rem 1rem;
 }
 
 .auction-button-container {
@@ -160,6 +150,9 @@
 }
 
 .final-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   border-top: 2px solid #a7a1a1;
   width: 100%;
 }
