@@ -7,7 +7,9 @@ export function LiveAuctionCard() {
       <div className="auction-card-header">
         <div className="time-bar">
           <span className="selling-price">$8,900</span>
-          <span className="buying-dealer">Joe Sells Cars</span>
+          <span className="buying-dealer">
+            Joe Sells Cars Outside of his dads garage
+          </span>
         </div>
         {/* these two spans must be dynamically changed */}
       </div>

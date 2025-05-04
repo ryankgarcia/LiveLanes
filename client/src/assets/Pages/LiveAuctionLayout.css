@@ -26,6 +26,29 @@
   height: 4px;
 }
 
+/* this class will be used for the Details of each car */
+.scroll-container-details {
+  @media (width >= 500px) {
+    overflow-y: scroll;
+    height: 100vh;
+    padding-left: 0.1rem;
+    padding-right: 0.3rem;
+    padding-top: 0.4rem;
+  }
+}
+
+/* this class is to allow the user to scroll within the page vertically to view car details */
+.scroll-container-details::-webkit-scrollbar {
+  height: 100vh;
+
+  @media (width >= 500px) {
+    /* turn this white class back on, black is just to get a visual of what is currently happening
+    background-color: white; */
+    background-color: black;
+    width: 4px;
+  }
+}
+
 .auction-margin-top {
   margin-top: 5%;
 
@@ -47,15 +70,19 @@
   }
 }
 
-.auction-column-half {
+.auction-column-right {
   @media (width >= 500px) {
-    width: calc(100% / 2);
+    width: 43%;
   }
 }
 
-.auction-column-full {
+/* this is currently in use but needs to be changed at some point to reflect the fimga */
+.auction-column-left {
   @media (width >= 500px) {
-    width: 100%;
+    /* this value 100% width is great, was just turned off and changed to a lower value to test
+    57% is a number that was used to 'eyeball the example figma'
+    width: 100%; */
+    width: 57%;
   }
 }
 

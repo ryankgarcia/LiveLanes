@@ -9,6 +9,8 @@
   width: 100%;
   background-color: #28b89a;
   animation: timerColorFade 40s linear forwards;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 @keyframes timerColorFade {
@@ -45,7 +47,6 @@
 
 .auction-card-header {
   display: flex;
-  justify-content: space-around;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 
@@ -56,12 +57,18 @@
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
+  padding-right: 7%;
+  padding-left: 8%;
 }
 
 .auction-card-header .buying-dealer {
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
+  padding-right: 0.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .auction-card-body {
