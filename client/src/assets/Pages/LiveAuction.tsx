@@ -1,3 +1,22 @@
+// import { Details } from '../Components/Details';
+import { LiveAuctionCard } from '../Components/BidCard';
+// import { LiveAuctionNextUpCard } from '../Components/LiveAuctionNextUpCard';
+// import { SearchBar } from '../Components/SearchBar';
+import './LiveAuctionLayout.css';
+
 export function LiveAuction() {
-  return <h2>LiveAuction JSX here...</h2>;
+  return (
+    <div className="auction-container">
+      {/* <SearchBar /> */}
+      <div className="auction-row">
+        <div className="auction-column-full">
+          <div className="scroll-container-cards">
+            <LiveAuctionCard />
+          </div>
+        </div>
+      </div>
+      {/* <LiveAuctionNextUpCard /> */}
+      {/* <Details /> */}
+    </div>
+  );
 }

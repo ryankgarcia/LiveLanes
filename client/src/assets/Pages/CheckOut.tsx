@@ -1,3 +1,3 @@
 export function CheckOut() {
-  return <h2>Checkout JSX here...</h2>;
+  return <h2>Checkout page coming soon...</h2>;
 }

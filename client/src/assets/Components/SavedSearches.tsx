@@ -1,11 +1,5 @@
 import './SavedSearches.css';
-
-type SavedFilter = {
-  filterType: string;
-  minPrice?: number;
-  maxPrice?: number;
-  searchTerm?: string;
-};
+import { SavedFilter } from './types';
 
 type SavedSearchesProps = {
   savedFilters: SavedFilter[];
@@ -21,12 +15,7 @@ export function SavedSearches({
       <h4>Saved Searches</h4>
       {savedFilters.map((filter, index) => (
         <label key={index}>
-          <input
-            type="radio"
-            name="userSavedSearch"
-            onChange={() => onApplySavedFilter(filter)}
-          />
-          {filter.searchTerm || filter.filterType}
+          <div onClick={() => onApplySavedFilter(filter)}>{filter.name}</div>
         </label>
       ))}
     </div>

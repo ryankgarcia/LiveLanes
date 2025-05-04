@@ -9,9 +9,9 @@ type FilterProps = {
   setDraftMinPrice: (value: string) => void;
   setDraftMaxPrice: (value: string) => void;
   onSaveFilter: () => void;
-  // handleSavedSearch: (entry: string) => void;
+  onSearchNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // event handler passed as props so user can change their saved search name
+  searchName: string; // this was added to make the change for user to type in their saved search name
 };
-
 export function Filters({
   selectedFilter,
   onFilterChange,
@@ -21,6 +21,8 @@ export function Filters({
   setDraftMaxPrice,
   setDraftMinPrice,
   onSaveFilter,
+  onSearchNameChange,
+  searchName,
 }: FilterProps) {
   return (
     <div>
@@ -33,7 +35,6 @@ export function Filters({
             value="all"
             checked={selectedFilter === 'all'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="all"
             name="filterBy"
           />
           All
@@ -42,10 +43,20 @@ export function Filters({
           <input
             className="custom-radio"
             type="radio"
+            value="favorite"
+            checked={selectedFilter === 'favorite'}
+            onChange={(e) => onFilterChange(e.target.value)}
+            name="filterBy"
+          />
+          Watch List
+        </label>
+        <label>
+          <input
+            className="custom-radio"
+            type="radio"
             value="priceLowHigh"
             checked={selectedFilter === 'priceLowHigh'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="lowToHigh"
             name="filterBy"
           />
           Price: Lowest - Highest
@@ -57,7 +68,6 @@ export function Filters({
             value="priceHighLow"
             checked={selectedFilter === 'priceHighLow'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="highToLow"
             name="filterBy"
           />
           Price: Highest - Lowest
@@ -69,7 +79,6 @@ export function Filters({
             value="mileage"
             checked={selectedFilter === 'mileage'}
             onChange={(e) => onFilterChange(e.target.value)}
-            id="mileage"
             name="filterBy"
           />
           Mileage
@@ -102,15 +111,17 @@ export function Filters({
             <input
               className="range-box"
               type="number"
-              placeholder="min"
+              placeholder="Min"
               value={draftMinPrice}
               onChange={(e) => setDraftMinPrice(e.target.value)}
             />
             Min
+          </div>
+          <div>
             <input
               className="range-box"
               type="number"
-              placeholder="max"
+              placeholder="Max"
               value={draftMaxPrice}
               onChange={(e) => setDraftMaxPrice(e.target.value)}
             />
@@ -121,14 +132,22 @@ export function Filters({
           </div>
         </form>
         <div>
-          <button
-            type="button"
-            onClick={onSaveFilter}
-            className="save-search-button">
-            Save Search
-          </button>
+          <input
+            type="text"
+            className="saved-search-box"
+            placeholder="Name your search"
+            value={searchName} // this was changed
+            onChange={onSearchNameChange} // this was changed
+          />
+          <div>
+            <button
+              type="button"
+              onClick={onSaveFilter}
+              className="save-search-button">
+              Save Search
+            </button>
+          </div>
         </div>
-        {/* the button above on this statement should add to Save Searches component */}
       </div>
     </div>
   );

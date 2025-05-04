@@ -1,3 +1,3 @@
 export function BuyNow() {
-  return <h2>BuyNow JSX here...</h2>;
+  return <h2>Coming soon...</h2>;
 }

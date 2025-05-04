@@ -1,0 +1,59 @@
+.auction-container {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  @media (width >= 500px) {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+  }
+}
+
+.scroll-container-cards {
+  overflow-x: scroll;
+}
+
+/* this css class changes the color of the bar that is displayed */
+.scroll-container-cards::-webkit-scrollbar {
+  background-color: white;
+}
+
+.auction-margin-top {
+  margin-top: 5%;
+
+  @media (width >= 500px) {
+    margin-top: 10%;
+    margin-left: 1.5%;
+  }
+}
+
+.auction-row {
+  @media (width >= 500px) {
+    display: flex;
+  }
+}
+
+.auction-column-quarter {
+  @media (width >= 500px) {
+    width: calc(100% / 5);
+  }
+}
+
+.auction-column-half {
+  @media (width >= 500px) {
+    width: calc(100% / 2);
+  }
+}
+
+.auction-column-full {
+  @media (width >= 500px) {
+    width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
