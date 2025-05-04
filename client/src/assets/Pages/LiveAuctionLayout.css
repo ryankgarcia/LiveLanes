@@ -14,11 +14,14 @@
 
 .scroll-container-cards {
   overflow-x: scroll;
+  height: 400px;
 }
 
 /* this css class changes the color of the bar that is displayed */
 .scroll-container-cards::-webkit-scrollbar {
-  background-color: white;
+  /* background-color: white; */
+  background-color: #c7c7c7;
+  height: 4px;
 }
 
 .auction-margin-top {

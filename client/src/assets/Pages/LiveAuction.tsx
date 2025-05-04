@@ -15,6 +15,7 @@ export function LiveAuction() {
           </div>
         </div>
       </div>
+      <div className="auction-column-full"></div>
       {/* <LiveAuctionNextUpCard /> */}
       {/* <Details /> */}
     </div>
