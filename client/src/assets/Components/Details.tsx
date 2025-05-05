@@ -27,16 +27,16 @@ export function Details() {
         <h3>Hello World!!</h3>
         <h4>Making a few visual changes to reflect an example...</h4>
         <h4>This is fun once you learn the minor details!</h4>
-        <h3>Hello World!!</h3>
+        <h3>This needs to change to a vehicle's details!!</h3>
         <h4>Making a few visual changes to reflect an example...</h4>
         <h4>This is fun once you learn the minor details!</h4>
-        <h3>Hello World!!</h3>
+        <h3>This needs to change to a vehicle's details!!</h3>
         <h4>Making a few visual changes to reflect an example...</h4>
         <h4>This is fun once you learn the minor details!</h4>
-        <h3>Hello World!!</h3>
+        <h3>This needs to change to a vehicle's details!!</h3>
         <h4>Making a few visual changes to reflect an example...</h4>
         <h4>This is fun once you learn the minor details!</h4>
-        <h3>Hello World!!</h3>
+        <h3>This needs to change to a vehicle's details!!</h3>
         <h4>Making a few visual changes to reflect an example...</h4>
         <h4>This is fun once you learn the minor details!</h4>
       </div>
