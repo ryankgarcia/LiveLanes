@@ -27,9 +27,11 @@ type Props = {
 export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function handleOpenModal() {
-    setIsModalOpen(true);
+  function onHandleClose() {
+    onPlaceBid();
+    setIsModalOpen(false);
   }
+
   return (
     // comment the auction card back in, it works but was just commented out
     // to test the modal
@@ -53,10 +55,7 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
             src={entry.imageUrl}
             alt={`${entry.year} ${entry.make} ${entry.model}`}
           />
-          <button
-            className="bid-btn"
-            isModalOpen={isModalOpen}
-            onClick={handleOpenModal}>
+          <button className="bid-btn" onClick={() => setIsModalOpen(true)}>
             Bid
           </button>
         </div>
@@ -79,17 +78,25 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
         </div>
       </div>
       {/* this needs to be conditionally rendered when the user clicks OG bid */}
-      <div className="bidCard-modal">
-        <div className="modal-row">
-          <div className="modal-column">
-            <h3>Are you sure you want to place your bid?</h3>
-            <button className="bidCard-confirmButton" onClick={onPlaceBid}>
-              Place Bid
-            </button>
-            <button className="bidCard-cancelButton">Cancel</button>
+      {isModalOpen && (
+        <div className="bidCard-modal">
+          <div className="modal-row">
+            <div className="modal-column">
+              <h3>Are you sure you want to place your bid?</h3>
+              <button
+                className="bidCard-confirmButton"
+                onClick={() => onHandleClose()}>
+                Confirm
+              </button>
+              <button
+                className="bidCard-cancelButton"
+                onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
