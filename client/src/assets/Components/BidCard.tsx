@@ -33,20 +33,16 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
   }
 
   return (
-    // comment the auction card back in, it works but was just commented out
-    // to test the modal
     <div key={entry.vehicleId} className="auction-card">
       {/* {somewhere right here there must be a green bar that goes down counting the seconds} */}
       <div className="auction-card-header">
         <div className="time-bar">
           <span className="selling-price">${`${bid}`}</span>
-          {/* this will change as people drive the price up during the auction, else it starts at starting price */}
           <span className="buying-dealer">
             Joe Sells Cars Outside of his dads garage
-            {/* this needs to change as well, dynamically for current highest bidder */}
+            {/* this needs to change dynamically for current highest bidder */}
           </span>
         </div>
-        {/* these two spans must be dynamically changed */}
       </div>
       <div className="auction-card-body">
         <img
@@ -61,6 +57,7 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
       <div className="auction-vehicle-info">
         <div>
           <span className="auction-lane">A23 {}</span>
+          {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
             {' '}
             {entry.year} {} {entry.make}
@@ -97,8 +94,6 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
             </div>
           </div>
         </div>
-        //   </div>
-        // </div>
       )}
     </div>
   );

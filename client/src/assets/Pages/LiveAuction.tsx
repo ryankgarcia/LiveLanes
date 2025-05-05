@@ -6,7 +6,6 @@ import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
-import { GiEntryDoor } from 'react-icons/gi';
 
 export function LiveAuction() {
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
@@ -15,6 +14,7 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   // const [openDetails, setOpenDetails] = useState<Vehicle>() // this will control what vehicle details show up in the details component
+  const [isLive, setIsLive] = useState();
 
   // function handleDetails(vehicleId: number) {}
 
