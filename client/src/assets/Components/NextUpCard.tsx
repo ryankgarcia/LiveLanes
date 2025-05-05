@@ -33,8 +33,8 @@ export function NextUpCard({ entry }: Props) {
   return (
     <div className="nextUp-card-container">
       <div className="nextUp-card">
-        <h3 className="nextUp-lane">A13</h3>
         {/* when you figure how to add lane assignments, you put that in the line below this one */}
+        <h3 className="nextUp-lane">A13</h3>
         <div className="nextUp-card-body">
           <span className="nextUp-vehicle-year-make">
             {entry.year} {entry.make}

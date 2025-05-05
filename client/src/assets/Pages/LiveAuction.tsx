@@ -58,7 +58,13 @@ export function LiveAuction() {
       <div className="auction-row">
         <div className="auction-column-left">
           <div className="scroll-container-cards">
-            <LiveAuctionCard />
+            {entries.length > 0 ? (
+              entries.map((entry) => (
+                <LiveAuctionCard key={entry.vehicleId} entry={entry} />
+              ))
+            ) : (
+              <div>There are no vehicles yet . . .</div>
+            )}
           </div>
         </div>
         <div className="liveauction-searchBar">
