@@ -1,6 +1,5 @@
 import './BidCard.css';
 import { Vehicle } from '../../data';
-import React from 'react';
 
 // export type Vehicle = {
 //   vehicleId?: number;
