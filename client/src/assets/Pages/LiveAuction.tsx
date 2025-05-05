@@ -6,6 +6,7 @@ import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
+import { GiEntryDoor } from 'react-icons/gi';
 
 export function LiveAuction() {
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
@@ -13,9 +14,11 @@ export function LiveAuction() {
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
+  // const [openDetails, setOpenDetails] = useState<Vehicle>() // this will control what vehicle details show up in the details component
+
+  // function handleDetails(vehicleId: number) {}
 
   function handlePlaceBid(vehicleId: number) {
-    console.log('ive been clicked');
     setBids((prevBids) => ({
       ...prevBids,
       [vehicleId]: (prevBids[vehicleId] ?? 0) + 150,
@@ -116,7 +119,7 @@ export function LiveAuction() {
         </div>
         <div className="auction-column-right">
           <div className="scroll-container-details">
-            <Details />
+            {/* <Details key={entry.vehicleId} entry={entry} /> */}
           </div>
         </div>
         {/* <div className="auction-column-full"> */}
