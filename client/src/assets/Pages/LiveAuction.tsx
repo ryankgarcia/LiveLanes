@@ -3,15 +3,9 @@ import { LiveAuctionCard } from '../Components/BidCard';
 import { Details } from '../Components/Details';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
-// import { LiveAuctionNextUpCard } from '../Components/LiveAuctionNextUpCard';
+import { useEffect, useState } from 'react';
+import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
-// import { SavedFilter } from '../Components/types';
-import { useState } from 'react';
-
-// type Props = {
-//   searchTerm: string;
-//   onCustomChange: (value: SavedFilter) => void;
-// };
 
 export function LiveAuction() {
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
@@ -20,6 +14,7 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
 
   const trimSearchTerm = searchTerm.trim().toLowerCase();
+
   const filteredCars = entries.filter((term) => {
     const combinations = [
       `${term.make} ${term.model} ${term.year}`,
@@ -33,6 +28,31 @@ export function LiveAuction() {
       combo.toLowerCase().includes(trimSearchTerm)
     );
   });
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const entries = await readVehicles();
+        // assign a lane to every vehicle here
+        setEntries(entries);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    load();
+  }, []);
+
+  if (isLoading) return <div>Loading cars...</div>;
+  if (error) {
+    return (
+      <div>
+        Error loading vehicles{' '}
+        {error instanceof Error ? error.message : 'Unknown Error'}
+      </div>
+    );
+  }
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -42,11 +62,7 @@ export function LiveAuction() {
           </div>
         </div>
         <div className="liveauction-searchBar">
-          <SearchBar
-            searchTerm={searchTerm}
-            // onChange={(e) => onCustomChange(e.target.value)}
-            onChange={(e) => onCustomChange(e.target.value)}
-          />
+          <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
         </div>
         <div className="auction-2button-container">
           <button className="liveauction-autoBidButton">A</button>
@@ -63,8 +79,16 @@ export function LiveAuction() {
       {/* <SearchBar /> */}
       <div className="auction-column-full">
         <div className="scroll-container-cards">
-          <NextUpCard />
-          <NextUpCard />
+          {filteredCars.length > 0 ? (
+            filteredCars.map((entry) => (
+              <NextUpCard key={entry.vehicleId} entry={entry} />
+            ))
+          ) : (
+            <div className="no-vehicle-options">
+              Sorry, no vehicles matched your search word.
+            </div>
+          )}
+          {/* <NextUpCard /> */}
         </div>
       </div>
       {/* <div className="auction-row"> */}
