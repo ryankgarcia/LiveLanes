@@ -1,5 +1,6 @@
 import './BidCard.css';
 import { Vehicle } from '../../data';
+import React from 'react';
 
 // export type Vehicle = {
 //   vehicleId?: number;
@@ -17,17 +18,19 @@ import { Vehicle } from '../../data';
 
 type Props = {
   entry: Vehicle;
+  bid: number;
+  onPlaceBid: () => void;
   // distance: number;
 };
 
 //  distance is needed here to show the user how far away the car is from them
-export function LiveAuctionCard({ entry }: Props) {
+export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
   return (
     <div className="auction-card">
       {/* {somewhere right here there must be a green bar that goes down counting the seconds} */}
       <div className="auction-card-header">
         <div className="time-bar">
-          <span className="selling-price">{entry.startingPrice}</span>
+          <span className="selling-price">{`${bid}`}</span>
           {/* this will change as people drive the price up during the auction, else it starts at starting price */}
           <span className="buying-dealer">
             Joe Sells Cars Outside of his dads garage
@@ -42,7 +45,9 @@ export function LiveAuctionCard({ entry }: Props) {
           src={entry.imageUrl}
           alt={`${entry.year} ${entry.make} ${entry.model}`}
         />
-        <button className="bid-btn">Bid</button>
+        <button className="bid-btn" onClick={onPlaceBid}>
+          Bid
+        </button>
       </div>
       <div className="auction-vehicle-info">
         <div>

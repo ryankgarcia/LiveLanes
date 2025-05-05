@@ -12,10 +12,14 @@ export function LiveAuction() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
-  const [bid, setBid] = useState<number>(); // this state will handle bids the user is currently placing
+  const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
 
-  function handlePlaceBid() {
-    setBid((prev) => prev + 150);
+  function handlePlaceBid(vehicleId: number) {
+    console.log('ive been clicked');
+    setBids((prevBids) => ({
+      ...prevBids,
+      [vehicleId]: (prevBids[vehicleId] ?? 0) + 150,
+    }));
   }
 
   const trimSearchTerm = searchTerm.trim().toLowerCase();
@@ -40,6 +44,14 @@ export function LiveAuction() {
         const entries = await readVehicles();
         // assign a lane to every vehicle here
         setEntries(entries);
+        // added these lines below
+        const initialBids: { [vehicleId: number]: number } = {};
+        for (const entry of entries) {
+          if (entry.vehicleId !== undefined) {
+            initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
+          }
+        }
+        setBids(initialBids);
       } catch (err) {
         setError(err);
       } finally {
@@ -70,7 +82,12 @@ export function LiveAuction() {
               entries
                 .slice(0, 5)
                 .map((entry) => (
-                  <LiveAuctionCard key={entry.vehicleId} entry={entry} />
+                  <LiveAuctionCard
+                    key={entry.vehicleId}
+                    entry={entry}
+                    bid={bids[entry.vehicleId!] ?? 0}
+                    onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
+                  />
                 ))
             ) : (
               <div>There are no vehicles yet . . .</div>
