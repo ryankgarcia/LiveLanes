@@ -12,6 +12,11 @@ export function LiveAuction() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
+  const [bid, setBid] = useState<number>(); // this state will handle bids the user is currently placing
+
+  function handlePlaceBid() {
+    setBid((prev) => prev + 150);
+  }
 
   const trimSearchTerm = searchTerm.trim().toLowerCase();
 
@@ -57,50 +62,48 @@ export function LiveAuction() {
     <div className="auction-container">
       <div className="auction-row">
         <div className="auction-column-left">
-          <div className="scroll-container-cards">
+          <div className="scroll-container-bidCards">
+            {/* the slice method was used here to only show 5 cars at once,
+            but the remaining cars must show up in their lane assignments
+            in the NextUpCard */}
             {entries.length > 0 ? (
-              entries.map((entry) => (
-                <LiveAuctionCard key={entry.vehicleId} entry={entry} />
-              ))
+              entries
+                .slice(0, 5)
+                .map((entry) => (
+                  <LiveAuctionCard key={entry.vehicleId} entry={entry} />
+                ))
             ) : (
               <div>There are no vehicles yet . . .</div>
             )}
           </div>
-        </div>
-        <div className="liveauction-searchBar">
-          <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
-        </div>
-        <div className="auction-2button-container">
-          <button className="liveauction-autoBidButton">A</button>
-          <button className="liveauction-favButton">
-            {<IoIosStarOutline color="white" />}
-          </button>
+          <div className="liveauction-searchBar">
+            <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
+          </div>
+          <div className="auction-2button-container">
+            <button className="liveauction-autoBidButton">A</button>
+            <button className="liveauction-favButton">
+              {<IoIosStarOutline color="white" />}
+            </button>
+          </div>
+          <div className="scroll-container-nextUpCards">
+            {filteredCars.length > 0 ? (
+              filteredCars.map((entry) => (
+                <NextUpCard key={entry.vehicleId} entry={entry} />
+              ))
+            ) : (
+              <div className="no-vehicle-options">
+                Sorry, no vehicles matched your search word.
+              </div>
+            )}
+          </div>
         </div>
         <div className="auction-column-right">
           <div className="scroll-container-details">
             <Details />
           </div>
         </div>
+        {/* <div className="auction-column-full"> */}
       </div>
-      {/* <SearchBar /> */}
-      <div className="auction-column-full">
-        <div className="scroll-container-cards">
-          {filteredCars.length > 0 ? (
-            filteredCars.map((entry) => (
-              <NextUpCard key={entry.vehicleId} entry={entry} />
-            ))
-          ) : (
-            <div className="no-vehicle-options">
-              Sorry, no vehicles matched your search word.
-            </div>
-          )}
-          {/* <NextUpCard /> */}
-        </div>
-      </div>
-      {/* <div className="auction-row"> */}
-
-      {/* <div className="scroll-container-details">
-        </div> */}
       {/* </div> */}
     </div>
   );

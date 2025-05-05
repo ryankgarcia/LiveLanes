@@ -69,22 +69,52 @@ on a card that no vehicles have been found */
   border: 3px solid #5295f9;
 }
 
-.scroll-container-cards {
+/* overflow-x with a value of scroll allows for the ability to scroll within a
+container from left to right. It's possible to limit the amount of items in a
+container by using JS slice method */
+.scroll-container-bidCards {
+  height: 365px;
+  padding-left: 2%;
+  padding-top: 2%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 1rem;
+  width: calc(225px * 5 + 4rem);
+  max-width: 100%;
+}
+
+/* this css class changes the color of the bar that is displayed */
+.scroll-container-bidCards::-webkit-scrollbar {
+  /* background-color: white; */
+
+  background-color: #c7c7c7;
+  height: 4px;
+}
+
+.scroll-container-nextUpCards {
   overflow-x: scroll;
+
+  /* overflow-x: auto; */
   height: 365px;
   padding-left: 2%;
   padding-top: 2%;
 }
 
-/* this css class changes the color of the bar that is displayed */
-.scroll-container-cards::-webkit-scrollbar {
-  /* background-color: white; */
+.scroll-container-nextUpCards::-webkit-scrollbar {
+  /* background-color: transparent; */
+
+  /* width and height need to be set in order to reduce the thickness of the scrollbar
+in the browser */
   background-color: #c7c7c7;
-  height: 4px;
+  height: 2px;
+  width: 2px;
 }
 
 /* this class will be used for the Details of each car */
 .scroll-container-details {
+  width: 100%;
+
   @media (width >= 500px) {
     overflow-y: scroll;
     height: 100vh;
@@ -101,11 +131,15 @@ on a card that no vehicles have been found */
   @media (width >= 500px) {
     /* turn this white class back on, black is just to get a visual of what is currently happening
     background-color: white; */
+
+    /* background-color: transparent; */
+
     background-color: black;
     width: 4px;
   }
 }
 
+/* this class is currently not being used? double check before deleting
 .auction-margin-top {
   margin-top: 5%;
 
@@ -113,17 +147,11 @@ on a card that no vehicles have been found */
     margin-top: 10%;
     margin-left: 1.5%;
   }
-}
+} */
 
 .auction-row {
   @media (width >= 500px) {
     display: flex;
-  }
-}
-
-.auction-column-quarter {
-  @media (width >= 500px) {
-    width: calc(100% / 5);
   }
 }
 
@@ -133,12 +161,8 @@ on a card that no vehicles have been found */
   }
 }
 
-/* this is currently in use but needs to be changed at some point to reflect the fimga */
 .auction-column-left {
   @media (width >= 500px) {
-    /* this value 100% width is great, was just turned off and changed to a lower value to test
-    57% is a number that was used to 'eyeball the example figma'
-    width: 100%; */
     width: 57%;
   }
 }

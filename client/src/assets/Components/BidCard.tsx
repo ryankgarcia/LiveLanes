@@ -58,7 +58,7 @@ export function LiveAuctionCard({ entry }: Props) {
         </div>
       </div>
       <div className="auction-card-footer">
-        <span className="final-line">CA, 101 mi away</span>
+        <span className="final-line">CA, 102 mi away</span>
         {/* need to figure out how to get the distances here */}
       </div>
     </div>

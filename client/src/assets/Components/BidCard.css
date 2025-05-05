@@ -24,6 +24,8 @@
 }
 
 .auction-card {
+  /* this class below is new, delete it if it messes up everything */
+  flex-shrink: 0;
   width: 225px;
   height: 300px;
   background-color: #f2eeee;
