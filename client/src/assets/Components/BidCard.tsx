@@ -52,8 +52,7 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
   //   if (!isAuctionLive) {
   //     setIsAuctionLive(true);
   //     setTimer((prev) => (prev <= 5 ? 7 : prev));
-  //     onPlaceBid();
-  //     setIsModalOpen(false);
+  //     onHandleProceedBid()
   //   }
   // }
 
