@@ -30,6 +30,9 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
   const [timer, setTimer] = useState(40);
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   // const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [openDetails, setOpenDetails] = useState<Vehicle>(); // this will control what vehicle details show up in the details component
+
+  function handleDetails() {}
 
   useEffect(() => {
     if (!isAuctionLive) return;
