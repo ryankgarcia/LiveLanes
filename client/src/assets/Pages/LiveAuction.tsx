@@ -19,13 +19,19 @@ export function LiveAuction() {
   const [timer, setTimer] = useState(40);
 
   function handleStartAuction() {
-    if (!isAuctionLive) return;
-    setIsAuctionLive(true);
-    setTimer((prev) => prev - 1);
+    console.log('clicked timer button!');
+    if (!isAuctionLive) {
+      setIsAuctionLive(true);
+      setTimer((prev) => {
+        if (timer <= 1) {
+          console.log('i am in the 0 block');
+          return 0;
+        }
+        console.log('i am in the counting block');
+        return prev - 1;
+      });
+    }
   }
-  //  function handleSelectedVehicle() {
-
-  //  }
 
   function handlePlaceBid(vehicleId: number) {
     setBids((prevBids) => ({
