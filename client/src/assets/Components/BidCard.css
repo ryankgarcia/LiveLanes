@@ -4,22 +4,55 @@
   gap: 1.5rem;
 }
 
+.auction-card-header {
+  display: flex;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+
+  /* background-color: #28b89a; */
+}
+
+.auction-card-header .selling-price {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-right: 7%;
+  padding-left: 8%;
+}
+
+.auction-card-header .buying-dealer {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-right: 0.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .time-bar {
   height: 2rem;
   width: 100%;
   background-color: #28b89a;
-  animation: timerColorFade 40s linear forwards;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.time-bar.active {
+  animation-name: timeColorFade;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 @keyframes timerColorFade {
   from {
-    background-color: #219f85;
+    background-color: #28b89a;
   }
 
   to {
-    background-color: #28b89a;
+    background-color: #219f85;
   }
 }
 
@@ -141,32 +174,6 @@ this is new, if it doesn't work, remove it
     box-shadow: 0 0 10px #9747ff;
     cursor: pointer;
   }
-}
-
-.auction-card-header {
-  display: flex;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-
-  /* background-color: #28b89a; */
-}
-
-.auction-card-header .selling-price {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding-right: 7%;
-  padding-left: 8%;
-}
-
-.auction-card-header .buying-dealer {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding-right: 0.4rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .auction-card-body {

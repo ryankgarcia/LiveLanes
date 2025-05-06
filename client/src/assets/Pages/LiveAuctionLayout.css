@@ -42,6 +42,17 @@ on a card that no vehicles have been found */
   flex-direction: row;
 }
 
+.startLive-auction {
+  background-color: orange;
+  color: black;
+  margin-right: 0.6rem;
+}
+
+.startLive-auction:hover {
+  background-color: black;
+  color: orange;
+}
+
 .liveauction-favButton {
   margin-left: 1.3rem;
   width: 50px;

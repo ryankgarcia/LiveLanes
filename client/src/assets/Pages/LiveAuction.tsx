@@ -1,6 +1,6 @@
 import { IoIosStarOutline } from 'react-icons/io';
 import { LiveAuctionCard } from '../Components/BidCard';
-import { Details } from '../Components/Details';
+// import { Details } from '../Components/Details';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   // const [openDetails, setOpenDetails] = useState<Vehicle>() // this will control what vehicle details show up in the details component
-  const [isLive, setIsLive] = useState();
 
   // function handleDetails(vehicleId: number) {}
 
@@ -73,6 +72,10 @@ export function LiveAuction() {
       </div>
     );
   }
+
+  function onCheckClick() {
+    console.log('ive been clicked');
+  }
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -100,6 +103,10 @@ export function LiveAuction() {
             <SearchBar searchTerm={searchTerm} onCustomChange={setSearchTerm} />
           </div>
           <div className="auction-2button-container">
+            {/* this button controls the start of the entire app's live auction timer (demo purposes) */}
+            <button className="startLive-auction" onClick={onCheckClick}>
+              Start Auction
+            </button>
             <button className="liveauction-autoBidButton">A</button>
             <button className="liveauction-favButton">
               {<IoIosStarOutline color="white" />}
