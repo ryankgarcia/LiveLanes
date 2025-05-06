@@ -15,7 +15,14 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
+  const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
+  const [timer, setTimer] = useState(40);
 
+  function handleStartAuction() {
+    if (!isAuctionLive) return;
+    setIsAuctionLive(true);
+    setTimer((prev) => prev - 1);
+  }
   //  function handleSelectedVehicle() {
 
   //  }
@@ -76,9 +83,6 @@ export function LiveAuction() {
     );
   }
 
-  function onCheckClick() {
-    console.log('ive been clicked');
-  }
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -108,7 +112,7 @@ export function LiveAuction() {
           </div>
           <div className="auction-2button-container">
             {/* this button controls the start of the entire app's live auction timer (demo purposes) */}
-            <button className="startLive-auction" onClick={onCheckClick}>
+            <button className="startLive-auction" onClick={handleStartAuction}>
               Start Auction
             </button>
             <button className="liveauction-autoBidButton">A</button>
@@ -130,7 +134,11 @@ export function LiveAuction() {
         </div>
         <div className="auction-column-right">
           <div className="scroll-container-details">
-            {selectedVehicle ? <Details entry={selectedVehicle} /> : ''}
+            {selectedVehicle ? (
+              <Details entry={selectedVehicle} timer={timer} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
         {/* <div className="auction-column-full"> */}

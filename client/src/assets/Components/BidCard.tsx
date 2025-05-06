@@ -28,12 +28,7 @@ type Props = {
 export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // the following 3 states control the timer functionality of the auction
-  // const [timer, setTimer] = useState(40);
-  // const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
 
-  // function handleStartAuction() {
-
-  // }
   // function handleLastBids() {
   //   if (!isAuctionLive) {
   //     setIsAuctionLive(true);
