@@ -32,6 +32,7 @@ export function Details({ entry }: Props) {
     <div className="details-view-container">
       <div className="details-flex-row">
         <div className="details-column-full">
+          <div className="greenBar-Timer">some text</div>
           <span className="details-image-span">{entry.laneLetter}</span>
           <span className="details-image-span">{entry.year}</span>
           <span className="details-image-span">{entry.make}</span>
@@ -41,6 +42,7 @@ export function Details({ entry }: Props) {
             src={entry.imageUrl}
             alt={`${entry.make} ${entry.model} ${entry.year}`}
           />
+
           <span className="details-image-span">{entry.mileage}</span>
           <span className="details-image-span">{entry.vin}</span>
         </div>

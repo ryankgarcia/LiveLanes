@@ -30,24 +30,10 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
   // the following 3 states control the timer functionality of the auction
   // const [timer, setTimer] = useState(40);
   // const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
-  // const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-  // useEffect(() => {
-  //   if (!isAuctionLive) return;
+  // function handleStartAuction() {
 
-  //   const id = setInterval(() => {
-  //     setTimer((prev) => {
-  //       if (prev <= 1) {
-  //         clearInterval(id);
-  //         setIsAuctionLive(false);
-  //         return 0;
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-  //   return () => clearInterval(id);
-  // }, [isAuctionLive]);
-
+  // }
   // function handleLastBids() {
   //   if (!isAuctionLive) {
   //     setIsAuctionLive(true);
