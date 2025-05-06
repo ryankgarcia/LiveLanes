@@ -3,6 +3,7 @@
   object-fit: contain;
   max-width: 50%;
   display: flex;
+  border-radius: 16px;
 
   /* this max width is what will break everything if you type in something crazy */
   @media (width >= 500px) {
@@ -14,7 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+
+  /* margin-top: 5rem; */
 }
 
 .image-caption {
@@ -57,6 +59,12 @@
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
+
+  /* margin-top: 2.5rem; */
+
+  @media (width >= 500px) {
+    margin-top: 10rem;
+  }
 }
 
 .prev-image {

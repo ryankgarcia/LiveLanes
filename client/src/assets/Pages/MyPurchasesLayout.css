@@ -1,0 +1,131 @@
+.mypurchases-container {
+  padding-left: 3rem;
+  padding-top: 3%;
+
+  @media (width >= 500px) {
+    padding-top: 2%;
+    padding-left: 15%;
+
+    /* margin-left: 8%; */
+
+    /* height: 100vh; */
+  }
+}
+
+.purchase-page-color {
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.mypurchase-row {
+  display: flex;
+}
+
+.mypurchase-column-main {
+  @media (width >= 500px) {
+    flex-basis: 60%;
+    justify-content: center;
+  }
+}
+
+.mypurchase-column-side {
+  @media (width >= 500px) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* this is header elements */
+.final-sale-text {
+  color: black;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  text-wrap-mode: nowrap;
+}
+
+/* change this back to white. i only changed it to black to see the visual differences */
+.final-sale-card {
+  /* width: 300px; */
+
+  width: 100%;
+  height: 200px;
+  margin-top: 15%;
+
+  /* background-color: white; */
+  background-color: black;
+  margin-bottom: 3rem;
+
+  @media (width >= 500px) {
+    width: 550px;
+  }
+}
+
+/* change this back to white. i only changed it to black to see the visual differences */
+.checkout-summary-box {
+  /* background-color: white; */
+  background-color: black;
+  margin-top: 3rem;
+
+  @media (width >= 500px) {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* change this back to white. i only changed it to black to see the visual differences */
+.checkout-box {
+  /* background-color: white; */
+  background-color: black;
+  width: 350px;
+  height: 250px;
+  margin-top: 3rem;
+  display: flex;
+}
+
+.checkout-green-text {
+  color: #28b89a;
+}
+
+.checkout-black-text {
+  color: black;
+}
+
+.checkout-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-wrap-mode: nowrap;
+  color: white;
+  background-color: #28b89a;
+
+  /* width: 64px; */
+
+  /* height: 32px; */
+  width: 15rem;
+  height: 3rem;
+}
+
+.checkout-summary-chargers {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.checkout-summary-cost {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* get rid of this class asap, it will mess up other css from other pages */
+
+/* p,
+span {
+  color: white;
+} */
+
+.final-prices,
+.final-charges {
+  color: white;
+}
