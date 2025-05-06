@@ -1,6 +1,6 @@
 import './BidCard.css';
 import { Vehicle } from '../../data';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // export type Vehicle = {
 //   vehicleId?: number;
@@ -20,46 +20,44 @@ type Props = {
   entry: Vehicle;
   bid: number;
   onPlaceBid: () => void;
+  onSelect: () => void;
   // distance: number;
 };
 
 //  distance is needed here to show the user how far away the car is from them
-export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
+export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // the following 3 states control the timer functionality of the auction
-  const [timer, setTimer] = useState(40);
-  const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
+  // const [timer, setTimer] = useState(40);
+  // const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   // const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
-  const [openDetails, setOpenDetails] = useState<Vehicle>(); // this will control what vehicle details show up in the details component
 
-  function handleDetails() {}
+  // useEffect(() => {
+  //   if (!isAuctionLive) return;
 
-  useEffect(() => {
-    if (!isAuctionLive) return;
+  //   const id = setInterval(() => {
+  //     setTimer((prev) => {
+  //       if (prev <= 1) {
+  //         clearInterval(id);
+  //         setIsAuctionLive(false);
+  //         return 0;
+  //       }
+  //       return prev - 1;
+  //     });
+  //   }, 1000);
+  //   return () => clearInterval(id);
+  // }, [isAuctionLive]);
 
-    const id = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(id);
-          setIsAuctionLive(false);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(id);
-  }, [isAuctionLive]);
+  // function handleLastBids() {
+  //   if (!isAuctionLive) {
+  //     setIsAuctionLive(true);
+  //     setTimer((prev) => (prev <= 5 ? 7 : prev));
+  //     onPlaceBid();
+  //     setIsModalOpen(false);
+  //   }
+  // }
 
-  function handleLastBids() {
-    if (!isAuctionLive) {
-      setIsAuctionLive(true);
-      setTimer((prev) => (prev <= 5 ? 7 : prev));
-      onPlaceBid();
-      setIsModalOpen(false);
-    }
-  }
-
-  function onHandleClose() {
+  function onHandleProceedBid() {
     onPlaceBid();
     setIsModalOpen(false);
   }
@@ -68,26 +66,27 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
     <div key={entry.vehicleId} className="auction-card">
       {/* {somewhere right here there must be a green bar that goes down counting the seconds} */}
       <div className="auction-card-header">
-        <div
+        {/* <div
           key={timer}
           className={`time-bar ${isAuctionLive ? 'active' : ''}`}
-          style={{ animationDuration: `${timer}s` }}>
-          <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span>
-          <span className="selling-price">${`${bid}`}</span>
-          <span className="buying-dealer">
-            Joe Sells Cars Outside of his dads garage
-            {/* this needs to change dynamically for current highest bidder */}
-          </span>
-        </div>
+          style={{ animationDuration: `${timer}s` }}> */}
+        {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
+        <span className="selling-price">${`${bid}`}</span>
+        <span className="buying-dealer">
+          Joe Sells Cars Outside of his dads garage
+          {/* this needs to change dynamically for current highest bidder */}
+        </span>
+        {/* </div> */}
       </div>
       <div className="auction-card-body">
         {/* <div className="countdown"></div> */}
         <img
+          onClick={onSelect}
           className="auction-vehicle-img"
           src={entry.imageUrl}
           alt={`${entry.year} ${entry.make} ${entry.model}`}
         />
-        <button className="bid-btn" onClick={handleLastBids}>
+        <button className="bid-btn" onClick={() => setIsModalOpen(true)}>
           Bid
         </button>
       </div>
@@ -118,7 +117,7 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid }: Props) {
               <h3>Are you sure you want to place your bid?</h3>
               <button
                 className="bidCard-confirmButton"
-                onClick={() => onHandleClose()}>
+                onClick={() => onHandleProceedBid()}>
                 Confirm
               </button>
               <button

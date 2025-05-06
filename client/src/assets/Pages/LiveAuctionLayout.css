@@ -143,9 +143,9 @@ in the browser */
     /* turn this white class back on, black is just to get a visual of what is currently happening
     background-color: white; */
 
-    /* background-color: transparent; */
+    background-color: transparent;
 
-    background-color: black;
+    /* background-color: black; */
     width: 4px;
   }
 }
