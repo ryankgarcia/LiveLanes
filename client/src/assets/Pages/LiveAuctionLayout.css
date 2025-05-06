@@ -127,7 +127,8 @@ in the browser */
   width: 100%;
 
   @media (width >= 500px) {
-    overflow-y: scroll;
+    /* overflow-y: scroll;
+    comment this back in once you apply the notes you wrote down */
     height: 100vh;
     padding-left: 0.1rem;
     padding-right: 0.3rem;

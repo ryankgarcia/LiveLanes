@@ -14,9 +14,11 @@ export function LiveAuction() {
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
+  // const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   const [timer, setTimer] = useState(40);
+  // const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
 
   function handleStartAuction() {
     console.log('clicked timer button!');
@@ -98,17 +100,16 @@ export function LiveAuction() {
             but the remaining cars must show up in their lane assignments
             in the NextUpCard */}
             {entries.length > 0 ? (
-              entries
-                .slice(0, 5)
-                .map((entry) => (
-                  <LiveAuctionCard
-                    key={entry.vehicleId}
-                    entry={entry}
-                    bid={bids[entry.vehicleId!] ?? 0}
-                    onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
-                    onSelect={() => setSelectedVehicle(entry)}
-                  />
-                ))
+              entries.slice(0, 5).map((entry) => (
+                <LiveAuctionCard
+                  key={entry.vehicleId}
+                  entry={entry}
+                  bid={bids[entry.vehicleId!] ?? 0}
+                  // timeLeft={}
+                  onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
+                  onSelect={() => setSelectedVehicle(entry)}
+                />
+              ))
             ) : (
               <div>There are no vehicles yet . . .</div>
             )}
@@ -140,10 +141,8 @@ export function LiveAuction() {
         </div>
         <div className="auction-column-right">
           <div className="scroll-container-details">
-            {selectedVehicle ? (
+            {selectedVehicle && (
               <Details entry={selectedVehicle} timer={timer} />
-            ) : (
-              ''
             )}
           </div>
         </div>
