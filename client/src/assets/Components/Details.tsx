@@ -23,18 +23,18 @@ import './Details.css';
 
 type Props = {
   entry: Vehicle;
-  timer: number;
+  timeout: number;
   // imageUrl: string;
   // vehicleId?:
 };
 
-export function Details({ entry, timer }: Props) {
+export function Details({ entry, timeout }: Props) {
   return (
     <div className="details-view-container">
       <div className="details-image-flex-row">
         <div className="details-image-column-full">
           <div className="greenBar-Timer">
-            {`00m ${timer}s`}
+            {`00m ${timeout}s`}
             <span className="details-bidding-dealer-name">Dealer Name</span>
             <span className="details-bidding-dealer-name">
               Current Highest bid $

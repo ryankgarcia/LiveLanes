@@ -1,6 +1,5 @@
 import { IoIosStarOutline } from 'react-icons/io';
 import { LiveAuctionCard } from '../Components/BidCard';
-// import { Details } from '../Components/Details';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
@@ -14,32 +13,65 @@ export function LiveAuction() {
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
-  // const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
-  const [timer, setTimer] = useState(40);
-  // const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
+  const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
 
   function handleStartAuction() {
-    console.log('clicked timer button!');
-    if (!isAuctionLive) {
-      setIsAuctionLive(true);
-      setTimer((prev) => {
-        if (timer <= 1) {
-          console.log('i am in the 0 block');
-          return 0;
+    if (isAuctionLive) return;
+    setIsAuctionLive(true);
+    setTimeouts(() => {
+      const newTimeouts: { [vehicleId: number]: number } = {};
+      for (const entry of entries) {
+        newTimeouts[entry.vehicleId] = 40;
+      }
+      return newTimeouts;
+    });
+    const id = setInterval(() => {
+      setTimeouts((prev) => {
+        const newTimeouts: { [vehicleId: number]: number } = {};
+        for (const entry of entries) {
+          // Don't let this go less than 0. If at 0, remove Bid button
+          newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
         }
-        console.log('i am in the counting block');
-        return prev - 1;
+        // figure out if auction is done and call setIsAuctionLive(false);
+        // and clearInterval(intervalId) to stop the timer
+        return newTimeouts;
       });
-    }
+    }, 1000);
+    setIntervalId(id);
   }
+
+  // this function should complete the following.
+  // the user presses start auction button.
+  // start the 40 second interval, then start the 40s timer
+  // start the timer for the auction, changing cars every 40s
+  // each car will have 40 seconds to run, then change to the next car in line
+  // that group of cars will run for 40s then switch to the next set of cars.
+
+  // function handleStartAuction() {
+  //   console.log('clicked timer button!');
+  //   if (!isAuctionLive) {
+  //     setIsAuctionLive(true);
+  //     setTimer((prev) => {
+  //       if (timer <= 1) {
+  //         console.log('i am in the 0 block');
+  //         return 0;
+  //       }
+  //       console.log('i am in the counting block');
+  //       return prev - 1;
+  //     });
+  //   }
+  // }
 
   function handlePlaceBid(vehicleId: number) {
     setBids((prevBids) => ({
       ...prevBids,
       [vehicleId]: (prevBids[vehicleId] ?? 0) + 150,
     }));
+    // Reset the timeout for this vehicleId if necessary
+    // const newTimeouts = {...prev}; newTimeouts[vehicleId] = 15; setTimeouts(newTimeouts)
   }
 
   const trimSearchTerm = searchTerm.trim().toLowerCase();
@@ -67,9 +99,7 @@ export function LiveAuction() {
         // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
         for (const entry of entries) {
-          if (entry.vehicleId !== undefined) {
-            initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
-          }
+          initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
         }
         setBids(initialBids);
       } catch (err) {
@@ -100,16 +130,17 @@ export function LiveAuction() {
             but the remaining cars must show up in their lane assignments
             in the NextUpCard */}
             {entries.length > 0 ? (
-              entries.slice(0, 5).map((entry) => (
-                <LiveAuctionCard
-                  key={entry.vehicleId}
-                  entry={entry}
-                  bid={bids[entry.vehicleId!] ?? 0}
-                  // timeLeft={}
-                  onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
-                  onSelect={() => setSelectedVehicle(entry)}
-                />
-              ))
+              entries
+                .slice(0, 5)
+                .map((entry) => (
+                  <LiveAuctionCard
+                    key={entry.vehicleId}
+                    entry={entry}
+                    bid={bids[entry.vehicleId!] ?? 0}
+                    onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
+                    onSelect={() => setSelectedVehicle(entry)}
+                  />
+                ))
             ) : (
               <div>There are no vehicles yet . . .</div>
             )}
@@ -142,7 +173,10 @@ export function LiveAuction() {
         <div className="auction-column-right">
           <div className="scroll-container-details">
             {selectedVehicle && (
-              <Details entry={selectedVehicle} timer={timer} />
+              <Details
+                entry={selectedVehicle}
+                timeout={timeouts[selectedVehicle.vehicleId]}
+              />
             )}
           </div>
         </div>
