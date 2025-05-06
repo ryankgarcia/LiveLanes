@@ -34,6 +34,13 @@ export function LiveAuction() {
         for (const entry of entries) {
           // Don't let this go less than 0. If at 0, remove Bid button
           newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
+          if (newTimeouts[entry.vehicleId] === 0) {
+            return () => clearInterval(id);
+          }
+        }
+        if (entries.length < 0) {
+          setIsAuctionLive(false);
+          return () => clearInterval(id);
         }
         // figure out if auction is done and call setIsAuctionLive(false);
         // and clearInterval(intervalId) to stop the timer
@@ -43,33 +50,19 @@ export function LiveAuction() {
     setIntervalId(id);
   }
 
-  // this function should complete the following.
-  // the user presses start auction button.
-  // start the 40 second interval, then start the 40s timer
-  // start the timer for the auction, changing cars every 40s
-  // each car will have 40 seconds to run, then change to the next car in line
-  // that group of cars will run for 40s then switch to the next set of cars.
-
-  // function handleStartAuction() {
-  //   console.log('clicked timer button!');
-  //   if (!isAuctionLive) {
-  //     setIsAuctionLive(true);
-  //     setTimer((prev) => {
-  //       if (timer <= 1) {
-  //         console.log('i am in the 0 block');
-  //         return 0;
-  //       }
-  //       console.log('i am in the counting block');
-  //       return prev - 1;
-  //     });
-  //   }
-  // }
-
   function handlePlaceBid(vehicleId: number) {
     setBids((prevBids) => ({
       ...prevBids,
       [vehicleId]: (prevBids[vehicleId] ?? 0) + 150,
     }));
+
+    const timeLeft = timeouts[vehicleId];
+    if (timeLeft <= 7) {
+      setTimeouts((prev) => ({
+        ...prev,
+        [vehicleId]: 9,
+      }));
+    }
     // Reset the timeout for this vehicleId if necessary
     // const newTimeouts = {...prev}; newTimeouts[vehicleId] = 15; setTimeouts(newTimeouts)
   }
