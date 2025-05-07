@@ -217,6 +217,7 @@ export function LiveAuction() {
           <div className="scroll-container-details">
             {selectedVehicle && (
               <Details
+                bid={bids[selectedVehicle.vehicleId]}
                 entry={selectedVehicle}
                 timeout={timeouts[selectedVehicle.vehicleId]}
               />

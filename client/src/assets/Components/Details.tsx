@@ -24,11 +24,12 @@ import './Details.css';
 type Props = {
   entry: Vehicle;
   timeout: number | undefined;
+  bid: number;
   // imageUrl: string;
   // vehicleId: Vehicle;
 };
 
-export function Details({ entry, timeout }: Props) {
+export function Details({ entry, timeout, bid }: Props) {
   return (
     <div className="details-view-container">
       <div className="details-image-flex-row">
@@ -39,8 +40,11 @@ export function Details({ entry, timeout }: Props) {
           >
             {timeout !== undefined ? `00m ${timeout}s` : ''}
             <span className="details-bidding-dealer-name">Dealer Name</span>
+            {/* in this line above make a table from the database that will account for the user's who
+            are members of the website, and their dealership name will be inserted in a template literal
+            where the words 'Dealer Name currently are' */}
             <span className="details-bidding-dealer-name">
-              Current Highest bid $
+              {timeout !== undefined ? `$${bid + entry.startingPrice}` : ''}
             </span>
           </div>
           <div className="details-image-span">
