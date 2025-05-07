@@ -31,7 +31,7 @@ export function LiveAuction() {
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
-  const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
+  const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
   const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
 
@@ -40,7 +40,7 @@ export function LiveAuction() {
     setIsAuctionLive(true);
     setTimeouts(() => {
       const newTimeouts: { [vehicleId: number]: number } = {};
-      for (const entry of entries) {
+      for (const entry of carsInLiveAuction) {
         newTimeouts[entry.vehicleId] = 40;
       }
       return newTimeouts;
@@ -48,7 +48,7 @@ export function LiveAuction() {
     const id = setInterval(() => {
       setTimeouts((prev) => {
         const newTimeouts: { [vehicleId: number]: number } = {};
-        for (const entry of entries) {
+        for (const entry of carsInLiveAuction) {
           // Don't let this go less than 0. If at 0, remove Bid button
           if (prev[entry.vehicleId] === 0) {
             newTimeouts[entry.vehicleId] = 0;
@@ -163,10 +163,6 @@ export function LiveAuction() {
       </div>
     );
   }
-
-  const genLane = laneAssign();
-  // const newLane = genLane.map((item, index) => item[index]);
-  console.log('newlane', genLane);
 
   return (
     <div className="auction-container">
