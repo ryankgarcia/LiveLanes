@@ -84,7 +84,7 @@ export function LiveAuctionCard({
       </div>
       <div className="auction-vehicle-info">
         <div>
-          <span className="auction-lane">A23 {}</span>
+          <span className="auction-lane">{entry.laneLetter}</span>
           {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
             {' '}

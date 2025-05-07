@@ -7,6 +7,22 @@ import { readVehicles, Vehicle } from '../../data'; // this needs to import data
 import './LiveAuctionLayout.css';
 import { Details } from '../Components/Details';
 
+function laneAssign(): string[][] {
+  const laneAssignment: string[][] = [];
+  const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
+
+  for (let i = 0; i < laneLetter.length; i++) {
+    const letterArr: string[] = [];
+
+    for (let j = 1; j < 51; j++) {
+      letterArr.push(`${laneLetter[i]}${j}`);
+    }
+    laneAssignment.push(letterArr);
+  }
+
+  return laneAssignment;
+}
+
 export function LiveAuction() {
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
@@ -17,6 +33,7 @@ export function LiveAuction() {
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
+  const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
 
   function handleStartAuction() {
     if (isAuctionLive) return;
@@ -87,13 +104,40 @@ export function LiveAuction() {
     );
   });
 
+  function liveLaneAssigns(vehicles: Vehicle[]): Vehicle[] {
+    let j = 0;
+    const lanesClone = structuredClone(lanes);
+    for (let i = 0; i < vehicles.length; i++) {
+      const lane = lanesClone[j].shift();
+      if (lane)
+        // this is checking if its a string
+        vehicles[i].laneLetter = lane;
+      j++;
+      if (j >= 5) {
+        j = 0;
+      }
+    }
+    setLanes(lanesClone);
+    return vehicles;
+  }
+
   useEffect(() => {
     async function load() {
       try {
         const entries = await readVehicles();
+        const entriesWithLanes = liveLaneAssigns(entries);
         // assign a lane to every vehicle here
-        const first5 = entries.splice(0, 5);
+        const first5 = entriesWithLanes.splice(0, 5);
+        // move this for loop somewhere else 115
+        // const lanesClone = structuredClone(lanes);
+        // for (let i = 0; i < lanesClone.length; i++) {
+        //   const lane = lanesClone[i].shift();
+        //   if (lane)
+        //     // this is checking if this is a string
+        //     first5[i].laneLetter = lane;
+        // }
         setCarsInLiveAuction(first5);
+        // setLanes(lanesClone);
         setEntries(entries);
         // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
@@ -118,22 +162,6 @@ export function LiveAuction() {
         {error instanceof Error ? error.message : 'Unknown Error'}
       </div>
     );
-  }
-
-  function laneAssign(): string[][] {
-    const laneAssignment: string[][] = [];
-    const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
-
-    for (let i = 0; i < laneLetter.length; i++) {
-      const letterArr: string[] = [];
-
-      for (let j = 1; j < 51; j++) {
-        letterArr.push(`${laneLetter[i]}${j}`);
-      }
-      laneAssignment.push(letterArr);
-    }
-
-    return laneAssignment;
   }
 
   const genLane = laneAssign();
