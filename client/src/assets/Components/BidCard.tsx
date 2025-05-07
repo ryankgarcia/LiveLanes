@@ -42,6 +42,7 @@ export function LiveAuctionCard({
     setIsModalOpen(true);
     if (timeouts[entry.vehicleId] <= 0 || undefined) {
       setIsModalOpen(false);
+      // if you can include a line of code that will show no more bids or some text that say ""
       return;
     }
   }

@@ -7,6 +7,7 @@ import { readVehicles, Vehicle } from '../../data'; // this needs to import data
 import './LiveAuctionLayout.css';
 import { Details } from '../Components/Details';
 
+// the purpose of this function is to assign lane letter's to each car in the LiveAuction page
 function laneAssign(): string[][] {
   const laneAssignment: string[][] = [];
   const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
@@ -38,9 +39,13 @@ export function LiveAuction() {
   function handleStartAuction() {
     if (isAuctionLive) return;
     setIsAuctionLive(true);
+    const entriesWithLanes = liveLaneAssigns(entries);
+    // assign a lane to every vehicle here
+    const first5 = entriesWithLanes.splice(0, 5);
+    setCarsInLiveAuction(first5);
     setTimeouts(() => {
       const newTimeouts: { [vehicleId: number]: number } = {};
-      for (const entry of carsInLiveAuction) {
+      for (const entry of first5) {
         newTimeouts[entry.vehicleId] = 40;
       }
       return newTimeouts;
@@ -48,7 +53,7 @@ export function LiveAuction() {
     const id = setInterval(() => {
       setTimeouts((prev) => {
         const newTimeouts: { [vehicleId: number]: number } = {};
-        for (const entry of carsInLiveAuction) {
+        for (const entry of first5) {
           // Don't let this go less than 0. If at 0, remove Bid button
           if (prev[entry.vehicleId] === 0) {
             newTimeouts[entry.vehicleId] = 0;
@@ -56,16 +61,13 @@ export function LiveAuction() {
             newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
           }
         }
+        // figure out if auction is done and call setIsAuctionLive(false);
+        // and clearInterval(intervalId) to stop the timer
         if (Object.values(newTimeouts).every((value) => value === 0)) {
           setIsAuctionLive(false);
           clearInterval(id);
           return {};
         }
-        // if (entries.length < 0) {
-        //   setIsAuctionLive(false);
-        // }
-        // figure out if auction is done and call setIsAuctionLive(false);
-        // and clearInterval(intervalId) to stop the timer
         return newTimeouts;
       });
     }, 1000);
@@ -125,19 +127,6 @@ export function LiveAuction() {
     async function load() {
       try {
         const entries = await readVehicles();
-        const entriesWithLanes = liveLaneAssigns(entries);
-        // assign a lane to every vehicle here
-        const first5 = entriesWithLanes.splice(0, 5);
-        // move this for loop somewhere else 115
-        // const lanesClone = structuredClone(lanes);
-        // for (let i = 0; i < lanesClone.length; i++) {
-        //   const lane = lanesClone[i].shift();
-        //   if (lane)
-        //     // this is checking if this is a string
-        //     first5[i].laneLetter = lane;
-        // }
-        setCarsInLiveAuction(first5);
-        // setLanes(lanesClone);
         setEntries(entries);
         // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
