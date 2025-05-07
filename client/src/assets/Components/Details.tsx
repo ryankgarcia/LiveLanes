@@ -25,7 +25,7 @@ type Props = {
   entry: Vehicle;
   timeout: number | undefined;
   // imageUrl: string;
-  // vehicleId?:
+  // vehicleId: Vehicle;
 };
 
 export function Details({ entry, timeout }: Props) {
@@ -33,7 +33,10 @@ export function Details({ entry, timeout }: Props) {
     <div className="details-view-container">
       <div className="details-image-flex-row">
         <div className="details-image-column-full">
-          <div className="greenBar-Timer">
+          <div
+            className="greenBar-Timer"
+            // style={{ animationDuration: `${timeout[entry.vehicleId]}s` }}
+          >
             {timeout !== undefined ? `00m ${timeout}s` : ''}
             <span className="details-bidding-dealer-name">Dealer Name</span>
             <span className="details-bidding-dealer-name">

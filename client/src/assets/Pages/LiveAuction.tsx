@@ -16,6 +16,7 @@ export function LiveAuction() {
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
+  const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
 
   function handleStartAuction() {
     if (isAuctionLive) return;
@@ -91,6 +92,8 @@ export function LiveAuction() {
       try {
         const entries = await readVehicles();
         // assign a lane to every vehicle here
+        const first5 = entries.splice(0, 5);
+        setCarsInLiveAuction(first5);
         setEntries(entries);
         // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
@@ -117,6 +120,26 @@ export function LiveAuction() {
     );
   }
 
+  function laneAssign(): string[][] {
+    const laneAssignment: string[][] = [];
+    const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
+
+    for (let i = 0; i < laneLetter.length; i++) {
+      const letterArr: string[] = [];
+
+      for (let j = 1; j < 51; j++) {
+        letterArr.push(`${laneLetter[i]}${j}`);
+      }
+      laneAssignment.push(letterArr);
+    }
+
+    return laneAssignment;
+  }
+
+  const genLane = laneAssign();
+  // const newLane = genLane.map((item, index) => item[index]);
+  console.log('newlane', genLane);
+
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -125,11 +148,12 @@ export function LiveAuction() {
             {/* the slice method was used here to only show 5 cars at once,
             but the remaining cars must show up in their lane assignments
             in the NextUpCard */}
-            {entries.length > 0 ? (
-              entries.slice(0, 5).map((entry) => (
+            {carsInLiveAuction.length > 0 ? (
+              carsInLiveAuction.map((entry) => (
                 <LiveAuctionCard
                   key={entry.vehicleId}
                   entry={entry}
+                  isAuctionLive={isAuctionLive}
                   bid={bids[entry.vehicleId!] ?? 0}
                   // write a prop that disables the button at time === 0 seconds
                   onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}

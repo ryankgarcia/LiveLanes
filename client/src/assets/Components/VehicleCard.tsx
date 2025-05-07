@@ -13,29 +13,6 @@ type VehicleCardProps = {
 // this function exists to assign each vehicle in the auction a number and a letter
 // that indicates the lane and number it will show up at
 // needs to be worked out but this is the general idea
-function laneAssign(): string[] {
-  const laneAssignment: string[] = [];
-  const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
-
-  for (let i = 0; i < laneLetter.length; i++) {
-    // debugger;
-    for (let j = 0; j < 51; j++) {
-      laneAssignment.push(`${laneLetter[i]}${j}`);
-    }
-  }
-  // for (let i = 1; i < 51; i++) {
-  //   const randomLaneIndex: number = Math.floor(
-  //     Math.random() * laneLetter.length
-  //   );
-  //   const randomLaneLetter: string = laneLetter[randomLaneIndex];
-  //   const lane = `${randomLaneLetter}${i}`;
-  //   laneAssignment.push(lane);
-  return laneAssignment;
-}
-
-const genLane = laneAssign();
-// const newLane = genLane.map((item, index) => item[index]);
-console.log('newlane', genLane);
 
 export function VehicleCard({
   entry,

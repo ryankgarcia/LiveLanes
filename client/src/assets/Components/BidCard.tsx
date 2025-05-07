@@ -21,11 +21,18 @@ type Props = {
   bid: number;
   onPlaceBid: () => void;
   onSelect: () => void;
+  isAuctionLive: boolean;
   // distance: number;
 };
 
 //  distance is needed here to show the user how far away the car is from them
-export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
+export function LiveAuctionCard({
+  entry,
+  bid,
+  onPlaceBid,
+  onSelect,
+  isAuctionLive,
+}: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // the following 3 states control the timer functionality of the auction
 
@@ -36,6 +43,11 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
   //     onHandleProceedBid()
   //   }
   // }
+
+  function onBidClick() {
+    if (!isAuctionLive) return;
+    setIsModalOpen(true);
+  }
 
   function onHandleProceedBid() {
     onPlaceBid();
@@ -66,7 +78,7 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
           src={entry.imageUrl}
           alt={`${entry.year} ${entry.make} ${entry.model}`}
         />
-        <button className="bid-btn" onClick={() => setIsModalOpen(true)}>
+        <button className="bid-btn" onClick={onBidClick}>
           Bid
         </button>
       </div>
