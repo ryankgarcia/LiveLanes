@@ -23,7 +23,7 @@ import './Details.css';
 
 type Props = {
   entry: Vehicle;
-  timeout: number;
+  timeout: number | undefined;
   // imageUrl: string;
   // vehicleId?:
 };
@@ -34,7 +34,7 @@ export function Details({ entry, timeout }: Props) {
       <div className="details-image-flex-row">
         <div className="details-image-column-full">
           <div className="greenBar-Timer">
-            {`00m ${timeout}s`}
+            {timeout !== undefined ? `00m ${timeout}s` : ''}
             <span className="details-bidding-dealer-name">Dealer Name</span>
             <span className="details-bidding-dealer-name">
               Current Highest bid $

@@ -15,7 +15,6 @@ export function LiveAuction() {
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>();
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
 
   function handleStartAuction() {
@@ -33,21 +32,25 @@ export function LiveAuction() {
         const newTimeouts: { [vehicleId: number]: number } = {};
         for (const entry of entries) {
           // Don't let this go less than 0. If at 0, remove Bid button
-          newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
-          if (newTimeouts[entry.vehicleId] === 0) {
-            return () => clearInterval(id);
+          if (prev[entry.vehicleId] === 0) {
+            newTimeouts[entry.vehicleId] = 0;
+          } else {
+            newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
           }
         }
-        if (entries.length < 0) {
+        if (Object.values(newTimeouts).every((value) => value === 0)) {
           setIsAuctionLive(false);
-          return () => clearInterval(id);
+          clearInterval(id);
+          return {};
         }
+        // if (entries.length < 0) {
+        //   setIsAuctionLive(false);
+        // }
         // figure out if auction is done and call setIsAuctionLive(false);
         // and clearInterval(intervalId) to stop the timer
         return newTimeouts;
       });
     }, 1000);
-    setIntervalId(id);
   }
 
   function handlePlaceBid(vehicleId: number) {
@@ -123,17 +126,16 @@ export function LiveAuction() {
             but the remaining cars must show up in their lane assignments
             in the NextUpCard */}
             {entries.length > 0 ? (
-              entries
-                .slice(0, 5)
-                .map((entry) => (
-                  <LiveAuctionCard
-                    key={entry.vehicleId}
-                    entry={entry}
-                    bid={bids[entry.vehicleId!] ?? 0}
-                    onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
-                    onSelect={() => setSelectedVehicle(entry)}
-                  />
-                ))
+              entries.slice(0, 5).map((entry) => (
+                <LiveAuctionCard
+                  key={entry.vehicleId}
+                  entry={entry}
+                  bid={bids[entry.vehicleId!] ?? 0}
+                  // write a prop that disables the button at time === 0 seconds
+                  onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
+                  onSelect={() => setSelectedVehicle(entry)}
+                />
+              ))
             ) : (
               <div>There are no vehicles yet . . .</div>
             )}
