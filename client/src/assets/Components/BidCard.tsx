@@ -36,15 +36,6 @@ export function LiveAuctionCard({
   timeouts,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // the following 3 states control the timer functionality of the auction
-
-  // function handleLastBids() {
-  //   if (!isAuctionLive) {
-  //     setIsAuctionLive(true);
-  //     setTimer((prev) => (prev <= 5 ? 7 : prev));
-  //     onHandleProceedBid()
-  //   }
-  // }
 
   function onBidClick() {
     if (!isAuctionLive) return;
@@ -69,7 +60,9 @@ export function LiveAuctionCard({
           className={`time-bar ${isAuctionLive ? 'active' : ''}`}
           style={{ animationDuration: `${timer}s` }}> */}
         {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
-        <span className="selling-price">${`${bid}`}</span>
+        <span className="selling-price">
+          ${`${bid + entry.startingPrice} `}
+        </span>
         <span className="buying-dealer">
           Joe Sells Cars Outside of his dads garage
           {/* this needs to change dynamically for current highest bidder */}
