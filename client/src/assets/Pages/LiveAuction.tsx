@@ -110,7 +110,7 @@ export function LiveAuction() {
     for (let i = 0; i < vehicles.length; i++) {
       const lane = lanesClone[j].shift();
       if (lane)
-        // this is checking if its a string
+        // this if(lane) is checking if its a string
         vehicles[i].laneLetter = lane;
       j++;
       if (j >= 5) {
@@ -179,7 +179,7 @@ export function LiveAuction() {
                   entry={entry}
                   isAuctionLive={isAuctionLive}
                   bid={bids[entry.vehicleId!] ?? 0}
-                  // write a prop that disables the button at time === 0 seconds
+                  timeouts={timeouts} // this props needs to disable the button from being clicked if timeouts = 0 seconds
                   onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
                   onSelect={() => setSelectedVehicle(entry)}
                 />

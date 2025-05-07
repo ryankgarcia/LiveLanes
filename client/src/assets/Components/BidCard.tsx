@@ -22,6 +22,7 @@ type Props = {
   onPlaceBid: () => void;
   onSelect: () => void;
   isAuctionLive: boolean;
+  timeouts: { [vehicleId: number]: number };
   // distance: number;
 };
 
@@ -32,6 +33,7 @@ export function LiveAuctionCard({
   onPlaceBid,
   onSelect,
   isAuctionLive,
+  timeouts,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // the following 3 states control the timer functionality of the auction
@@ -47,6 +49,10 @@ export function LiveAuctionCard({
   function onBidClick() {
     if (!isAuctionLive) return;
     setIsModalOpen(true);
+    if (timeouts[entry.vehicleId] <= 0 || undefined) {
+      setIsModalOpen(false);
+      return;
+    }
   }
 
   function onHandleProceedBid() {
@@ -93,7 +99,9 @@ export function LiveAuctionCard({
         </div>
         <span className="auction-vehicle-model">{entry.model}</span>
         <div>
-          <span className="auction-vehicle-mileage">{entry.mileage} mi</span>
+          <span className="auction-vehicle-mileage">
+            {entry.mileage.toLocaleString()} mi
+          </span>
         </div>
       </div>
       <div className="auction-card-footer">

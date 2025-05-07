@@ -125,6 +125,8 @@ in the browser */
 .scroll-container-details {
   width: 100%;
 
+  /* height: 100vh; */
+
   @media (width >= 500px) {
     /* overflow-y: scroll; */
 
