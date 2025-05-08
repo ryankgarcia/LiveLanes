@@ -21,40 +21,40 @@ type Props = {
   bid: number;
   onPlaceBid: () => void;
   onSelect: () => void;
+  isAuctionLive: boolean;
+  timeouts: { [vehicleId: number]: number };
   // distance: number;
 };
 
+// fix this formatting issue. so that it looks clean
+function formatUSD(number: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(number);
+}
+
 //  distance is needed here to show the user how far away the car is from them
-export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
+export function LiveAuctionCard({
+  entry,
+  bid,
+  onPlaceBid,
+  onSelect,
+  isAuctionLive,
+  timeouts,
+}: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // the following 3 states control the timer functionality of the auction
-  // const [timer, setTimer] = useState(40);
-  // const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
-  // const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-  // useEffect(() => {
-  //   if (!isAuctionLive) return;
-
-  //   const id = setInterval(() => {
-  //     setTimer((prev) => {
-  //       if (prev <= 1) {
-  //         clearInterval(id);
-  //         setIsAuctionLive(false);
-  //         return 0;
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-  //   return () => clearInterval(id);
-  // }, [isAuctionLive]);
-
-  // function handleLastBids() {
-  //   if (!isAuctionLive) {
-  //     setIsAuctionLive(true);
-  //     setTimer((prev) => (prev <= 5 ? 7 : prev));
-  //     onHandleProceedBid()
-  //   }
-  // }
+  function onBidClick() {
+    if (!isAuctionLive) return;
+    setIsModalOpen(true);
+    if (timeouts[entry.vehicleId] <= 0 || undefined) {
+      setIsModalOpen(false);
+      // if you can include a line of code that will show no more bids or some text that say ""
+      return;
+    }
+  }
 
   function onHandleProceedBid() {
     onPlaceBid();
@@ -70,7 +70,10 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
           className={`time-bar ${isAuctionLive ? 'active' : ''}`}
           style={{ animationDuration: `${timer}s` }}> */}
         {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
-        <span className="selling-price">${`${bid}`}</span>
+        <span className="selling-price">
+          {/* fix this error */}
+          {formatUSD(`${bid + entry.startingPrice}`)}
+        </span>
         <span className="buying-dealer">
           Joe Sells Cars Outside of his dads garage
           {/* this needs to change dynamically for current highest bidder */}
@@ -85,13 +88,13 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
           src={entry.imageUrl}
           alt={`${entry.year} ${entry.make} ${entry.model}`}
         />
-        <button className="bid-btn" onClick={() => setIsModalOpen(true)}>
+        <button className="bid-btn" onClick={onBidClick}>
           Bid
         </button>
       </div>
       <div className="auction-vehicle-info">
         <div>
-          <span className="auction-lane">A23 {}</span>
+          <span className="auction-lane">{entry.laneLetter}</span>
           {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
             {' '}
@@ -100,7 +103,9 @@ export function LiveAuctionCard({ entry, bid, onPlaceBid, onSelect }: Props) {
         </div>
         <span className="auction-vehicle-model">{entry.model}</span>
         <div>
-          <span className="auction-vehicle-mileage">{entry.mileage} mi</span>
+          <span className="auction-vehicle-mileage">
+            {entry.mileage.toLocaleString()} mi
+          </span>
         </div>
       </div>
       <div className="auction-card-footer">

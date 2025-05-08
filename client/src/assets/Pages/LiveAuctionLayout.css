@@ -105,8 +105,7 @@ container by using JS slice method */
 
 .scroll-container-nextUpCards {
   overflow-x: scroll;
-
-  /* overflow-x: auto; */
+  overflow-x: auto;
   height: 365px;
   padding-left: 2%;
   padding-top: 2%;
@@ -126,8 +125,12 @@ in the browser */
 .scroll-container-details {
   width: 100%;
 
+  /* height: 100vh; */
+
   @media (width >= 500px) {
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+
+    /* comment this back in once you apply the notes you wrote down */
     height: 100vh;
     padding-left: 0.1rem;
     padding-right: 0.3rem;

@@ -34,7 +34,7 @@ export function NextUpCard({ entry }: Props) {
     <div className="nextUp-card-container">
       <div className="nextUp-card">
         {/* when you figure how to add lane assignments, you put that in the line below this one */}
-        <h3 className="nextUp-lane">A13</h3>
+        <h3 className="nextUp-lane">{entry.laneLetter}</h3>
         <div className="nextUp-card-body">
           <span className="nextUp-vehicle-year-make">
             {entry.year} {entry.make}

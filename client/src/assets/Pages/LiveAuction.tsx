@@ -1,12 +1,28 @@
 import { IoIosStarOutline } from 'react-icons/io';
 import { LiveAuctionCard } from '../Components/BidCard';
-// import { Details } from '../Components/Details';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
 import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
 import { Details } from '../Components/Details';
+
+// the purpose of this function is to assign lane letter's to each car in the LiveAuction page
+function laneAssign(): string[][] {
+  const laneAssignment: string[][] = [];
+  const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
+
+  for (let i = 0; i < laneLetter.length; i++) {
+    const letterArr: string[] = [];
+
+    for (let j = 1; j < 51; j++) {
+      letterArr.push(`${laneLetter[i]}${j}`);
+    }
+    laneAssignment.push(letterArr);
+  }
+
+  return laneAssignment;
+}
 
 export function LiveAuction() {
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
@@ -15,16 +31,63 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
+  const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
+  const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
+  const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
+  const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
 
-  //  function handleSelectedVehicle() {
-
-  //  }
+  function handleStartAuction() {
+    if (isAuctionLive) return;
+    setIsAuctionLive(true);
+    const entriesWithLanes = liveLaneAssigns(entries);
+    // assign a lane to every vehicle here
+    const first5 = entriesWithLanes.splice(0, 5);
+    setCarsInLiveAuction(first5);
+    setTimeouts(() => {
+      const newTimeouts: { [vehicleId: number]: number } = {};
+      for (const entry of first5) {
+        newTimeouts[entry.vehicleId] = 40;
+      }
+      return newTimeouts;
+    });
+    const id = setInterval(() => {
+      setTimeouts((prev) => {
+        const newTimeouts: { [vehicleId: number]: number } = {};
+        for (const entry of first5) {
+          // Don't let this go less than 0. If at 0, remove Bid button
+          if (prev[entry.vehicleId] === 0) {
+            newTimeouts[entry.vehicleId] = 0;
+          } else {
+            newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
+          }
+        }
+        // figure out if auction is done and call setIsAuctionLive(false);
+        // and clearInterval(intervalId) to stop the timer
+        if (Object.values(newTimeouts).every((value) => value === 0)) {
+          setIsAuctionLive(false);
+          clearInterval(id);
+          return {};
+        }
+        return newTimeouts;
+      });
+    }, 1000);
+  }
 
   function handlePlaceBid(vehicleId: number) {
     setBids((prevBids) => ({
       ...prevBids,
       [vehicleId]: (prevBids[vehicleId] ?? 0) + 150,
     }));
+
+    const timeLeft = timeouts[vehicleId];
+    if (timeLeft <= 7) {
+      setTimeouts((prev) => ({
+        ...prev,
+        [vehicleId]: 9,
+      }));
+    }
+    // Reset the timeout for this vehicleId if necessary
+    // const newTimeouts = {...prev}; newTimeouts[vehicleId] = 15; setTimeouts(newTimeouts)
   }
 
   const trimSearchTerm = searchTerm.trim().toLowerCase();
@@ -43,18 +106,32 @@ export function LiveAuction() {
     );
   });
 
+  function liveLaneAssigns(vehicles: Vehicle[]): Vehicle[] {
+    let j = 0;
+    const lanesClone = structuredClone(lanes);
+    for (let i = 0; i < vehicles.length; i++) {
+      const lane = lanesClone[j].shift();
+      if (lane)
+        // this if(lane) is checking if its a string
+        vehicles[i].laneLetter = lane;
+      j++;
+      if (j >= 5) {
+        j = 0;
+      }
+    }
+    setLanes(lanesClone);
+    return vehicles;
+  }
+
   useEffect(() => {
     async function load() {
       try {
         const entries = await readVehicles();
-        // assign a lane to every vehicle here
         setEntries(entries);
         // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
         for (const entry of entries) {
-          if (entry.vehicleId !== undefined) {
-            initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
-          }
+          initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
         }
         setBids(initialBids);
       } catch (err) {
@@ -76,9 +153,6 @@ export function LiveAuction() {
     );
   }
 
-  function onCheckClick() {
-    console.log('ive been clicked');
-  }
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -87,20 +161,23 @@ export function LiveAuction() {
             {/* the slice method was used here to only show 5 cars at once,
             but the remaining cars must show up in their lane assignments
             in the NextUpCard */}
-            {entries.length > 0 ? (
-              entries
-                .slice(0, 5)
-                .map((entry) => (
-                  <LiveAuctionCard
-                    key={entry.vehicleId}
-                    entry={entry}
-                    bid={bids[entry.vehicleId!] ?? 0}
-                    onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
-                    onSelect={() => setSelectedVehicle(entry)}
-                  />
-                ))
+            {carsInLiveAuction.length > 0 ? (
+              carsInLiveAuction.map((entry) => (
+                <LiveAuctionCard
+                  key={entry.vehicleId}
+                  entry={entry}
+                  isAuctionLive={isAuctionLive}
+                  bid={bids[entry.vehicleId!] ?? 0}
+                  timeouts={timeouts} // this props needs to disable the button from being clicked if timeouts = 0 seconds
+                  onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
+                  onSelect={() => setSelectedVehicle(entry)}
+                />
+              ))
             ) : (
-              <div>There are no vehicles yet . . .</div>
+              <div>
+                There are no vehicles yet. . . Press the 'Start Auction' button
+                below to begin
+              </div>
             )}
           </div>
           <div className="liveauction-searchBar">
@@ -108,7 +185,7 @@ export function LiveAuction() {
           </div>
           <div className="auction-2button-container">
             {/* this button controls the start of the entire app's live auction timer (demo purposes) */}
-            <button className="startLive-auction" onClick={onCheckClick}>
+            <button className="startLive-auction" onClick={handleStartAuction}>
               Start Auction
             </button>
             <button className="liveauction-autoBidButton">A</button>
@@ -130,7 +207,13 @@ export function LiveAuction() {
         </div>
         <div className="auction-column-right">
           <div className="scroll-container-details">
-            {selectedVehicle ? <Details entry={selectedVehicle} /> : ''}
+            {selectedVehicle && (
+              <Details
+                bid={bids[selectedVehicle.vehicleId]}
+                entry={selectedVehicle}
+                timeout={timeouts[selectedVehicle.vehicleId]}
+              />
+            )}
           </div>
         </div>
         {/* <div className="auction-column-full"> */}
