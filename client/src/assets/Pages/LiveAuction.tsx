@@ -3,7 +3,7 @@ import { LiveAuctionCard } from '../Components/BidCard';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
-import { readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { readVehicles, userFavorites, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
 import { Details } from '../Components/Details';
 
@@ -153,6 +153,17 @@ export function LiveAuction() {
     );
   }
 
+  // figure out how to make this function work so when the user clicks the
+  // favorites star, it will read favorites from local storage.
+
+  // function handleReadFavorites() {
+  //   const favoriteIds = userFavorites().map((fav) => fav.vehicleId);
+  //   const filteredQueFavorites = carsInLiveAuction.filter((car) =>
+  //     favoriteIds.includes(car.vehicleId)
+  //   );
+  //   filteredQueFavorites;
+  // }
+
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -189,7 +200,11 @@ export function LiveAuction() {
               Start Auction
             </button>
             <button className="liveauction-autoBidButton">A</button>
-            <button className="liveauction-favButton">
+            <button
+              className="liveauction-favButton"
+              // onClick={handleReadFavorites}
+              // this needs to call the favorites from localStorage
+              onClick={() => userFavorites}>
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
