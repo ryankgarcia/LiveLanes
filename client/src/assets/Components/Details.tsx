@@ -1,4 +1,5 @@
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { formatUSD } from './AuxilaryFunctions';
 import './Details.css';
 
 // type Vehicle = {
@@ -44,7 +45,7 @@ export function Details({ entry, timeout, bid }: Props) {
             where the words 'Dealer Name currently are' */}
           <span className="details-bidding-dealer-name">
             {timeout !== undefined
-              ? `$${bid + entry.startingPrice || entry.startingPrice}`
+              ? formatUSD(entry.startingPrice || bid + entry.startingPrice)
               : ''}
           </span>
         </div>

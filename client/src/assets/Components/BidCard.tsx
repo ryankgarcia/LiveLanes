@@ -1,6 +1,7 @@
 import './BidCard.css';
 import { Vehicle } from '../../data';
 import { useState } from 'react';
+import { formatUSD } from './AuxilaryFunctions';
 
 // export type Vehicle = {
 //   vehicleId?: number;
@@ -25,15 +26,6 @@ type Props = {
   timeouts: { [vehicleId: number]: number };
   // distance: number;
 };
-
-// fix this formatting issue. so that it looks clean
-function formatUSD(number: number) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(number);
-}
 
 //  distance is needed here to show the user how far away the car is from them
 export function LiveAuctionCard({
@@ -72,7 +64,7 @@ export function LiveAuctionCard({
         {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
         <span className="selling-price">
           {/* fix this error */}
-          {formatUSD(`${bid + entry.startingPrice}`)}
+          {formatUSD(entry.startingPrice || bid + entry.startingPrice)}
         </span>
         <span className="buying-dealer">
           Joe Sells Cars Outside of his dads garage

@@ -74,3 +74,12 @@ export function randomDistance(): number {
 // lane number (letter+num) car make + year, miles, and distance
 
 // user can sort the data by price, make, model, search for the make and model they are looking for
+
+// this function is imported in the bidCard & details component to properly format prices to USD
+export function formatUSD(number: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(number);
+}
