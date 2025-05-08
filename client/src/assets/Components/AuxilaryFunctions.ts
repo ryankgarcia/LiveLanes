@@ -55,7 +55,8 @@ function vins200(vinGenerator: () => string): string[] {
 }
 
 const vinArr = vins200(generateVIN);
-console.log(vinArr);
+//comment this back in later to remove typeScript error
+// console.log(vinArr);
 
 // auxiliary function
 export function randomDistance(): number {

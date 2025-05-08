@@ -3,7 +3,7 @@ import { LiveAuctionCard } from '../Components/BidCard';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
-import { readVehicles, userFavorites, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { readFavorites, readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 import './LiveAuctionLayout.css';
 import { Details } from '../Components/Details';
 
@@ -35,6 +35,30 @@ export function LiveAuction() {
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
   const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
+  const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
+    undefined
+  );
+
+  // the purpose of this useEffect is to allow the user to press the favorites
+  // star and filter the cars on display to the cars they favorite, from localStorage
+  const trimSearchTerm = searchTerm.trim().toLowerCase();
+
+  useEffect(() => {
+    const favoriteCars = entries.filter((term) => {
+      const combinations = [
+        `${term.make} ${term.model} ${term.year}`,
+        `${term.make} ${term.year} ${term.model}`,
+        `${term.model} ${term.year} ${term.make}`,
+        `${term.model} ${term.make} ${term.year}`,
+        `${term.year} ${term.model} ${term.make}`,
+        `${term.year} ${term.make} ${term.model}`,
+      ];
+      return combinations.some((combo) =>
+        combo.toLowerCase().includes(trimSearchTerm)
+      );
+    });
+    setFilteredCars(favoriteCars);
+  }, [entries, trimSearchTerm]);
 
   function handleStartAuction() {
     if (isAuctionLive) return;
@@ -86,25 +110,13 @@ export function LiveAuction() {
         [vehicleId]: 9,
       }));
     }
-    // Reset the timeout for this vehicleId if necessary
-    // const newTimeouts = {...prev}; newTimeouts[vehicleId] = 15; setTimeouts(newTimeouts)
   }
 
-  const trimSearchTerm = searchTerm.trim().toLowerCase();
-
-  const filteredCars = entries.filter((term) => {
-    const combinations = [
-      `${term.make} ${term.model} ${term.year}`,
-      `${term.make} ${term.year} ${term.model}`,
-      `${term.model} ${term.year} ${term.make}`,
-      `${term.model} ${term.make} ${term.year}`,
-      `${term.year} ${term.model} ${term.make}`,
-      `${term.year} ${term.make} ${term.model}`,
-    ];
-    return combinations.some((combo) =>
-      combo.toLowerCase().includes(trimSearchTerm)
-    );
-  });
+  function handleReadFavorites() {
+    const favoritesFromStorage = readFavorites();
+    setFilteredCars(favoritesFromStorage);
+    return;
+  }
 
   function liveLaneAssigns(vehicles: Vehicle[]): Vehicle[] {
     let j = 0;
@@ -153,17 +165,6 @@ export function LiveAuction() {
     );
   }
 
-  // figure out how to make this function work so when the user clicks the
-  // favorites star, it will read favorites from local storage.
-
-  // function handleReadFavorites() {
-  //   const favoriteIds = userFavorites().map((fav) => fav.vehicleId);
-  //   const filteredQueFavorites = carsInLiveAuction.filter((car) =>
-  //     favoriteIds.includes(car.vehicleId)
-  //   );
-  //   filteredQueFavorites;
-  // }
-
   return (
     <div className="auction-container">
       <div className="auction-row">
@@ -202,15 +203,20 @@ export function LiveAuction() {
             <button className="liveauction-autoBidButton">A</button>
             <button
               className="liveauction-favButton"
-              // onClick={handleReadFavorites}
-              // this needs to call the favorites from localStorage
-              onClick={() => userFavorites}>
+              onClick={() => {
+                handleReadFavorites();
+              }}>
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
-          <div className="scroll-container-nextUpCards">
-            {filteredCars.length > 0 ? (
-              filteredCars.map((entry) => (
+          <div
+            className="scroll-container-nextUpCards"
+            // onClick={() => {
+            //   if (carsInLiveAuction.length > 0) handleReadFavorites();
+            // }}
+          >
+            {filteredCars?.length > 0 ? (
+              filteredCars?.map((entry) => (
                 <NextUpCard key={entry.vehicleId} entry={entry} />
               ))
             ) : (
