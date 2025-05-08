@@ -63,8 +63,10 @@ export function LiveAuctionCard({
           style={{ animationDuration: `${timer}s` }}> */}
         {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
         <span className="selling-price">
-          {/* fix this error */}
-          {formatUSD(entry.startingPrice || bid + entry.startingPrice)}
+          {/* is this logic redundant? is there a more simple way to write it? */}
+          {isAuctionLive
+            ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
+            : formatUSD(entry.startingPrice)}
         </span>
         <span className="buying-dealer">
           Joe Sells Cars Outside of his dads garage

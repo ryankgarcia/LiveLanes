@@ -44,9 +44,10 @@ export function Details({ entry, timeout, bid }: Props) {
             are members of the website, and their dealership name will be inserted in a template literal
             where the words 'Dealer Name currently are' */}
           <span className="details-bidding-dealer-name">
+            {/* is this logic breaking DRY */}
             {timeout !== undefined
-              ? formatUSD(entry.startingPrice || bid + entry.startingPrice)
-              : ''}
+              ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
+              : formatUSD(entry.startingPrice)}
           </span>
         </div>
         <div className="details-image-span">

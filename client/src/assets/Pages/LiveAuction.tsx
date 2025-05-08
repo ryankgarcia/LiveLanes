@@ -174,7 +174,7 @@ export function LiveAuction() {
                 />
               ))
             ) : (
-              <div>
+              <div className="startAuction">
                 There are no vehicles yet. . . Press the 'Start Auction' button
                 below to begin
               </div>

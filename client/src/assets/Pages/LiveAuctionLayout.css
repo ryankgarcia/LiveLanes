@@ -21,6 +21,16 @@
   }
 }
 
+.startAuction {
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 /* this css class is so if there are no vehicles the user has searched for it shows
 on a card that no vehicles have been found */
 .no-vehicle-options {
