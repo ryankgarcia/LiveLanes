@@ -14,7 +14,6 @@ export function SearchBar({ searchTerm, onCustomChange }: Props) {
         value={searchTerm}
         onChange={(e) => onCustomChange(e.target.value)}
         placeholder="Search"
-        // className="search-bar"
       />
       {searchTerm === '' && <BsSearch className="search-icon" />}
     </div>
