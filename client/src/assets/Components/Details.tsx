@@ -75,14 +75,14 @@ export function Details({ entry, timeout, bid }: Props) {
           alt={`${entry.make} ${entry.model} ${entry.year}`}
         />
 
-        <div className="details-flex-row">
-          <div className="details-column-full">
+        <div className="new-details">
+          <div>
             <div className="detail-squares"> Year {entry.year}</div>
             <div className="detail-squares"> Make {entry.make}</div>
             <div className="detail-squares"> Model {entry.model}</div>
             <div className="detail-squares"> Trim {entry.trim}</div>
           </div>
-          <div className="details-flex-row">
+          <div>
             <div className="details-column-full">
               <div className="detail-squares"> Engine {entry.engine}</div>
               <div className="detail-squares">
@@ -96,7 +96,7 @@ export function Details({ entry, timeout, bid }: Props) {
               </div>
             </div>
           </div>
-          <div className="details-flex-row">
+          <div>
             <div className="details-column-full">
               <div className="detail-squares">Fuel Type{entry.fuelType}</div>
               <div className="detail-squares">Body Type{entry.bodyType}</div>

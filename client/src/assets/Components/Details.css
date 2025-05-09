@@ -31,6 +31,12 @@
   }
 }
 
+.new-details {
+  width: 100%;
+  justify-content: space-evenly;
+  display: flex;
+}
+
 .details-flex-row {
   display: flex;
 }
@@ -71,7 +77,10 @@
   height: calc(32px * 4);
   width: calc(32px * 4);
   color: black;
-  margin: 1.5rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  align-content: center;
   background-color: #f0f0f0;
   font-size: 1.1rem;
 }
