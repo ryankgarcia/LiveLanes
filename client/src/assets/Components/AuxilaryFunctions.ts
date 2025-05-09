@@ -1,60 +1,59 @@
 // the reason this function was created is to give each vehicle entry
 // a randomized VIN number to make each entry unique
 
-function generateVIN(): string {
-  let vin: string = '';
-  const vinLength: number = 17;
-  const vinCharacters: string[] = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-  ];
-  for (let i = 0; i < vinLength; i++) {
-    const randomIndex = Math.floor(Math.random() * vinCharacters.length);
-    vin += vinCharacters[randomIndex];
-  }
-  return vin;
-}
+// function generateVIN(): string {
+//   let vin: string = '';
+//   const vinLength: number = 17;
+//   const vinCharacters: string[] = [
+//     'A',
+//     'B',
+//     'C',
+//     'D',
+//     'E',
+//     'F',
+//     'G',
+//     'H',
+//     'J',
+//     'K',
+//     'L',
+//     'M',
+//     'N',
+//     'P',
+//     'R',
+//     'S',
+//     'T',
+//     'U',
+//     'V',
+//     'W',
+//     'X',
+//     'Y',
+//     'Z',
+//     '0',
+//     '1',
+//     '2',
+//     '3',
+//     '4',
+//     '5',
+//     '6',
+//     '7',
+//     '8',
+//     '9',
+//   ];
+//   for (let i = 0; i < vinLength; i++) {
+//     const randomIndex = Math.floor(Math.random() * vinCharacters.length);
+//     vin += vinCharacters[randomIndex];
+//   }
+//   return vin;
+// }
 
-function vins200(vinGenerator: () => string): string[] {
-  const vinList: string[] = [];
-  for (let i = 0; i < 200; i++) {
-    vinList.push(vinGenerator());
-  }
-  return vinList;
-}
+// function vins200(vinGenerator: () => string): string[] {
+//   const vinList: string[] = [];
+//   for (let i = 0; i < 200; i++) {
+//     vinList.push(vinGenerator());
+//   }
+//   return vinList;
+// }
 
-const vinArr = vins200(generateVIN);
 //comment this back in later to remove typeScript error
 // console.log(vinArr);
 
