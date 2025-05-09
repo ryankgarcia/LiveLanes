@@ -37,14 +37,22 @@ export function LiveAuction() {
   const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
   const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
     undefined
-  );
+  ); // this state variable is used to filter the user's favorites when clicking the star button
+  const [isShowingFavorites, setIsShowingFavorites] = useState<boolean>(false);
 
   // the purpose of this useEffect is to allow the user to press the favorites
   // star and filter the cars on display to the cars they favorite, from localStorage
   const trimSearchTerm = searchTerm.trim().toLowerCase();
 
   useEffect(() => {
-    const favoriteCars = entries.filter((term) => {
+    const entriesShown = isShowingFavorites
+      ? readFavorites().filter((fav) =>
+          carsInLiveAuction.some((live) => live.vehicleId === fav.vehicleId)
+        )
+      : carsInLiveAuction;
+
+    console.log('entriesShown', entriesShown);
+    const filteredCars = entriesShown.filter((term) => {
       const combinations = [
         `${term.make} ${term.model} ${term.year}`,
         `${term.make} ${term.year} ${term.model}`,
@@ -57,8 +65,10 @@ export function LiveAuction() {
         combo.toLowerCase().includes(trimSearchTerm)
       );
     });
-    setFilteredCars(favoriteCars);
-  }, [entries, trimSearchTerm]);
+    // setFilteredCars(filteredCars);
+    setFilteredCars(filteredCars);
+    console.log('filteredCars', filteredCars);
+  }, [carsInLiveAuction, trimSearchTerm, isShowingFavorites]);
 
   function handleStartAuction() {
     if (isAuctionLive) return;
@@ -112,11 +122,11 @@ export function LiveAuction() {
     }
   }
 
-  function handleReadFavorites() {
-    const favoritesFromStorage = readFavorites();
-    setFilteredCars(favoritesFromStorage);
-    return;
-  }
+  // function handleReadFavorites() {
+  //   const favoritesFromStorage = readFavorites();
+  //   setFilteredCars(favoritesFromStorage);
+  //   return;
+  // }
 
   function liveLaneAssigns(vehicles: Vehicle[]): Vehicle[] {
     let j = 0;
@@ -203,9 +213,10 @@ export function LiveAuction() {
             <button className="liveauction-autoBidButton">A</button>
             <button
               className="liveauction-favButton"
-              onClick={() => {
-                handleReadFavorites();
-              }}>
+              onClick={() =>
+                //{ handleReadFavorites()};
+                setIsShowingFavorites((prev) => !prev)
+              }>
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
