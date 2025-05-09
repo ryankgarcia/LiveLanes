@@ -34,7 +34,7 @@ export function LiveAuction() {
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
-  const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
+  const [lanes, setLanes] = useState<string[][]>(() => laneAssign()); //this state variable is used to assign the virtual
   const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
     undefined
   ); // this state variable is used to filter the user's favorites when clicking the star button
@@ -57,7 +57,6 @@ export function LiveAuction() {
         combo.toLowerCase().includes(trimSearchTerm)
       );
     });
-    // setFilteredCars(filteredCars);
     setFilteredCars(filteredCarsAll);
   }, [entries, trimSearchTerm]);
 
