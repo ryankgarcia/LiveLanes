@@ -38,21 +38,13 @@ export function LiveAuction() {
   const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
     undefined
   ); // this state variable is used to filter the user's favorites when clicking the star button
-  const [isShowingFavorites, setIsShowingFavorites] = useState<boolean>(false);
 
   // the purpose of this useEffect is to allow the user to press the favorites
   // star and filter the cars on display to the cars they favorite, from localStorage
   const trimSearchTerm = searchTerm.trim().toLowerCase();
 
   useEffect(() => {
-    const entriesShown = isShowingFavorites
-      ? readFavorites().filter((fav) =>
-          carsInLiveAuction.some((live) => live.vehicleId === fav.vehicleId)
-        )
-      : carsInLiveAuction;
-
-    console.log('entriesShown', entriesShown);
-    const filteredCars = entriesShown.filter((term) => {
+    const filteredCarsAll = entries.filter((term) => {
       const combinations = [
         `${term.make} ${term.model} ${term.year}`,
         `${term.make} ${term.year} ${term.model}`,
@@ -66,9 +58,8 @@ export function LiveAuction() {
       );
     });
     // setFilteredCars(filteredCars);
-    setFilteredCars(filteredCars);
-    console.log('filteredCars', filteredCars);
-  }, [carsInLiveAuction, trimSearchTerm, isShowingFavorites]);
+    setFilteredCars(filteredCarsAll);
+  }, [entries, trimSearchTerm]);
 
   function handleStartAuction() {
     if (isAuctionLive) return;
@@ -122,11 +113,28 @@ export function LiveAuction() {
     }
   }
 
-  // function handleReadFavorites() {
-  //   const favoritesFromStorage = readFavorites();
-  //   setFilteredCars(favoritesFromStorage);
-  //   return;
-  // }
+  function handleReadFavorites() {
+    const favoritesFromStorage = readFavorites();
+
+    if (JSON.stringify(filteredCars) === JSON.stringify(favoritesFromStorage)) {
+      const filteredAllCars = entries.filter((term) => {
+        const combinations = [
+          `${term.make} ${term.model} ${term.year}`,
+          `${term.make} ${term.year} ${term.model}`,
+          `${term.model} ${term.year} ${term.make}`,
+          `${term.model} ${term.make} ${term.year}`,
+          `${term.year} ${term.model} ${term.make}`,
+          `${term.year} ${term.make} ${term.model}`,
+        ];
+        return combinations.some((combo) =>
+          combo.toLowerCase().includes(trimSearchTerm)
+        );
+      });
+      setFilteredCars(filteredAllCars);
+    } else {
+      setFilteredCars(favoritesFromStorage);
+    }
+  }
 
   function liveLaneAssigns(vehicles: Vehicle[]): Vehicle[] {
     let j = 0;
@@ -213,10 +221,9 @@ export function LiveAuction() {
             <button className="liveauction-autoBidButton">A</button>
             <button
               className="liveauction-favButton"
-              onClick={() =>
-                //{ handleReadFavorites()};
-                setIsShowingFavorites((prev) => !prev)
-              }>
+              onClick={handleReadFavorites}
+              // setIsShowingFavorites((prev) => !prev)
+            >
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
@@ -226,7 +233,7 @@ export function LiveAuction() {
             //   if (carsInLiveAuction.length > 0) handleReadFavorites();
             // }}
           >
-            {filteredCars?.length > 0 ? (
+            {filteredCars && filteredCars?.length > 0 ? (
               filteredCars?.map((entry) => (
                 <NextUpCard key={entry.vehicleId} entry={entry} />
               ))
