@@ -39,7 +39,9 @@ export function Details({ entry, timeout, bid }: Props) {
           // style={{ animationDuration: `${timeout[entry.vehicleId]}s` }}
         >
           {timeout !== undefined ? `00m ${timeout}s` : ''}
-          <span className="details-bidding-dealer-name">Dealer Name</span>
+          {/* <span className="details-bidding-dealer-name">
+            {entry.sellerName}
+          </span> */}
           {/* in this line above make a table from the database that will account for the user's who
             are members of the website, and their dealership name will be inserted in a template literal
             where the words 'Dealer Name currently are' */}
@@ -50,25 +52,34 @@ export function Details({ entry, timeout, bid }: Props) {
               : formatUSD(entry.startingPrice)}
           </span>
         </div>
-        <div className="details-image-span">
-          <span>
-            <div className="details-image-flex-row">
-              <div className="details-image-column-left">
-                {entry.laneLetter}
-              </div>
-              {/* <span className="details-image-span">{entry.year}</span> */}
+        <div className="details-image-layout">
+          <div className="details-image-flex-row">
+            <div className="details-image-column-left">
+              <span className="p-lane">{entry.laneLetter.toUpperCase()}</span>
             </div>
-          </span>
-        </div>
-
-        <span className="details-image-span">
-          <div className="details-flex-row">
-            {/* <div className="details-image-column-left">{entry.make}</div>{' '} */}
           </div>
-        </span>
-        {/* <span className="details-image-span">{entry.model}</span> */}
-        {/* <span className="details-image-span">{entry.mileage}</span> */}
-        {/* <span className="details-image-span">{entry.vin}</span> */}
+          <div className="details-image-flex-row">
+            <div className="details-image-column-left">
+              <span className="p-year">{entry.year}</span>
+            </div>
+            <div className="details-image-column-left">
+              <span className="p-make">{entry.make}</span>
+            </div>
+            <div className="details-image-column-left">
+              <span className="p-model">{entry.model}</span>
+            </div>
+          </div>
+        </div>
+        <div className="details-image-layout">
+          {/* <div className="details-image-flex-row"> */}
+          {/* <div className="details-image-column-right"> */}
+          {/* <span>{entry.mileage.toLocaleString()} mi</span> */}
+          {/* </div> */}
+          {/* </div> */}
+        </div>
+        {/* <span className="details-image-layout">{entry.model}</span> */}
+        {/* <span className="details-image-layout">{entry.mileage}</span> */}
+        {/* <span className="details-image-layout">{entry.vin}</span> */}
         <img
           className="details-image-open"
           src={entry.imageUrl}

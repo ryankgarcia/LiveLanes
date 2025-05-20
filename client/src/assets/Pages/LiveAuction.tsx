@@ -217,7 +217,6 @@ export function LiveAuction() {
             <button className="startLive-auction" onClick={handleStartAuction}>
               Start Auction
             </button>
-            <button className="liveauction-autoBidButton">A</button>
             <button
               className="liveauction-favButton"
               onClick={handleReadFavorites}

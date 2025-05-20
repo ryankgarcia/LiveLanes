@@ -88,7 +88,7 @@ export function LiveAuctionCard({
       </div>
       <div className="auction-vehicle-info">
         <div>
-          <span className="auction-lane">{entry.laneLetter}</span>
+          <span className="auction-lane">{entry.laneLetter.toUpperCase()}</span>
           {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
             {' '}

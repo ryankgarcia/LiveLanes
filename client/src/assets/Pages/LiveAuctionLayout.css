@@ -75,21 +75,6 @@ on a card that no vehicles have been found */
   border: 3px solid #f8c800;
 }
 
-.liveauction-autoBidButton {
-  width: 50px;
-  height: 50px;
-  color: white;
-  font-style: italic;
-  font-weight: bold;
-  font-size: 1rem;
-  background-color: #c7c7c7;
-}
-
-.liveauction-autoBidButton:hover {
-  background-color: #5295f9;
-  border: 3px solid #5295f9;
-}
-
 /* overflow-x with a value of scroll allows for the ability to scroll within a
 container from left to right. It's possible to limit the amount of items in a
 container by using JS slice method */

@@ -7,6 +7,15 @@
   }
 }
 
+.p-lane,
+.p-year,
+.p-make,
+.p-model {
+  font-weight: bold;
+  font-size: 2rem;
+  background-color: lightgray;
+}
+
 .greenBar-Timer {
   display: flex;
   position: relative;
@@ -54,6 +63,11 @@
   margin-left: 3rem;
 }
 
+.details-image-column-right {
+  flex-basis: 100%;
+  margin-right: 3rem;
+}
+
 /* .details-lane-assign {
   display: flex;
   color: #28b89a;
@@ -65,7 +79,7 @@
   width: 100%;
 }
 
-.details-image-span {
+.details-image-layout {
   position: absolute;
   color: white;
   font-weight: bold;
