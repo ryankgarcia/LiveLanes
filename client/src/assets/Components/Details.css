@@ -117,8 +117,9 @@
 }
 
 .vin-div {
-  padding-left: 4rem;
+  padding-left: 2rem;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .span {

@@ -1,5 +1,5 @@
 import './InMaintenance.css';
 
-export function MyPurchases() {
+export function Sell() {
   return <h2>In maintenance . . .</h2>;
 }

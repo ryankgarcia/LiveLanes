@@ -6,6 +6,7 @@ import { HomePage } from './assets/Pages/HomePage';
 import { LiveAuction } from './assets/Pages/LiveAuction';
 import { BuyNow } from './assets/Pages/BuyNow';
 import { MyPurchases } from './assets/Pages/MyPurchases';
+import { Sell } from './assets/Pages/Sell';
 
 // the way outlet works is that we let all the stuff that is not the navbar show on the page
 // which changes depending on the route you are on
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/runlist" element={<RunList />} />
         <Route path="/liveauction" element={<LiveAuction />} />
         <Route path="/buynow" element={<BuyNow />} />
+        <Route path="/sell" element={<Sell />} />
         <Route path="/mypurchases" element={<MyPurchases />} />
         <Route path="*" element={<NotFound />} />
       </Route>

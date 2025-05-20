@@ -1,3 +1,5 @@
+import './InMaintenance.css';
+
 export function BuyNow() {
-  return <h2>Coming soon...</h2>;
+  return <h2>In maintenance . . .</h2>;
 }
