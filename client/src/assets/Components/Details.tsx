@@ -26,25 +26,14 @@ type Props = {
   entry: Vehicle;
   timeout: number | undefined;
   bid: number;
-  // imageUrl: string;
-  // vehicleId: Vehicle;
 };
 
 export function Details({ entry, timeout, bid }: Props) {
   return (
     <div className="details-view-container">
       <div className="details-image-column-full">
-        <div
-          className="greenBar-Timer"
-          // style={{ animationDuration: `${timeout[entry.vehicleId]}s` }}
-        >
+        <div className="greenBar-Timer">
           {timeout !== undefined ? `00m ${timeout}s` : ''}
-          {/* <span className="details-bidding-dealer-name">
-            {entry.sellerName}
-          </span> */}
-          {/* in this line above make a table from the database that will account for the user's who
-            are members of the website, and their dealership name will be inserted in a template literal
-            where the words 'Dealer Name currently are' */}
           <span className="details-bidding-dealer-name">
             {/* is this logic breaking DRY */}
             {timeout !== undefined
@@ -70,16 +59,6 @@ export function Details({ entry, timeout, bid }: Props) {
             </div>
           </div>
         </div>
-        <div className="details-image-layout">
-          {/* <div className="details-image-flex-row"> */}
-          {/* <div className="details-image-column-right"> */}
-          {/* <span>{entry.mileage.toLocaleString()} mi</span> */}
-          {/* </div> */}
-          {/* </div> */}
-        </div>
-        {/* <span className="details-image-layout">{entry.model}</span> */}
-        {/* <span className="details-image-layout">{entry.mileage}</span> */}
-        {/* <span className="details-image-layout">{entry.vin}</span> */}
         <img
           className="details-image-open"
           src={entry.imageUrl}
@@ -89,41 +68,67 @@ export function Details({ entry, timeout, bid }: Props) {
           <p> VIN: {entry.vin}</p>
         </div>
         <div className="reports-div">
-          <p> Damages: {entry.damages}</p>
-          {/* in this p element make it its own card with grey space to be able to
-      leave detailed comments about the car's condition */}
+          <p>
+            <span className="span">Damages:</span> {entry.damages}
+          </p>
         </div>
         <div className="reports-div">
-          <p> Condition Report: {entry.conditionReport}</p>
+          <p>
+            <span className="span">Condition Report:</span>
+            {entry.conditionReport}
+          </p>
         </div>
         <div className="reports-div">
-          <p> Seller: {entry.sellerName}</p>
+          <p>
+            <span className="span">Seller:</span> {entry.sellerName}
+          </p>
         </div>
         <div className="new-details">
           <div>
-            <div className="detail-squares"> Year {entry.year}</div>
-            <div className="detail-squares"> Make {entry.make}</div>
-            <div className="detail-squares"> Model {entry.model}</div>
-            <div className="detail-squares"> Trim {entry.trim}</div>
+            <div className="detail-squares">
+              <span className="span">Year</span> {entry.year}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Make</span> {entry.make}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Model</span> {entry.model}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Trim</span> {entry.trim}
+            </div>
           </div>
           <div>
             <div className="details-column-full">
-              <div className="detail-squares"> Engine {entry.engine}</div>
               <div className="detail-squares">
-                Interior Color {entry.interiorColor}
+                <span className="span">Engine</span> {entry.engine}
               </div>
               <div className="detail-squares">
-                Exterior {entry.exteriorColor}
+                <span className="span">Interior Color</span>
+                {entry.interiorColor}
               </div>
               <div className="detail-squares">
-                Transmission {entry.transmission}
+                <span className="span">Exterior</span> {entry.exteriorColor}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Transmission</span> {entry.transmission}
               </div>
             </div>
           </div>
           <div>
             <div className="details-column-full">
-              <div className="detail-squares">Fuel Type{entry.fuelType}</div>
-              <div className="detail-squares">Body Type{entry.bodyType}</div>
+              <div className="detail-squares">
+                <span className="span">Fuel Type</span>
+                {entry.fuelType}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Body Type</span>
+                {entry.bodyType}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Mileage</span>
+                {entry.mileage.toLocaleString()}
+              </div>
             </div>
           </div>
         </div>

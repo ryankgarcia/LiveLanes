@@ -14,6 +14,7 @@
   font-weight: bold;
   font-size: 2rem;
   background-color: lightgray;
+  color: black;
 }
 
 .greenBar-Timer {
@@ -65,7 +66,8 @@
 
 .details-image-column-right {
   flex-basis: 100%;
-  margin-right: 3rem;
+
+  /* margin-right: 3rem; */
 }
 
 /* .details-lane-assign {
@@ -117,4 +119,10 @@
 .vin-div {
   padding-left: 4rem;
   font-size: 1.2rem;
+}
+
+.span {
+  font-weight: bold;
+  display: flex;
+  align-items: flex-start;
 }
