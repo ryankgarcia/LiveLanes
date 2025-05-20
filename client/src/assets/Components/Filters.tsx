@@ -83,18 +83,6 @@ export function Filters({
           />
           Mileage
         </label>
-        <label>
-          <input
-            className="custom-radio"
-            type="radio"
-            value="autoBids"
-            checked={selectedFilter === 'autoBids'}
-            onChange={(e) => onFilterChange(e.target.value)}
-            id="autoBids"
-            name="filterBy"
-          />
-          Auto Bids
-        </label>
         <form onSubmit={onPriceChange}>
           <label>
             <input

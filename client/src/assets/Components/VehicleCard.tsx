@@ -1,5 +1,5 @@
 import './VehicleCard.css';
-import { MdOutlineHdrAuto, MdOutlineStar, MdStar } from 'react-icons/md';
+import { MdOutlineStar, MdStar } from 'react-icons/md';
 import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
 
 type VehicleCardProps = {
@@ -31,14 +31,11 @@ export function VehicleCard({
       <div className="card-body">
         <img
           className="vehicle-img"
-          src={entry.imageUrl} // this line should be receiving images from the server from the images directory and store the imgUrl in the database.
+          src={entry.imageUrl}
           alt={`${entry.year} ${entry.make} ${entry.model}`}
         />
         <div className="vehicle-info">
           <div className="vehicle-title">
-            <span className="card-theme-font">a1</span>
-            {/* <span className="card-theme-font">{newLane}</span> */}
-            {/* this line above needs to show a random letter & number which resembles the line and number the car will appear during live auction */}
             <span className="vehicle-model">
               {entry.year} {} {entry.make}
             </span>
@@ -58,7 +55,6 @@ export function VehicleCard({
       </div>
       <div className="card-footer">
         <div className="button-container">
-          <button className="bid-button">{<MdOutlineHdrAuto />} Set bid</button>
           <button
             className={isFavorite ? 'remove-button' : 'fav-button'}
             onClick={

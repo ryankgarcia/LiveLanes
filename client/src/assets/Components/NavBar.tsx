@@ -1,7 +1,6 @@
 import { BsFillCarFrontFill } from 'react-icons/bs';
-import { FaUserCircle } from 'react-icons/fa';
-import './NavBar.css';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import './NavBar.css';
 
 export function NavBar() {
   const location = useLocation();
@@ -43,9 +42,6 @@ export function NavBar() {
   const textColorTop = getTextColor(topClass);
   const textColorBottom = getTextColor(bottomClass);
 
-  // there are styles that can be conditionally added depending on the page
-  // the user is on. bg-black, bg-green, bg-white
-
   return (
     <div>
       <div className={`navbar-top ${topClass} ${textColorTop}`}>
@@ -74,10 +70,6 @@ export function NavBar() {
               My Purchases <BsFillCarFrontFill />
             </span>
           </NavLink>
-        </div>
-        <div className="profile-icon">
-          <FaUserCircle size={32} />
-          {/* this is where userManagement will be... */}
         </div>
       </div>
       <div className={`navbar-bottom ${bottomClass} ${textColorBottom}`}>
