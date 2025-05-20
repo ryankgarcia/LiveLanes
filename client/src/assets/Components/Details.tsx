@@ -74,7 +74,20 @@ export function Details({ entry, timeout, bid }: Props) {
           src={entry.imageUrl}
           alt={`${entry.make} ${entry.model} ${entry.year}`}
         />
-
+        <div className="vin-div">
+          <p> VIN: {entry.vin}</p>
+        </div>
+        <div className="reports-div">
+          <p> Damages: {entry.damages}</p>
+          {/* in this p element make it its own card with grey space to be able to
+      leave detailed comments about the car's condition */}
+        </div>
+        <div className="reports-div">
+          <p> Condition Report: {entry.conditionReport}</p>
+        </div>
+        <div className="reports-div">
+          <p> Seller: {entry.sellerName}</p>
+        </div>
         <div className="new-details">
           <div>
             <div className="detail-squares"> Year {entry.year}</div>
