@@ -1,4 +1,3 @@
-import './App.css';
 import { NavBar } from './assets/Components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './assets/Pages/NotFound';
@@ -8,8 +7,6 @@ import { LiveAuction } from './assets/Pages/LiveAuction';
 import { BuyNow } from './assets/Pages/BuyNow';
 import { MyPurchases } from './assets/Pages/MyPurchases';
 
-// this file will only have the routes to the page
-// the useEffect should be placed in the component that will be fetching the data
 // the way outlet works is that we let all the stuff that is not the navbar show on the page
 // which changes depending on the route you are on
 

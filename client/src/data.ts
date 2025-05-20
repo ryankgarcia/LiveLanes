@@ -1,4 +1,4 @@
-// in this file i will be adding all of the fetch calls in the
+// in this file i will be adding all of the fetch calls
 // for the client to communicate the data to the server
 
 import { SavedFilter } from './assets/Components/types';

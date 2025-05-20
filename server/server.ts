@@ -23,8 +23,8 @@ app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 app.use(express.static('public'));
 
-// this endpoint will get read all of the vehicles,
-// later we will get an api call from the client to this endpoint
+// this endpoint will read all of the vehicles,
+// later we will make an api call from the client to this endpoint
 app.get('/api/vehicles', async (req, res, next) => {
   try {
     const sql = `
@@ -38,7 +38,6 @@ app.get('/api/vehicles', async (req, res, next) => {
   }
 });
 
-// in CRUD - this is READ data
 app.get('/api/vehicles/:vehicleId', async (req, res, next) => {
   try {
     const { vehicleId } = req.params;
