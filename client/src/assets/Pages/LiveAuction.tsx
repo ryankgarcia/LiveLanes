@@ -219,18 +219,11 @@ export function LiveAuction() {
             </button>
             <button
               className="liveauction-favButton"
-              onClick={handleReadFavorites}
-              // setIsShowingFavorites((prev) => !prev)
-            >
+              onClick={handleReadFavorites}>
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
-          <div
-            className="scroll-container-nextUpCards"
-            // onClick={() => {
-            //   if (carsInLiveAuction.length > 0) handleReadFavorites();
-            // }}
-          >
+          <div className="scroll-container-nextUpCards">
             {filteredCars && filteredCars?.length > 0 ? (
               filteredCars?.map((entry) => (
                 <NextUpCard key={entry.vehicleId} entry={entry} />
@@ -253,9 +246,7 @@ export function LiveAuction() {
             )}
           </div>
         </div>
-        {/* <div className="auction-column-full"> */}
       </div>
-      {/* </div> */}
     </div>
   );
 }

@@ -36,9 +36,10 @@ export function Details({ entry, timeout, bid }: Props) {
           {timeout !== undefined ? `00m ${timeout}s` : ''}
           <span className="details-bidding-dealer-name">
             {/* is this logic breaking DRY */}
-            {timeout !== undefined
-              ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
-              : formatUSD(entry.startingPrice)}
+            {/* {timeout !== undefined && bid !== undefined
+              ? formatUSD(bid)
+              : formatUSD(entry.startingPrice)} */}
+            {formatUSD(bid)}
           </span>
         </div>
         <div className="details-image-layout">
@@ -127,7 +128,7 @@ export function Details({ entry, timeout, bid }: Props) {
               </div>
               <div className="detail-squares">
                 <span className="span">Mileage</span>
-                {entry.mileage.toLocaleString()}
+                {entry.mileage.toLocaleString()} mi
               </div>
             </div>
           </div>

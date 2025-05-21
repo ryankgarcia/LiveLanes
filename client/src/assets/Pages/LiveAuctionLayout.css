@@ -43,6 +43,7 @@ on a card that no vehicles have been found */
   justify-content: center;
   align-items: center;
   overflow: auto;
+  padding-left: 0.8rem;
 }
 
 .auction-2button-container {

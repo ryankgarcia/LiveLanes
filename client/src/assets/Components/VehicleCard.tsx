@@ -10,10 +10,6 @@ type VehicleCardProps = {
   isFavorite: boolean;
 };
 
-// this function exists to assign each vehicle in the auction a number and a letter
-// that indicates the lane and number it will show up at
-// needs to be worked out but this is the general idea
-
 export function VehicleCard({
   entry,
   distance,
