@@ -39,17 +39,13 @@ export function HomePage() {
       <div className="homepage-container">
         <div className="home-row">
           <div className="home-column-full">
-            <h3 className="home-header">
-              Drive the
-              <span className="emf">Bid</span>. Win the ride.
-            </h3>
+            <h3 className="home-header">Drive the Bid. Win the ride.</h3>
           </div>
         </div>
         <div className="home-row">
           <div className="home-column-full">
             <h3 className="home-header">
-              There's no slowing down, we're going
-              <span className="emf">live</span>.
+              There's no slowing down, we're going live.
             </h3>
           </div>
         </div>

@@ -1,5 +1,4 @@
 .homepage-container {
-  /* height: 100vh; */
   margin: 0 auto;
 
   @media (width >=500px) {
@@ -12,12 +11,6 @@
   background-color: #28b89a;
 }
 
-/* this class breaks certain things but fixes others... */
-
-/* .home-row {
-  display: flex;
-} */
-
 .home-header {
   display: flex;
   align-items: center;
@@ -29,13 +22,6 @@
   @media (width >= 500px) {
     padding-top: 1.5rem;
   }
-}
-
-.emf {
-  font-style: italic;
-  text-decoration: underline;
-  font-size: 1.3rem;
-  font-weight: bold;
 }
 
 * {
