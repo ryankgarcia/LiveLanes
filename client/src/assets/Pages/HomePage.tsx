@@ -41,14 +41,15 @@ export function HomePage() {
           <div className="home-column-full">
             <h3 className="home-header">
               Drive the
-              <em> Bid </em>. Win the ride.
+              <span className="emf">Bid</span>. Win the ride.
             </h3>
           </div>
         </div>
         <div className="home-row">
           <div className="home-column-full">
             <h3 className="home-header">
-              There's no slowing down, we're going <em>live</em>.
+              There's no slowing down, we're going
+              <span className="emf">live</span>.
             </h3>
           </div>
         </div>

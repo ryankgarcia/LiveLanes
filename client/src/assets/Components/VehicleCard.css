@@ -49,7 +49,6 @@ hr {
   width: 120px;
   object-fit: cover;
   border-radius: 4px;
-  cursor: pointer;
 }
 
 .vehicle-info {

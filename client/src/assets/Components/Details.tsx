@@ -34,13 +34,7 @@ export function Details({ entry, timeout, bid }: Props) {
       <div className="details-image-column-full">
         <div className="greenBar-Timer">
           {timeout !== undefined ? `00m ${timeout}s` : ''}
-          <span className="details-bidding-dealer-name">
-            {/* is this logic breaking DRY */}
-            {/* {timeout !== undefined && bid !== undefined
-              ? formatUSD(bid)
-              : formatUSD(entry.startingPrice)} */}
-            {formatUSD(bid)}
-          </span>
+          <span className="details-bidding-dealer-name">{formatUSD(bid)}</span>
         </div>
         <div className="details-image-layout">
           <div className="details-image-flex-row">

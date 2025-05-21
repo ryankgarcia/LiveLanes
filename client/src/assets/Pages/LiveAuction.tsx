@@ -197,7 +197,7 @@ export function LiveAuction() {
                   entry={entry}
                   isAuctionLive={isAuctionLive}
                   bid={bids[entry.vehicleId!] ?? 0}
-                  timeouts={timeouts} // this props needs to disable the button from being clicked if timeouts = 0 seconds
+                  timeouts={timeouts}
                   onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
                   onSelect={() => setSelectedVehicle(entry)}
                 />
