@@ -5,7 +5,6 @@
   border-radius: 16px;
   width: 67%;
 
-  /* this max width is what will break everything if you type in something crazy */
   @media (width >= 500px) {
     margin-left: 3.8rem;
     width: 50%;
@@ -25,11 +24,6 @@
     width: 100%;
     max-width: 1200px;
     height: 400px;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 
@@ -43,19 +37,11 @@
   height: 30px;
   margin-top: 10.5rem;
   border-radius: 4px;
+  font-family: sans-serif;
+  letter-spacing: 1px;
 
   @media (width >= 500px) {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 23rem;
-    font-family: sans-serif;
-    font-weight: 300;
-    letter-spacing: 1px;
-    color: black;
-    height: 30px;
-    background-color: #f0f0f0;
   }
 }
 
@@ -80,7 +66,6 @@
 .next-image {
   position: absolute;
   color: white;
-  z-index: 1;
   top: 50%;
   transform: translateY(-50%);
 
@@ -90,7 +75,7 @@
 }
 
 .prev-image {
-  left: 1.5rem;
+  left: 1rem;
 
   @media (width >= 500px) {
     left: 10rem;
