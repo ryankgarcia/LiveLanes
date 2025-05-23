@@ -1,6 +1,6 @@
 import './VehicleCard.css';
 import { MdOutlineStar, MdStar } from 'react-icons/md';
-import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { Vehicle } from '../../data';
 
 type VehicleCardProps = {
   entry: Vehicle;
@@ -50,18 +50,16 @@ export function VehicleCard({
         </div>
       </div>
       <div className="card-footer">
-        <div className="button-container">
-          <button
-            className={isFavorite ? 'remove-button' : 'fav-button'}
-            onClick={
-              isFavorite
-                ? () => onRemoveFavorite(entry)
-                : () => onAddFavorite(entry)
-            }>
-            {isFavorite ? <MdStar /> : <MdOutlineStar />}
-            {isFavorite ? 'Remove' : 'Add'}
-          </button>
-        </div>
+        <button
+          className={isFavorite ? 'remove-button' : 'fav-button'}
+          onClick={
+            isFavorite
+              ? () => onRemoveFavorite(entry)
+              : () => onAddFavorite(entry)
+          }>
+          {isFavorite ? <MdStar /> : <MdOutlineStar />}
+          {isFavorite ? 'Remove' : 'Add'}
+        </button>
       </div>
     </div>
   );
