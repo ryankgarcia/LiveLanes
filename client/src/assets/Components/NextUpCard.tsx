@@ -1,30 +1,6 @@
 import './NextUpCard.css';
 import { Vehicle } from '../../data';
 
-// export type Vehicle = {
-//   vehicleId?: number;
-//   laneLetter: string; // assign it here in run list right after you read them
-//   laneIndex: number; // assign it here in run list right after you read them
-//   vin: string;
-//   year: number;
-//   make: string;
-//   model: string;
-//   trim: string;
-//   bodyType: string;
-//   exteriorColor: string;
-//   interiorColor: string;
-//   transmission: string;
-//   engine: string;
-//   fuelType: string;
-//   mileage: number;
-//   sellerName: string;
-//   conditionReport: string;
-//   damages: string;
-//   startingPrice: number;
-//   reservePrice: number;
-//   imageUrl: string;
-// };
-
 type Props = {
   entry: Vehicle;
 };

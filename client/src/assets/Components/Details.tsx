@@ -26,80 +26,104 @@ type Props = {
   entry: Vehicle;
   timeout: number | undefined;
   bid: number;
-  // imageUrl: string;
-  // vehicleId: Vehicle;
 };
 
 export function Details({ entry, timeout, bid }: Props) {
   return (
     <div className="details-view-container">
       <div className="details-image-column-full">
-        <div
-          className="greenBar-Timer"
-          // style={{ animationDuration: `${timeout[entry.vehicleId]}s` }}
-        >
+        <div className="greenBar-Timer">
           {timeout !== undefined ? `00m ${timeout}s` : ''}
-          <span className="details-bidding-dealer-name">Dealer Name</span>
-          {/* in this line above make a table from the database that will account for the user's who
-            are members of the website, and their dealership name will be inserted in a template literal
-            where the words 'Dealer Name currently are' */}
-          <span className="details-bidding-dealer-name">
-            {/* is this logic breaking DRY */}
-            {timeout !== undefined
-              ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
-              : formatUSD(entry.startingPrice)}
-          </span>
+          <span className="details-bidding-dealer-name">{formatUSD(bid)}</span>
         </div>
-        <div className="details-image-span">
-          <span>
-            <div className="details-image-flex-row">
-              <div className="details-image-column-left">
-                {entry.laneLetter}
-              </div>
-              {/* <span className="details-image-span">{entry.year}</span> */}
+        <div className="details-image-layout">
+          <div className="details-image-flex-row">
+            <div className="details-image-column-left">
+              <span className="p-lane">{entry.laneLetter.toUpperCase()}</span>
             </div>
-          </span>
-        </div>
-
-        <span className="details-image-span">
-          <div className="details-flex-row">
-            {/* <div className="details-image-column-left">{entry.make}</div>{' '} */}
           </div>
-        </span>
-        {/* <span className="details-image-span">{entry.model}</span> */}
-        {/* <span className="details-image-span">{entry.mileage}</span> */}
-        {/* <span className="details-image-span">{entry.vin}</span> */}
+          <div className="details-image-flex-row">
+            <div className="details-image-column-left">
+              <span className="p-year">{entry.year}</span>
+            </div>
+            <div className="details-image-column-left">
+              <span className="p-make">{entry.make}</span>
+            </div>
+            <div className="details-image-column-left">
+              <span className="p-model">{entry.model}</span>
+            </div>
+          </div>
+        </div>
         <img
           className="details-image-open"
           src={entry.imageUrl}
           alt={`${entry.make} ${entry.model} ${entry.year}`}
         />
-
+        <div className="vin-div">
+          <p> VIN: {entry.vin}</p>
+        </div>
+        <div className="reports-div">
+          <p>
+            <span className="span">Damages:</span> {entry.damages}
+          </p>
+        </div>
+        <div className="reports-div">
+          <p>
+            <span className="span">Condition Report:</span>
+            {entry.conditionReport}
+          </p>
+        </div>
+        <div className="reports-div">
+          <p>
+            <span className="span">Seller:</span> {entry.sellerName}
+          </p>
+        </div>
         <div className="new-details">
           <div>
-            <div className="detail-squares"> Year {entry.year}</div>
-            <div className="detail-squares"> Make {entry.make}</div>
-            <div className="detail-squares"> Model {entry.model}</div>
-            <div className="detail-squares"> Trim {entry.trim}</div>
+            <div className="detail-squares">
+              <span className="span">Year</span> {entry.year}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Make</span> {entry.make}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Model</span> {entry.model}
+            </div>
+            <div className="detail-squares">
+              <span className="span">Trim</span> {entry.trim}
+            </div>
           </div>
           <div>
             <div className="details-column-full">
-              <div className="detail-squares"> Engine {entry.engine}</div>
               <div className="detail-squares">
-                Interior Color {entry.interiorColor}
+                <span className="span">Engine</span> {entry.engine}
               </div>
               <div className="detail-squares">
-                Exterior {entry.exteriorColor}
+                <span className="span">Interior Color</span>
+                {entry.interiorColor}
               </div>
               <div className="detail-squares">
-                Transmission {entry.transmission}
+                <span className="span">Exterior</span> {entry.exteriorColor}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Transmission</span> {entry.transmission}
               </div>
             </div>
           </div>
           <div>
             <div className="details-column-full">
-              <div className="detail-squares">Fuel Type{entry.fuelType}</div>
-              <div className="detail-squares">Body Type{entry.bodyType}</div>
+              <div className="detail-squares">
+                <span className="span">Fuel Type</span>
+                {entry.fuelType}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Body Type</span>
+                {entry.bodyType}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Mileage</span>
+                {entry.mileage.toLocaleString()} mi
+              </div>
             </div>
           </div>
         </div>

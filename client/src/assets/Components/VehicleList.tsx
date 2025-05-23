@@ -1,5 +1,5 @@
 import './VehicleCard.css';
-import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { Vehicle } from '../../data';
 import { VehicleCard } from './VehicleCard';
 
 export type FilterProps = {
@@ -18,10 +18,8 @@ type Props = {
   onAddFavorite: (vehicle: Vehicle) => void;
   onRemoveFavorite: (vehicle: Vehicle) => void;
   favorites: Vehicle[];
-  // this one will be reserved for lanes
 };
 
-// this one will be reserved for lanes pass it in here as props
 export function VehicleList({
   entries,
   distances,

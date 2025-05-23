@@ -19,11 +19,10 @@ input {
   background-color: white;
 }
 
+/* this css ruleset changes the highlighting color of the input field to green */
 input::selection {
   background: #28b89a;
 }
-
-/* this css ruleset changes the highlighting color of the input field to green */
 
 .search-icon {
   position: absolute;

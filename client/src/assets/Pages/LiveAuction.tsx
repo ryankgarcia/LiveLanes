@@ -34,7 +34,7 @@ export function LiveAuction() {
   const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
-  const [lanes, setLanes] = useState<string[][]>(() => laneAssign());
+  const [lanes, setLanes] = useState<string[][]>(() => laneAssign()); //this state variable is used to assign the virtual
   const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
     undefined
   ); // this state variable is used to filter the user's favorites when clicking the star button
@@ -57,7 +57,6 @@ export function LiveAuction() {
         combo.toLowerCase().includes(trimSearchTerm)
       );
     });
-    // setFilteredCars(filteredCars);
     setFilteredCars(filteredCarsAll);
   }, [entries, trimSearchTerm]);
 
@@ -198,7 +197,7 @@ export function LiveAuction() {
                   entry={entry}
                   isAuctionLive={isAuctionLive}
                   bid={bids[entry.vehicleId!] ?? 0}
-                  timeouts={timeouts} // this props needs to disable the button from being clicked if timeouts = 0 seconds
+                  timeouts={timeouts}
                   onPlaceBid={() => handlePlaceBid(entry.vehicleId!)}
                   onSelect={() => setSelectedVehicle(entry)}
                 />
@@ -218,21 +217,13 @@ export function LiveAuction() {
             <button className="startLive-auction" onClick={handleStartAuction}>
               Start Auction
             </button>
-            <button className="liveauction-autoBidButton">A</button>
             <button
               className="liveauction-favButton"
-              onClick={handleReadFavorites}
-              // setIsShowingFavorites((prev) => !prev)
-            >
+              onClick={handleReadFavorites}>
               {<IoIosStarOutline color="white" />}
             </button>
           </div>
-          <div
-            className="scroll-container-nextUpCards"
-            // onClick={() => {
-            //   if (carsInLiveAuction.length > 0) handleReadFavorites();
-            // }}
-          >
+          <div className="scroll-container-nextUpCards">
             {filteredCars && filteredCars?.length > 0 ? (
               filteredCars?.map((entry) => (
                 <NextUpCard key={entry.vehicleId} entry={entry} />
@@ -255,9 +246,7 @@ export function LiveAuction() {
             )}
           </div>
         </div>
-        {/* <div className="auction-column-full"> */}
       </div>
-      {/* </div> */}
     </div>
   );
 }

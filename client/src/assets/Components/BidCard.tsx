@@ -24,7 +24,6 @@ type Props = {
   onSelect: () => void;
   isAuctionLive: boolean;
   timeouts: { [vehicleId: number]: number };
-  // distance: number;
 };
 
 //  distance is needed here to show the user how far away the car is from them
@@ -43,7 +42,6 @@ export function LiveAuctionCard({
     setIsModalOpen(true);
     if (timeouts[entry.vehicleId] <= 0 || undefined) {
       setIsModalOpen(false);
-      // if you can include a line of code that will show no more bids or some text that say ""
       return;
     }
   }
@@ -55,23 +53,15 @@ export function LiveAuctionCard({
 
   return (
     <div key={entry.vehicleId} className="auction-card">
-      {/* {somewhere right here there must be a green bar that goes down counting the seconds} */}
       <div className="auction-card-header">
-        {/* <div
-          key={timer}
-          className={`time-bar ${isAuctionLive ? 'active' : ''}`}
-          style={{ animationDuration: `${timer}s` }}> */}
-        {/* <span style={{ color: 'white', fontWeight: 'bold' }}>{timer}s</span> */}
         <span className="selling-price">
           {/* is this logic redundant? is there a more simple way to write it? */}
-          {isAuctionLive
+          {/* {isAuctionLive
             ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
-            : formatUSD(entry.startingPrice)}
+            : formatUSD(entry.startingPrice)} */}
+          {formatUSD(bid)}
         </span>
-        <span className="buying-dealer">
-          Joe Sells Cars Outside of his dads garage
-          {/* this needs to change dynamically for current highest bidder */}
-        </span>
+        <span className="selling-dealer">{entry.sellerName}</span>
         {/* </div> */}
       </div>
       <div className="auction-card-body">
@@ -88,10 +78,9 @@ export function LiveAuctionCard({
       </div>
       <div className="auction-vehicle-info">
         <div>
-          <span className="auction-lane">{entry.laneLetter}</span>
+          <span className="auction-lane">{entry.laneLetter.toUpperCase()}</span>
           {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
-            {' '}
             {entry.year} {} {entry.make}
           </span>
         </div>
@@ -103,7 +92,7 @@ export function LiveAuctionCard({
         </div>
       </div>
       <div className="auction-card-footer">
-        <span className="final-line">CA, 102 mi away</span>
+        <span className="final-line">CA, 101 mi away</span>
         {/* need to figure out how to get the distances here */}
       </div>
       {isModalOpen && (

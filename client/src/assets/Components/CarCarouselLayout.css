@@ -1,34 +1,47 @@
 .current-image {
-  object-fit: contain;
-  max-width: 50%;
-  display: flex;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   border-radius: 16px;
+  width: 67%;
 
-  /* this max width is what will break everything if you type in something crazy */
   @media (width >= 500px) {
+    margin-left: 3.8rem;
     width: 50%;
   }
 }
 
 .image-wrapper {
+  max-width: 600px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (width >= 500px) {
+    width: 100%;
+    max-width: 1200px;
+    height: 400px;
+  }
 }
 
 .image-caption {
   position: absolute;
+  background-color: #f0f0f0;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18rem;
+  height: 30px;
+  margin-top: 10.5rem;
+  border-radius: 4px;
   font-family: sans-serif;
-  font-weight: 300;
   letter-spacing: 1px;
-  color: white;
 
   @media (width >= 500px) {
-    /* margin-top: 35rem; */
+    margin-top: 23rem;
   }
 }
 
@@ -53,11 +66,8 @@
 .next-image {
   position: absolute;
   color: white;
-  z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-
-  /* margin-top: 2.5rem; */
 
   @media (width >= 500px) {
     margin-top: 10rem;
@@ -65,7 +75,7 @@
 }
 
 .prev-image {
-  left: 2.5rem;
+  left: 1rem;
 
   @media (width >= 500px) {
     left: 10rem;
