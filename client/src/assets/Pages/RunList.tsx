@@ -6,7 +6,7 @@ import {
   writeFavorites,
   writeSavedFavorites,
   readSavedFavorites,
-} from '../../data'; // this needs to import data.ts into this portion of the project
+} from '../../data';
 import { VehicleList } from '../Components/VehicleList';
 import { SearchBar } from '../Components/SearchBar';
 import { Filters } from '../Components/Filters';
@@ -19,9 +19,9 @@ export function RunList() {
   const [entries, setEntries] = useState<Vehicle[]>([]); // controls initial state of the Vehicle data being pulled by API call
   const [isLoading, setIsLoading] = useState(false); // lets user know the page is loading
   const [error, setError] = useState<unknown>(); // useEffect error handler
-  const [distances, setDistances] = useState<number[]>([]); // useEffect to create
+  const [distances, setDistances] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState(''); // part of searchbar component
-  const [selectedFilter, setSelectedFilter] = useState('all'); // might need to change this to an empty string ''
+  const [selectedFilter, setSelectedFilter] = useState('all');
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [draftMinPrice, setDraftMinPrice] = useState('');
@@ -32,9 +32,6 @@ export function RunList() {
   const [searchName, setSearchName] = useState(''); // this was added to add a name to the user's saved filter name
   // addFavorite state will push the vehicleId into watchlist (users-favorites)
   const [favorites, setFavorites] = useState<Vehicle[]>(() => readFavorites());
-
-  // add a useEffect to read them out of local storage. with an empty dependency to read them from local storage.
-  // then call handleApplySavedFilter inside the useEff
 
   // this event handler adds the vehicleId to a new vehicle Card array in the favorites section
   function handleAddFavorite(vehicle: Vehicle) {
@@ -55,8 +52,6 @@ export function RunList() {
     writeFavorites(remainingFavorites);
   }
 
-  // this needs to be props for filter component. this event handler will allow user to change the name of their saved search filter
-  // to the name of their
   function handleSavedSearchName(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchName(e.target.value);
   }
@@ -69,9 +64,7 @@ export function RunList() {
   function handlePriceRange(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!draftMinPrice && !draftMaxPrice) {
-      alert(
-        'Please fill out at least a Min or Max value to filter by price range'
-      );
+      alert('Please input a Min or Max value to filter by price range');
       return;
     }
     setMinPrice(draftMinPrice ? Number(draftMinPrice) : undefined);
@@ -86,7 +79,7 @@ export function RunList() {
     setSearchTerm(filter.searchTerm || '');
   }
 
-  // this handler is used to create a saved Search radio button.
+  // this handler is used to create a saved Search that is a clickable div element.
   function handleSaveCurrentFilter() {
     const newSavedFilter: SavedFilter = {
       name: searchName,
@@ -157,19 +150,17 @@ export function RunList() {
     );
   }
 
-  // this useEffect was created to simulate distances from a seller dealership from where the buyer is from based on the buyer's address
+  // this useEffect was created to simulate distances from a seller dealership
+  // to where the buyer's address is
   useEffect(() => {
     const generatedDistances = entries.map(() => randomDistance());
     setDistances(generatedDistances);
-
-    //assign the lane number here for the vehiclecard
   }, [entries]);
 
   useEffect(() => {
     async function load() {
       try {
         const entries = await readVehicles();
-        // assign a lane to every vehicle here
         setEntries(entries);
       } catch (err) {
         setError(err);

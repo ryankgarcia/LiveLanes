@@ -2,13 +2,12 @@
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 
   @media (width >= 500px) {
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 1%;
-    margin-bottom: 2%;
   }
 }
 
@@ -17,11 +16,9 @@
 
   @media (width >= 500px) {
     margin-top: 10%;
-    margin-left: 1.5%;
+    margin-left: 7.5%;
   }
 }
-
-/* same with this row, just comment it back in */
 
 .row {
   @media (width >= 500px) {
@@ -34,8 +31,6 @@
     width: calc(100% / 5);
   }
 }
-
-/* edit this .column half back in, it works but to test out the favorites feature i needed to comment it out */
 
 .column-half {
   @media (width >= 500px) {
