@@ -36,9 +36,13 @@ Try the application live at [http://ec2-3-12-119-53.us-east-2.compute.amazonaws.
 
 ## Preview
 
-(assets/livelanes-examples/liveauction-image.png)
+### Live Auction Preview
 
-(assets/livelanes-examples/runlist-image.png)
+![Live Auction Preview](client/src/assets/liveauction-preview.gif)
+
+### Run List Preview
+
+![Run List Preview](client/src/assets/runlist-preview.gif)
 
 ## Project Assistance
 
