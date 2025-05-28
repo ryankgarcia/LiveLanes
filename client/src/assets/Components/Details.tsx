@@ -1,26 +1,6 @@
-import { Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
+import { Vehicle } from '../../data';
 import { formatUSD } from './AuxilaryFunctions';
 import './Details.css';
-
-// type Vehicle = {
-//   vehicleId?: number;
-//   vin: string;
-//   year: number;
-//   make: string;
-//   model: string;
-//   trim: string;
-//   bodyType: string;
-//   exteriorColor: string;
-//   interiorColor: string;
-//   transmission: string;
-//   engine: string;
-//   fuelType: string;
-//   mileage: number;
-//   sellerName: string;
-//   conditionReport: string;
-//   damages: string;
-//   startingPrice: number;
-// };
 
 type Props = {
   entry: Vehicle;
@@ -31,10 +11,10 @@ type Props = {
 export function Details({ entry, timeout, bid }: Props) {
   return (
     <div className="details-view-container">
-      <div className="details-image-column-full">
+      <div>
         <div className="greenBar-Timer">
           {timeout !== undefined ? `00m ${timeout}s` : ''}
-          <span className="details-bidding-dealer-name">{formatUSD(bid)}</span>
+          <span>{formatUSD(bid)}</span>
         </div>
         <div className="details-image-layout">
           <div className="details-image-flex-row">
@@ -94,7 +74,7 @@ export function Details({ entry, timeout, bid }: Props) {
             </div>
           </div>
           <div>
-            <div className="details-column-full">
+            <div>
               <div className="detail-squares">
                 <span className="span">Engine</span> {entry.engine}
               </div>
@@ -111,10 +91,14 @@ export function Details({ entry, timeout, bid }: Props) {
             </div>
           </div>
           <div>
-            <div className="details-column-full">
+            <div>
               <div className="detail-squares">
                 <span className="span">Fuel Type</span>
                 {entry.fuelType}
+              </div>
+              <div className="detail-squares">
+                <span className="span">Doors</span>
+                {entry.doors}
               </div>
               <div className="detail-squares">
                 <span className="span">Body Type</span>

@@ -97,10 +97,6 @@
   z-index: 10;
   display: flex;
   justify-content: center;
-
-  @media (width >= 500px) {
-    /* width: 500px; */
-  }
 }
 
 .auction-card:hover {
@@ -133,6 +129,7 @@
 .auction-lane {
   color: #28b89a;
   font-weight: bold;
+  padding-right: 0.5rem;
 }
 
 .auction-vehicle-year-make {
@@ -157,9 +154,6 @@
 
 .auction-vehicle-price {
   font-size: 1rem;
-
-  /* color: white; */
-
   color: #28b89a;
   font-weight: bold;
   white-space: nowrap;

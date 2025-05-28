@@ -1,55 +1,60 @@
 .details-view-container {
-  width: 100%;
-
   @media (width >= 500px) {
     height: 100vh;
     width: 100%;
   }
 }
 
-.p-lane,
+.p-lane {
+  font-weight: bold;
+  font-size: 1.3rem;
+  background-color: lightgray;
+  color: #28b89a;
+
+  @media (width >=500px) {
+    font-size: 2rem;
+  }
+}
+
 .p-year,
 .p-make,
 .p-model {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.2rem;
   background-color: lightgray;
   color: black;
+
+  @media (width >=500px) {
+    font-size: 1.8rem;
+  }
 }
 
 .greenBar-Timer {
   display: flex;
-  position: relative;
   justify-content: space-around;
   background-color: #28b89a;
   color: white;
   font-weight: bold;
   font-size: 1.3rem;
   font-family: Arial, Helvetica, sans-serif;
-  width: 100%;
-  height: 2.7rem;
+  height: 2.3rem;
 }
 
 .new-details {
-  width: 100%;
   justify-content: space-evenly;
   display: flex;
-}
-
-.details-flex-row {
-  display: flex;
-}
-
-.details-column-full {
-  flex-basis: 100%;
+  padding-bottom: 1rem;
 }
 
 .details-image-flex-row {
-  display: flex;
+  display: inline-flex;
+
+  @media (width >=500px) {
+    display: flex;
+  }
 }
 
 .details-image-column-left {
-  flex-basis: 50%;
   margin-left: 3rem;
 }
 
@@ -59,10 +64,7 @@
 
 .details-image-layout {
   position: absolute;
-  color: white;
-  font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.7rem;
 }
 
 .detail-squares {
@@ -80,20 +82,16 @@
 .reports-div {
   color: black;
   background-color: #f0f0f0;
-  width: 100%;
-  height: 200px;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   margin-bottom: 1rem;
-  margin-top: 1rem;
   padding-left: 0.6rem;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .vin-div {
-  padding-left: 2rem;
+  padding-left: 0.8rem;
+  color: black;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -101,5 +99,4 @@
 .span {
   font-weight: bold;
   display: flex;
-  align-items: flex-start;
 }

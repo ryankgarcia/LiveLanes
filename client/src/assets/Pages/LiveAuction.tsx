@@ -3,11 +3,12 @@ import { LiveAuctionCard } from '../Components/BidCard';
 import { NextUpCard } from '../Components/NextUpCard';
 import { SearchBar } from '../Components/SearchBar';
 import { useEffect, useState } from 'react';
-import { readFavorites, readVehicles, Vehicle } from '../../data'; // this needs to import data.ts into this portion of the project
-import './LiveAuctionLayout.css';
+import { readFavorites, readVehicles, Vehicle } from '../../data';
 import { Details } from '../Components/Details';
+import { randomDistance } from '../Components/AuxilaryFunctions';
+import './LiveAuctionLayout.css';
 
-// the purpose of this function is to assign lane letter's to each car in the LiveAuction page
+// the purpose of this function is to assign lanes to each car in the LiveAuction page
 function laneAssign(): string[][] {
   const laneAssignment: string[][] = [];
   const laneLetter: string[] = ['a', 'b', 'c', 'd', 'e'];
@@ -15,7 +16,7 @@ function laneAssign(): string[][] {
   for (let i = 0; i < laneLetter.length; i++) {
     const letterArr: string[] = [];
 
-    for (let j = 1; j < 51; j++) {
+    for (let j = 1; j < 7; j++) {
       letterArr.push(`${laneLetter[i]}${j}`);
     }
     laneAssignment.push(letterArr);
@@ -31,16 +32,19 @@ export function LiveAuction() {
   const [error, setError] = useState<unknown>(); // useEffect error handler
   const [bids, setBids] = useState<{ [vehicleId: number]: number }>({}); // this state will handle bids the user is currently placing
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null); // this will control what vehicle details show up in the details component
-  const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // tie this to a button on the page, that lets the user begin the simulated auction event
+  const [isAuctionLive, setIsAuctionLive] = useState<boolean>(false); // this is tied to a button on the page, that lets the user begin the simulated auction event
   const [timeouts, setTimeouts] = useState<{ [vehicleId: number]: number }>({});
   const [carsInLiveAuction, setCarsInLiveAuction] = useState<Vehicle[]>([]);
-  const [lanes, setLanes] = useState<string[][]>(() => laneAssign()); //this state variable is used to assign the virtual
+  const [lanes, setLanes] = useState<string[][]>(() => laneAssign()); //this state variable is used to assign the virtual 'lane'
+  // this state variable is used to filter the user's favorites when clicking the star button
   const [filteredCars, setFilteredCars] = useState<Vehicle[] | undefined>(
     undefined
-  ); // this state variable is used to filter the user's favorites when clicking the star button
+  );
+  const [distances, setDistances] = useState<Record<number, number>>({});
 
   // the purpose of this useEffect is to allow the user to press the favorites
-  // star and filter the cars on display to the cars they favorite, from localStorage
+  // star and filter the cars on display to the cars they have favorited on the Runlist page,
+  // calling them from localStorage
   const trimSearchTerm = searchTerm.trim().toLowerCase();
 
   useEffect(() => {
@@ -58,13 +62,13 @@ export function LiveAuction() {
       );
     });
     setFilteredCars(filteredCarsAll);
-  }, [entries, trimSearchTerm]);
+    setLanes(lanes);
+  }, [entries, trimSearchTerm, lanes]);
 
   function handleStartAuction() {
     if (isAuctionLive) return;
     setIsAuctionLive(true);
     const entriesWithLanes = liveLaneAssigns(entries);
-    // assign a lane to every vehicle here
     const first5 = entriesWithLanes.splice(0, 5);
     setCarsInLiveAuction(first5);
     setTimeouts(() => {
@@ -85,7 +89,7 @@ export function LiveAuction() {
             newTimeouts[entry.vehicleId] = prev[entry.vehicleId] - 1;
           }
         }
-        // figure out if auction is done and call setIsAuctionLive(false);
+        // This figures out if auction is done and calls setIsAuctionLive(false)
         // and clearInterval(intervalId) to stop the timer
         if (Object.values(newTimeouts).every((value) => value === 0)) {
           setIsAuctionLive(false);
@@ -152,12 +156,23 @@ export function LiveAuction() {
     return vehicles;
   }
 
+  // this useEffect was added to assign each Vehicle a random distance from
+  // the buyer's dealership to simulate how far each car is from the user's location
+  useEffect(() => {
+    if (!entries.length) return;
+
+    const generated = Object.fromEntries(
+      entries.map((entry) => [entry.vehicleId, randomDistance()])
+    );
+
+    setDistances(generated);
+  }, [entries]);
+
   useEffect(() => {
     async function load() {
       try {
         const entries = await readVehicles();
         setEntries(entries);
-        // added these lines below
         const initialBids: { [vehicleId: number]: number } = {};
         for (const entry of entries) {
           initialBids[entry.vehicleId] = entry.startingPrice ?? 0;
@@ -187,13 +202,14 @@ export function LiveAuction() {
       <div className="auction-row">
         <div className="auction-column-left">
           <div className="scroll-container-bidCards">
-            {/* the slice method was used here to only show 5 cars at once,
-            but the remaining cars must show up in their lane assignments
+            {/* The splice method was used here to only show 5 cars at once.
+            The remaining cars will show up with their lane assignments
             in the NextUpCard */}
             {carsInLiveAuction.length > 0 ? (
               carsInLiveAuction.map((entry) => (
                 <LiveAuctionCard
                   key={entry.vehicleId}
+                  distance={distances[entry.vehicleId]}
                   entry={entry}
                   isAuctionLive={isAuctionLive}
                   bid={bids[entry.vehicleId!] ?? 0}
@@ -235,7 +251,7 @@ export function LiveAuction() {
             )}
           </div>
         </div>
-        <div className="auction-column-right">
+        <div>
           <div className="scroll-container-details">
             {selectedVehicle && (
               <Details

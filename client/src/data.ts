@@ -5,8 +5,8 @@ import { SavedFilter } from './assets/Components/types';
 
 export type Vehicle = {
   vehicleId: number;
-  laneLetter: string; // assign it here in run list right after you read them
-  laneIndex: number; // assign it here in run list right after you read them
+  laneLetter: string;
+  laneIndex: number;
   vin: string;
   year: number;
   make: string;
@@ -19,6 +19,7 @@ export type Vehicle = {
   engine: string;
   fuelType: string;
   mileage: number;
+  doors: string;
   sellerName: string;
   conditionReport: string;
   damages: string;
@@ -27,7 +28,6 @@ export type Vehicle = {
   imageUrl: string;
 };
 
-// need this one for the get protocol in the server
 export async function readVehicles(): Promise<Vehicle[]> {
   const url = '/api/vehicles';
   const response = await fetch(url);
@@ -37,7 +37,6 @@ export async function readVehicles(): Promise<Vehicle[]> {
   return vehicles;
 }
 
-// need this one for the get protocol in the server
 export async function readVehicleId(
   vehicleId: number
 ): Promise<Vehicle | undefined> {

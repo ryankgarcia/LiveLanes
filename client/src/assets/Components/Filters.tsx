@@ -10,7 +10,7 @@ type FilterProps = {
   setDraftMaxPrice: (value: string) => void;
   onSaveFilter: () => void;
   onSearchNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // event handler passed as props so user can change their saved search name
-  searchName: string; // this was added to make the change for user to type in their saved search name
+  searchName: string; // this was added to enable the user to type in their saved search name
 };
 export function Filters({
   selectedFilter,
@@ -97,7 +97,6 @@ export function Filters({
           </label>
           <div>
             <input
-              className="range-box"
               type="number"
               placeholder="Min"
               value={draftMinPrice}
@@ -107,7 +106,6 @@ export function Filters({
           </div>
           <div>
             <input
-              className="range-box"
               type="number"
               placeholder="Max"
               value={draftMaxPrice}

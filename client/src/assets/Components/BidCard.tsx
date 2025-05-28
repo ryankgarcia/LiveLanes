@@ -1,21 +1,7 @@
-import './BidCard.css';
 import { Vehicle } from '../../data';
 import { useState } from 'react';
 import { formatUSD } from './AuxilaryFunctions';
-
-// export type Vehicle = {
-//   vehicleId?: number;
-//   laneLetter: string; // assign it here in run list right after you read them
-//   laneIndex: number; // assign it here in run list right after you read them
-//   year: number;
-//   make: string;
-//   model: string;
-//   mileage: number;
-//   sellerName: string;
-//   startingPrice: number;
-//   reservePrice: number;
-//   imageUrl: string;
-// };
+import './BidCard.css';
 
 type Props = {
   entry: Vehicle;
@@ -24,9 +10,9 @@ type Props = {
   onSelect: () => void;
   isAuctionLive: boolean;
   timeouts: { [vehicleId: number]: number };
+  distance: number;
 };
 
-//  distance is needed here to show the user how far away the car is from them
 export function LiveAuctionCard({
   entry,
   bid,
@@ -34,6 +20,7 @@ export function LiveAuctionCard({
   onSelect,
   isAuctionLive,
   timeouts,
+  distance,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -51,21 +38,33 @@ export function LiveAuctionCard({
     setIsModalOpen(false);
   }
 
+  function locationAssignment() {
+    const location: string[] = ['CA', 'OR', 'WA', 'TX', 'KS', 'PA'];
+    for (let i = 0; i < location.length; i++) {
+      if (600 >= distance) {
+        location[i] = 'CA';
+      } else if (750 >= distance) {
+        location[i] = 'OR';
+      } else if (900 >= distance) {
+        location[i] = 'WA';
+      } else if (1200 >= distance) {
+        location[i] = 'TX';
+      } else if (1500 >= distance) {
+        location[i] = 'KS';
+      } else if (2400 >= distance) {
+        location[i] = 'PA';
+      }
+      return location[i];
+    }
+  }
+
   return (
     <div key={entry.vehicleId} className="auction-card">
       <div className="auction-card-header">
-        <span className="selling-price">
-          {/* is this logic redundant? is there a more simple way to write it? */}
-          {/* {isAuctionLive
-            ? formatUSD(entry.startingPrice + (bid - entry.startingPrice))
-            : formatUSD(entry.startingPrice)} */}
-          {formatUSD(bid)}
-        </span>
+        <span className="selling-price">{formatUSD(bid)}</span>
         <span className="selling-dealer">{entry.sellerName}</span>
-        {/* </div> */}
       </div>
       <div className="auction-card-body">
-        {/* <div className="countdown"></div> */}
         <img
           onClick={onSelect}
           className="auction-vehicle-img"
@@ -79,7 +78,6 @@ export function LiveAuctionCard({
       <div className="auction-vehicle-info">
         <div>
           <span className="auction-lane">{entry.laneLetter.toUpperCase()}</span>
-          {/* this auction lane span needs to account for the individual lane assignments */}
           <span className="auction-vehicle-year-make">
             {entry.year} {} {entry.make}
           </span>
@@ -92,15 +90,14 @@ export function LiveAuctionCard({
         </div>
       </div>
       <div className="auction-card-footer">
-        <span className="final-line">CA, 101 mi away</span>
-        {/* need to figure out how to get the distances here */}
+        <span className="final-line">
+          {locationAssignment()}, {distance} mi away
+        </span>
       </div>
       {isModalOpen && (
         <div className="bidCard-modal">
           <div className="modal-row">
             <div className="modal-column">
-              {/* <div className="bidCard-modal-3d">
-              <div className="card-modal-content"> */}
               <h3>Are you sure you want to place your bid?</h3>
               <button
                 className="bidCard-confirmButton"
