@@ -2,7 +2,7 @@
 
 A full stack TypeScript application for car dealership owners who want to purchase preowned cars.
 
-A new change
+A different change
 
 ## Why I Built This
 
