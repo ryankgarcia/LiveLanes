@@ -28,6 +28,7 @@ CREATE TABLE "vehicles" (
   "engine" text,
   "fuelType" text,
   "mileage" integer,
+  "doors" text,
   "sellerName" text,
   "conditionReport" text,
   "damages" text,

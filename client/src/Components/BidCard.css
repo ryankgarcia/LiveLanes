@@ -1,0 +1,196 @@
+.auction-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auction-card-header {
+  display: flex;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  background-color: #28b89a;
+}
+
+.auction-card-header .selling-price {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-right: 7%;
+  padding-left: 8%;
+}
+
+.auction-card-header .selling-dealer {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-right: 0.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.time-bar {
+  height: 2rem;
+  width: 100%;
+  background-color: #28b89a;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.auction-card {
+  flex-shrink: 0;
+  width: 225px;
+  height: 300px;
+  background-color: #f2eeee;
+  z-index: 1;
+  padding: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  position: relative;
+}
+
+.bidCard-confirmButton {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #219f85;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold;
+  width: 85%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.bidCard-cancelButton {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: red;
+  margin-top: 0.7rem;
+  border-radius: 2px;
+  color: #f0f0f0;
+  font-weight: bold;
+  width: 85%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.modal-row {
+  display: flex;
+}
+
+.modal-column {
+  flex-basis: 100%;
+}
+
+.bidCard-modal {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.3rem;
+  padding-left: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  width: 225px;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.auction-card:hover {
+  @media (width >= 500px) {
+    border-color: ;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #9747ff;
+    cursor: pointer;
+  }
+}
+
+.auction-card-body {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.auction-vehicle-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.auction-vehicle-info {
+  flex-grow: 1;
+}
+
+.auction-lane {
+  color: #28b89a;
+  font-weight: bold;
+  padding-right: 0.5rem;
+}
+
+.auction-vehicle-year-make {
+  font-weight: bold;
+}
+
+.auction-vehicle-model,
+.auction-vehicle-mileage {
+  font-size: 0.9rem;
+  color: black;
+}
+
+.auction-card-theme-font {
+  color: #28b89a;
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.auction-card-black-font {
+  color: black;
+}
+
+.auction-vehicle-price {
+  font-size: 1rem;
+  color: #28b89a;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.auction-button-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: row;
+}
+
+.bid-btn {
+  position: absolute;
+  bottom: 105px;
+  right: 10px;
+  background-color: white;
+  color: #28b89a;
+  border: 3px solid #28b89a;
+  border-radius: 50%;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+}
+
+/* transform: scale makes to button look more animated and add a drop shadow */
+.bid-btn:hover {
+  border: 4px solid #28b89a;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #28b89a;
+}
+
+.final-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-top: 2px solid #a7a1a1;
+  width: 100%;
+}

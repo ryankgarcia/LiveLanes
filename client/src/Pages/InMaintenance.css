@@ -1,0 +1,12 @@
+#h2 {
+  padding-left: 2rem;
+
+  @media (width >= 500px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 4rem;
+  }
+}

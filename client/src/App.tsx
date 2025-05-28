@@ -1,12 +1,12 @@
-import { NavBar } from './assets/Components/NavBar';
+import { NavBar } from './Components/NavBar';
 import { Routes, Route } from 'react-router-dom';
-import { NotFound } from './assets/Pages/NotFound';
-import { RunList } from './assets/Pages/RunList';
-import { HomePage } from './assets/Pages/HomePage';
-import { LiveAuction } from './assets/Pages/LiveAuction';
-import { BuyNow } from './assets/Pages/BuyNow';
-import { MyPurchases } from './assets/Pages/MyPurchases';
-import { Sell } from './assets/Pages/Sell';
+import { NotFound } from './Pages/NotFound';
+import { RunList } from './Pages/RunList';
+import { HomePage } from './Pages/HomePage';
+import { LiveAuction } from './Pages/LiveAuction';
+import { BuyNow } from './Pages/BuyNow';
+import { MyPurchases } from './Pages/MyPurchases';
+import { Sell } from './Pages/Sell';
 
 // the way outlet works is that we let all the stuff that is not the navbar show on the page
 // which changes depending on the route you are on
