@@ -1,7 +1,7 @@
 // in this file i will be adding all of the fetch calls
 // for the client to communicate the data to the server
 
-import { SavedFilter } from './assets/Components/types';
+import { SavedFilter } from './Components/types';
 
 export type Vehicle = {
   vehicleId: number;
