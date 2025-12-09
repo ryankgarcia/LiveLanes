@@ -23,10 +23,6 @@ and getting to watch them take a car home.
 - PostgreSQL
 - Express
 
-## Live Demo
-
-Try the application live at [http://ec2-3-12-119-53.us-east-2.compute.amazonaws.com/]
-
 ## Features
 
 - Users can view all of the listed cars and filter them by: make, model, year
